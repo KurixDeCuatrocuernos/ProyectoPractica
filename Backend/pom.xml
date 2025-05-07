@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Backend</name>
-	<description>Backend with Spring</description>
+	<description>backend with Spring for React frontend</description>
 	<url/>
 	<licenses>
 		<license/>
