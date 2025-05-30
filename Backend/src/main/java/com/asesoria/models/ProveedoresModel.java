@@ -77,8 +77,7 @@ public class ProveedoresModel {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ProveedoresModel [Id=").append(Id).append(", name=").append(name).append(", facturas=")
-				.append(facturas).append("]");
+		builder.append("ProveedoresModel [Id=").append(Id).append(", name=").append(name).append("]");
 		return builder.toString();
 	}
 	

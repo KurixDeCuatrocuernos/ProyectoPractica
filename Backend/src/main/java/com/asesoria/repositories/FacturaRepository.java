@@ -10,7 +10,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.asesoria.models.BillsTypeModel;
+import com.asesoria.models.ClientesModel;
 import com.asesoria.models.FacturaModel;
+import com.asesoria.models.ProveedoresModel;
+import com.asesoria.models.UsuariosModel;
 
 @Repository
 public interface FacturaRepository extends JpaRepository<FacturaModel, Long> {
@@ -19,18 +23,16 @@ public interface FacturaRepository extends JpaRepository<FacturaModel, Long> {
 	public Optional<FacturaModel> findById(long Id);
 	
 	// Método para buscar las facturas por su BillType
-	public List<FacturaModel> findByBillTypeId(int billTypeId);
+	public List<FacturaModel> findByBillTypeId(BillsTypeModel billTypeId);
 	
 	// Método para buscar las facturas por su Provider
-	public List<FacturaModel> findByProviderId(int providerId);
+	public List<FacturaModel> findByProviderId(ProveedoresModel providerId);
 	
 	// Método para buscar las facturas por su Client
-	public List<FacturaModel> findByClientId(int clientId);
+	public List<FacturaModel> findByClientId(ClientesModel clientId);
 	
-	// Método para buscar las facturas por su UserId y ValidDate (puede ser null, pero que sólo muestre los que no lo sean)
-	@Query("SELECT f FROM FacturaModel f WHERE f.user.id = :userId AND f.validDate IS NOT NULL")
-	List<FacturaModel> findByUserIdAndValidDateIsNotNull(@Param("userId") int userId);
-	
+	@Query("SELECT f FROM FacturaModel f WHERE f.userId.id = :userId AND f.validDate IS NOT NULL")
+	List<FacturaModel> findByUserIdAndValidDateIsNotNull(@Param("userId") long userId);
 	// Método para buscar una factura en un intervalo de fechas con un orden
 	public List<FacturaModel> findByValidDateBetween(Timestamp startDate, Timestamp endDate, Sort sort);
 	

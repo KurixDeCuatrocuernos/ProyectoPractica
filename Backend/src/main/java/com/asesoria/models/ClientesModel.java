@@ -78,9 +78,9 @@ public class ClientesModel {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ClientesModel [Id=").append(Id).append(", name=").append(name).append(", facturas=")
-				.append(facturas).append("]");
+		builder.append("ClientesModel [Id=").append(Id).append(", name=").append(name).append("]");
 		return builder.toString();
 	}
+
 
 }

@@ -9,12 +9,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.asesoria.models.BillsTypeModel;
+import com.asesoria.models.ClientesModel;
 import com.asesoria.models.FacturaModel;
+import com.asesoria.models.ProveedoresModel;
+import com.asesoria.models.UsuariosModel;
 import com.asesoria.repositories.FacturaRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +31,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/api/facturas")
 public class FacturaController {
 	
-	@Autowired
 	private FacturaRepository facturaRepo;
 	
 	@GetMapping("/{id}")
@@ -57,7 +61,9 @@ public class FacturaController {
 		Map<String, Object> rs = new HashMap<>();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			List<FacturaModel> facturas = facturaRepo.findByBillTypeId(billTypeId);
+			BillsTypeModel billType = new BillsTypeModel();
+			billType.setId(billTypeId);
+			List<FacturaModel> facturas = facturaRepo.findByBillTypeId(billType);
 			if(facturas.isEmpty()) {
 				rs.put("status", 404);
 				rs.put("message", "No se encontraron facturas de ese tipo");
@@ -80,7 +86,9 @@ public class FacturaController {
 		Map<String, Object> rs = new HashMap<>();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			List<FacturaModel> facturas = facturaRepo.findByClientId(clientId);
+			ClientesModel cliente = new ClientesModel();
+			cliente.setId(clientId);
+			List<FacturaModel> facturas = facturaRepo.findByClientId(cliente);
 			if(facturas.isEmpty()) {
 				rs.put("status", 404);
 				rs.put("message", "No se encontraron facturas de ese cliente");
@@ -103,7 +111,9 @@ public class FacturaController {
 		Map<String, Object> rs = new HashMap<>();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			List<FacturaModel> facturas = facturaRepo.findByProviderId(providerId);
+			ProveedoresModel proveedor = new ProveedoresModel();
+			proveedor.setId(providerId);
+			List<FacturaModel> facturas = facturaRepo.findByProviderId(proveedor);
 			if(facturas.isEmpty()) {
 				rs.put("status", 404);
 				rs.put("message", "No se encontraron facturas de ese proveedor");
@@ -154,7 +164,7 @@ public class FacturaController {
 	
 	// Este método dependerá del estilo de autenticación (firebase SpringSecurity, etc.)
 	@GetMapping("/{userId}")
-	public String getFacturasByUserId(@PathVariable int userId) throws JsonProcessingException {
+	public String getFacturasByUserId(@PathVariable long userId) throws JsonProcessingException {
 		Map<String, Object> rs = new HashMap<>();
 		ObjectMapper om = new ObjectMapper();
 		try {

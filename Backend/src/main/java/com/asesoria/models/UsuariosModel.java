@@ -134,8 +134,10 @@ public class UsuariosModel {
 		StringBuilder builder = new StringBuilder();
 		builder.append("UsuariosModel [Id=").append(Id).append(", name=").append(name).append(", email=").append(email)
 				.append(", password=").append(password).append(", role=").append(role).append(", confirmed=")
-				.append(confirmed).append(", facturas=").append(facturas).append("]");
+				.append(confirmed).append("]");
 		return builder.toString();
 	}
+
+
 	
 }

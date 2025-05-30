@@ -155,12 +155,9 @@ public class FacturaModel {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("FacturaModel [Id=").append(Id).append(", uploadDate=").append(uploadDate).append(", validDate=")
-				.append(validDate).append(", pdf=").append(Arrays.toString(pdf)).append(", userId=").append(userId)
-				.append(", providerId=").append(providerId).append(", clientId=").append(clientId)
-				.append(", billTypeId=").append(billTypeId).append("]");
+				.append(validDate).append(", pdf=").append(Arrays.toString(pdf)).append("]");
 		return builder.toString();
 	}
-
 	
 	
 }

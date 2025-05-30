@@ -77,8 +77,7 @@ public class BillsTypeModel {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("BillsTypeModel [Id=").append(Id).append(", name=").append(name).append(", facturas=")
-				.append(facturas).append("]");
+		builder.append("BillsTypeModel [Id=").append(Id).append(", name=").append(name).append("]");
 		return builder.toString();
 	}
 	

@@ -2,7 +2,6 @@ package com.asesoria.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/api/usuarios")
 public class UsuariosController {
 	
-	@Autowired
 	UsuariosRepository userRepo;
-	
-	@Autowired
+
 	Validator validator;
 	
 	@GetMapping("/checkAd/{id}")
