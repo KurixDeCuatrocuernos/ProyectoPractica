@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * Esta clase sirve como endpoint de la API /facturas, para la comunicación con esos datos
  */
 @RestController
+@CrossOrigin(origins="http://localhost:5173")
 @RequestMapping("/api/facturas")
 public class FacturaController {
 	
@@ -183,6 +184,23 @@ public class FacturaController {
 			rs.put("message", "Internal Server Error");
 			String json = om.writeValueAsString(rs);
 			return json;
+		}
+	} 
+	
+	@GetMapping("/testConnection")
+	public ResponseEntity<String> testConnection() throws JsonProcessingException {
+		Map<String, Object> rs = new HashMap<>();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			rs.put("status", 200);
+			rs.put("message", "Hola desde el controlador de Facturas del Backend");
+			String json = om.writeValueAsString(rs);
+			return ResponseEntity.ok(json);
+		} catch (Exception error) {
+			rs.put("status", 500);
+			rs.put("message", "Internal Server Error");
+			String json = om.writeValueAsString(rs);
+			return ResponseEntity.ok(json);
 		}
 	} 
 	
