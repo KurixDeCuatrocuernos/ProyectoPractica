@@ -1,6 +1,6 @@
 import '../appStyles/AppHomePage.css'
 
-function AppHomeComponent() {
+function AppHomePage() {
     return(
         <>
             <h1>Estás en la página principal de la aplicación</h1>
@@ -8,4 +8,4 @@ function AppHomeComponent() {
     );
 }
 
-export default AppHomeComponent;
+export default AppHomePage;
