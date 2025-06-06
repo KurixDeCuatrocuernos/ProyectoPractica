@@ -1,0 +1,43 @@
+#LoginForm_form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+#LoginForm_div_fields{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.LoginForm_fields_input{
+    background-color: #D6CFB3;
+  /* Esquinas superiores redondeadas */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+
+  border: none;
+  border-bottom: solid black 2px; 
+  padding: 0.5rem 1rem;
+}
+
+.LoginForm_fields_input:hover{
+    background-color: #eee6c9;
+}
+
+#LoginForm_Submit_button{
+    background-color: #648F55;
+    color: white;
+    border: none; 
+    border-top-right-radius: 45%;
+    border-bottom-right-radius: 45%;
+    height: 5dvh;
+    width: 8dvh;
+    padding: 1dvh;
+}
+
+#LoginForm_Submit_button:hover{
+    background-color: #648f55a8;
+    cursor: pointer;
+}
