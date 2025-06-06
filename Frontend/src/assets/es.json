@@ -1,0 +1,50 @@
+{
+    "headerComponent": {
+        "button1": "¿Quienes Somos?",
+        "button2": "Contacto",
+        "button3": "Servicios",
+        
+        "dropdown1": "Judicial",
+        "dropdown2": "Laboral"
+    },
+    "loginFormComponent": {
+        "submitButton": "Acceder",
+        "inputEmail": "Escribe tu correo electrónico",
+        "inputPassword": "Escribe tu contraseña"
+    },
+    "navComponent": {
+        "text": "Te Acompañamos con Soluciones claras, seguras y personalizadas para que tomes las mejores decisiones",
+        "button": "Contacto"
+    },
+    "contactComponent": {
+        "questionText": "¿Necesistas Contactar?",
+        "text": "Si quieres más información, ponte en contacto con nosotros y te ayudaremos: ",
+        "buttonText": "Contacto"
+    },
+    "homePage": {
+        "titleText": "Nuestros Servicios",
+        "judicialText": "Servicios de asesoramiento Jurídico",
+        "laboralText": "Servicios de asesoramiento Laboral"
+    },
+    "footerComponent": {
+        "servicesTitle": "Nuestros Servicios: ",
+        "service1": "Altas, Bajas y Variaciones en la Seguridad Social",
+        "service2": "Cotizaciones a la seguridad Social",
+        "service3": "Confección de Nóminas y Documentos de Costes",
+        "service4": "Consulta y envío de Notificaciones Telemáticas de la Seguridad Social",
+        "service5": "Certificaciones de Ingresos Anuales de los trabajadores",
+        "service6": "Confección de Contratos de Trabajo, Prórrogas y posterior presentación",
+        "service7": "Tramitación de Partes de Enfermedad y Accidentes Laborales",
+        "service8": "Sistema Especial de empleados de hogar",
+        "service9": "Presentación del modelo del IRPF y Resumen anual",
+        "service10": "Régimen especial de Trabajadores Autónomos",
+        "service11": "Herencias y Testamentos",
+        "service12": "Procesos Mercantiles",
+        "service13": "Contratos Civiles",
+        "service14": "Divorcios",
+        "service15": "Juicios Penales",
+        "service16": "Contratos de Inmuebles",
+        "socialMedia": "¡También puedes encontrarnos en nuestras redes sociales!: ",
+        "mapText": "Y también puedes encontrarnos en: "
+    }
+}
