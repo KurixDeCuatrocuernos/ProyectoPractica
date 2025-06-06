@@ -9,7 +9,7 @@ function ErrorPage() {
         <h1>Estás viendo la página de Error</h1>
         <h2>Porque la página: {uri} no existe</h2>
         </>
-    );
+    )
 }
 
-export default ErrorPage;
+export default ErrorPage
