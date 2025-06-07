@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/HeaderComponent.css'
 import logo from '../assets/LogoAndresEscudero2.jpeg'
-import textsEs from '../assets/es.json'
-import textsEn from '../assets/en.json'
 import LoginForm from './LoginFormComponent.jsx'
 import spain from '../assets/SpainFlag.png'
 import uk from '../assets/UnitedKingdomFlag.png'
 import { useLanguage } from '../context/LanguageContext';
-import { redirect } from 'react-router-dom'
 
 function HeaderComponent() {
 
@@ -25,12 +22,6 @@ function HeaderComponent() {
             setFlag(spain);
         }
           
-    } 
-
-    const redirectTo = async(uri) => {
-        useEffect((
-            navigate(uri)
-        ),[]);
     }
 
     return (
@@ -44,8 +35,8 @@ function HeaderComponent() {
                         <p id="header_navbar_sectionsButton" className='header_navbar_button' >{currentTexts.headerComponent.button3}</p>
                         <div id="header_navbar_dropdown">
                             {/*Aquí están los elementos del desplegable*/}
-                            {showServices && <p className='header_navbar_list_element'>{currentTexts.headerComponent.dropdown1}</p>}
-                            {showServices && <p className='header_navbar_list_element'>{currentTexts.headerComponent.dropdown2}</p>} 
+                            {showServices && <p className='header_navbar_list_element' onClick={() => navigate("/judicial_services")}>{currentTexts.headerComponent.dropdown1}</p>}
+                            {showServices && <p className='header_navbar_list_element' onClick={() => navigate("/laboral_services")}>{currentTexts.headerComponent.dropdown2}</p>} 
                         </div>
                     </div>
                 </div>
