@@ -8,8 +8,10 @@ import HeaderComponent from './components/HeaderComponent'
 import FooterComponent from './components/FooterComponent'
 import AppHomePage from './appPages/AppHomePage'
 import { LanguageProvider } from "./context/LanguageContext"
-import ContactComponent from "./components/ContactComponent"
-import NavComponent from "./components/NavComponent"
+import JudicialPage from "./pages/JudicialPage"
+import LaboralPage from "./pages/LaboralPage"
+import AboutUsPage from "./pages/AboutUsPage"
+import ContactPage from "./pages/ContactPage"
 
 function App() {
   const debug = import.meta.env.VITE_DEBUG_LOG
@@ -23,13 +25,13 @@ function App() {
       </header>
       
       <section>
-        <NavComponent/>
-      </section>
-      
-      <section>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="/judicial_services" element={<JudicialPage/>}/>
+          <Route path="laboral_services" element={<LaboralPage/>}/>
+          <Route path="/about_us" element={<AboutUsPage/>}/>
+          <Route path="/contact" element={<ContactPage/>}/>
 
           <Route path="/connection" element={debug && <TestPage/>}/>
             
@@ -37,11 +39,7 @@ function App() {
           <Route path="*" element={<ErrorPage/>}/>
         </Routes>
       </section>
-
-      <section>
-        <ContactComponent/>
-      </section>
-      
+    
       <footer>
         {!shouldShowLayout && <FooterComponent />}
       </footer>
