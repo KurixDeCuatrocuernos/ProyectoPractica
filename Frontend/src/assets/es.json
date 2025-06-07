@@ -13,18 +13,64 @@
         "inputPassword": "Escribe tu contraseña"
     },
     "navComponent": {
-        "text": "Te Acompañamos con Soluciones claras, seguras y personalizadas para que tomes las mejores decisiones",
+        "homePageText": "Te Acompañamos con Soluciones claras, seguras y personalizadas para que tomes las mejores decisiones",
+        "judicialPageText": "Te acompañamos con soluciones claras, seguras y personalizadas durante los procesos judiciales",
+        "laboralPageText": "Te acompañamos con soluciones claras, seguras y personalizadas para tu trabajo",
+        "aboutUsPage": "Somos una Asesoría especializada en asuntos jurídicos y laborales, con un enfoque humano y cercano.\nEn Escudero Jurídico nos importan las personas, por eso cada caso es único para nosotros. Nos comprometemos a brindarte un asesoramiento personalizado, claro y honesto, adaptado a tus necesidades reales. Nuestro objetivo es que tomes decisiones con seguridad y confianza, sabiendo que cuentas con un equipo que te respalda en cada paso.\nTu tranquilidad legal es nuestra prioridad.",
         "button": "Contacto"
-    },
-    "contactComponent": {
-        "questionText": "¿Necesistas Contactar?",
-        "text": "Si quieres más información, ponte en contacto con nosotros y te ayudaremos: ",
-        "buttonText": "Contacto"
     },
     "homePage": {
         "titleText": "Nuestros Servicios",
         "judicialText": "Servicios de asesoramiento Jurídico",
         "laboralText": "Servicios de asesoramiento Laboral"
+    },
+    "judicialPage": {
+        "title": "¿Necesita que le ayudemos en algún aspecto Jurídico?",
+        "inheritanceTitle": "Herencias y Testamentos",
+        "subtitle1": "Te asesoramos en el proceso para elaborar tu testamento",
+        "subtitle2":"Te asesoramos en el proceso para recibir tu herencia",
+        "homeContractsTitle": "Contratos de Inmuebles",
+        "subtitle3": "Contratos de Arrendamiento",
+        "subtitle4": "Contratos de venta de Inmuebles",
+        "subtitle5": "Inversión de Inmuebles",
+        "subtitle6": "Asesoramiento en Alquiler",
+        "divorcesTitle": "Divorcios",
+        "subtitle7": "Te asesoraremos durante el proceso de divorcio"
+    },
+    "laboralPage": {
+        "title": "¿Necesita que le ayudemos en algún problema laboral?",
+        "subtitle1": "Altas, Bajas y Variaciones en la Seguridad Social",
+        "subtitle2": "Consulta y envío de Notificaciones telemáticas de la Seguridad Social",
+        "subtitle3": "Cotizaciones a la Seguridad Social",
+        "subtitle4": "Confección de Nóminas y Documentos de costes",
+        "subtitle5": "Certificaciones de Ingresos Anuales de los trabajadores",
+        "subtitle6": "Confección de Contratos de Trabajo, Prórrogas y posterior presentación",
+        "subtitle7": "Tramitación de Partes de Enfermedad y Accidentes laborales"
+    },
+    "aboutUsPage": {
+        "subtitle1": "Somos personas que creen en el esfuerzo diario como motor del crecimiento. Trabajamos con dedicación y constancia, porque sabemos que cada paso cuenta.",
+        "subtitle2": "Actuamos con responsabilidad en todo lo que hacemos. Cumplimos nuestros compromisos con seriedad, porque creemos que la confianza se construye con hechos"
+    },
+    "contactPage": {
+        "title": "Contactar",
+        "namePlaceholder": "Inserta tu Nombre...",
+        "nameHintText": "Nombre",
+        "surnamePlaceholder": "Inserta tus apellidos...",
+        "surnameHintText": "Apellidos",
+        "emailPlaceholder": "Inserta tu email...",
+        "emailHintText": "Correo Electrónico",
+        "phonePlaceholder": "Inserta tu Teléfono...",
+        "phoneHintText": "Teléfono",
+        "textareaPlaceholder": "Necesito ayuda con...",
+        "textareaHintText": "Ofrécenos contexto acerca de cómo te podemos ayudar",
+        "submitButton": "Aceptar",
+        "privacyText": "Al hacer click en Aceptar te enviaremos un correo a la dirección de correo electrónico que nos hayas proporcionado, ninguno de los datos que introduzcas aquí se almacenarán, sólo se emplearán en la comunicación.",
+        "phoneHelpText": "O puedes llamarnos al 555-555-555"
+    },
+    "contactComponent": {
+        "questionText": "¿Necesitas Contactar?",
+        "text": "Si quieres más información, ponte en contacto con nosotros y te ayudaremos: ",
+        "buttonText": "Contacto"
     },
     "footerComponent": {
         "servicesTitle": "Nuestros Servicios: ",

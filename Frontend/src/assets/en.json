@@ -13,13 +13,59 @@
         "inputPassword": "Enter your password"
     },
     "navComponent": {
-        "text": "We accompany you with clear, secure, and personalized solutions so you can make the best decisions",
+        "homePageText": "We support you with clear, secure, and personalized solutions so you can make the best decisions",
+        "judicialPageText": "We support you with clear, secure, and personalized solutions throughout judicial processes",
+        "laboralPageText": "We support you with clear, secure, and personalized solutions for your work",
+        "aboutUsPage": "We are a consulting firm specialized in legal and labor matters, with a human and approachable focus.\nAt Escudero Jurídico, people matter to us — that’s why every case is unique. We are committed to providing you with personalized, clear, and honest advice tailored to your real needs. Our goal is to help you make decisions with confidence and peace of mind, knowing you have a team that supports you every step of the way.\nYour legal peace of mind is our priority.",
         "button": "Contact"
     },
     "homePage": {
         "titleText": "Our Services",
         "judicialText": "Legal Advisory Services",
         "laboralText": "Labor Advisory Services"
+    },
+    "judicialPage": {
+        "title": "Do you need help with any legal matter?",
+        "inheritanceTitle": "Wills and Inheritances",
+        "subtitle1": "We advise you in the process of creating your will",
+        "subtitle2": "We advise you in the process of receiving your inheritance",
+        "homeContractsTitle": "Real Estate Contracts",
+        "subtitle3": "Lease Agreements",
+        "subtitle4": "Real Estate Sale Contracts",
+        "subtitle5": "Real Estate Investment",
+        "subtitle6": "Rental Advice",
+        "divorcesTitle": "Divorces",
+        "subtitle7": "We will advise you during the divorce process"
+    },
+    "laboralPage": {
+        "title": "Do you need help with any work-related issue?",
+        "subtitle1": "Registrations, Terminations, and Changes in Social Security",
+        "subtitle2": "Consultation and Submission of Social Security Electronic Notifications",
+        "subtitle3": "Social Security Contributions",
+        "subtitle4": "Preparation of Payrolls and Cost Documents",
+        "subtitle5": "Annual Income Certificates for Employees",
+        "subtitle6": "Drafting of Employment Contracts, Extensions, and Subsequent Submission",
+        "subtitle7": "Processing of Sick Leave and Work-Related Accident Reports"
+    },
+    "aboutUsPage": {
+        "subtitle1": "We are people who believe in daily effort as the driving force behind growth. We work with dedication and perseverance because we know that every step matters.",
+        "subtitle2": "We act responsibly in everything we do. We fulfill our commitments seriously because we believe that trust is built through actions."
+    },
+    "contactPage": {
+        "title": "Contact",
+        "namePlaceholder": "Enter your name...",
+        "nameHintText": "Name",
+        "surnamePlaceholder": "Enter your surname...",
+        "surnameHintText": "Surname",
+        "emailPlaceholder": "Enter your email...",
+        "emailHintText": "Email",
+        "phonePlaceholder": "Enter your phone number...",
+        "phoneHintText": "Phone",
+        "textareaPlaceholder": "I need help with...",
+        "textareaHintText": "Give us some context about how we can help you",
+        "submitButton": "Submit",
+        "privacyText": "By clicking Submit, we will send an email to the address you provided. None of the data you enter here will be stored; it will only be used for communication purposes.",
+        "phoneHelpText": "Or you can call us at 555-555-555"
     },
     "contactComponent": {
         "questionText": "Need to Contact Us?",
