@@ -9,10 +9,13 @@ import { useLanguage } from '../context/LanguageContext';
 
 function HeaderComponent() {
 
+    // Variables para la estética de React
     const[flag, setFlag] = useState(spain);
     const { language, toggleLanguage, currentTexts } = useLanguage();
     const navigate = useNavigate();
     const [showServices, setShowServices] = useState(false);
+    const isInAboutUs = location.pathname === "/about_us";
+    const isInContact = location.pathname === "/contact";
 
     const setLanguage = async() => {
         toggleLanguage();
@@ -29,8 +32,8 @@ function HeaderComponent() {
             <div id='header_row'>
                 <img id='header_logo_img' src={logo} alt="Logo Andrés Escudero" onClick={() => navigate("/home")}/>
                 <div id='header_div_buttons'>
-                    <p className='header_navbar_button' onClick={() => navigate("/about_us")}>{currentTexts.headerComponent.button1}</p>
-                    <p className='header_navbar_button' onClick={() => navigate("/contact")}>{currentTexts.headerComponent.button2}</p>
+                    <p className={`header_navbar_button ${isInAboutUs ? "active" : ""}`} onClick={() => navigate("/about_us")}>{currentTexts.headerComponent.button1}</p>
+                    <p className={`header_navbar_button ${isInContact ? "active" : ""}`} onClick={() => navigate("/contact")}>{currentTexts.headerComponent.button2}</p>
                     <div id="header_navbar_div_sections" onMouseEnter={() => setShowServices(true)} onMouseLeave={() => setShowServices(false)}>
                         <p id="header_navbar_sectionsButton" className='header_navbar_button' >{currentTexts.headerComponent.button3}</p>
                         <div id="header_navbar_dropdown">

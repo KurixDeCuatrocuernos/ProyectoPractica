@@ -42,10 +42,16 @@
     padding: 10px;
 }
 
-.header_navbar_button:hover{
+/*modificados para marcar el botón en la página correspondiente:*/
+.header_navbar_button:not(.active):hover{
     cursor: pointer;
     background-color: #384268;
 }
+
+.header_navbar_button.active {
+  background-color: #384268;
+}
+/*-------------------------------------------------------------------*/
 
 #header_navbar_div_sections{
     position: relative;
