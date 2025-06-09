@@ -1,0 +1,96 @@
+{
+    "headerComponent": {
+        "button1": "Who Are We?",
+        "button2": "Contact",
+        "button3": "Services",
+
+        "dropdown1": "Legal",
+        "dropdown2": "Labor"
+    },
+    "loginFormComponent": {
+        "submitButton": "Log In",
+        "inputEmail": "Enter your email",
+        "inputPassword": "Enter your password"
+    },
+    "navComponent": {
+        "homePageText": "We support you with clear, secure, and personalized solutions so you can make the best decisions",
+        "judicialPageText": "We support you with clear, secure, and personalized solutions throughout judicial processes",
+        "laboralPageText": "We support you with clear, secure, and personalized solutions for your work",
+        "aboutUsPage": "We are a consulting firm specialized in legal and labor matters, with a human and approachable focus.\nAt Escudero Jurídico, people matter to us, that's why every case is unique. We are committed to providing you with personalized, clear, and honest advice tailored to your real needs. Our goal is to help you make decisions with confidence and peace of mind, knowing you have a team that supports you every step of the way.\nYour legal peace of mind is our priority.",
+        "button": "Contact"
+    },
+    "homePage": {
+        "titleText": "Our Services",
+        "judicialText": "Legal Advisory Services",
+        "laboralText": "Labor Advisory Services"
+    },
+    "judicialPage": {
+        "title": "Do you need help with any legal matter?",
+        "inheritanceTitle": "Wills and Inheritances",
+        "subtitle1": "We advise you in the process of creating your will",
+        "subtitle2": "We advise you in the process of receiving your inheritance",
+        "homeContractsTitle": "Real Estate Contracts",
+        "subtitle3": "Lease Agreements",
+        "subtitle4": "Real Estate Sale Contracts",
+        "subtitle5": "Real Estate Investment",
+        "subtitle6": "Rental Advice",
+        "divorcesTitle": "Divorces",
+        "subtitle7": "We will advise you during the divorce process"
+    },
+    "laboralPage": {
+        "title": "Do you need help with any work-related issue?",
+        "subtitle1": "Registrations, Terminations, and Changes in Social Security",
+        "subtitle2": "Consultation and Submission of Social Security Electronic Notifications",
+        "subtitle3": "Social Security Contributions",
+        "subtitle4": "Preparation of Payrolls and Cost Documents",
+        "subtitle5": "Annual Income Certificates for Employees",
+        "subtitle6": "Drafting of Employment Contracts, Extensions, and Subsequent Submission",
+        "subtitle7": "Processing of Sick Leave and Work-Related Accident Reports"
+    },
+    "aboutUsPage": {
+        "subtitle1": "We are people who believe in daily effort as the driving force behind growth. We work with dedication and perseverance because we know that every step matters.",
+        "subtitle2": "We act responsibly in everything we do. We fulfill our commitments seriously because we believe that trust is built through actions."
+    },
+    "contactPage": {
+        "title": "Contact",
+        "namePlaceholder": "Enter your name...",
+        "nameHintText": "Name",
+        "surnamePlaceholder": "Enter your surname...",
+        "surnameHintText": "Surname",
+        "emailPlaceholder": "Enter your email...",
+        "emailHintText": "Email",
+        "phonePlaceholder": "Enter your phone number...",
+        "phoneHintText": "Phone",
+        "textareaPlaceholder": "I need help with...",
+        "textareaHintText": "Give us some context about how we can help you",
+        "submitButton": "Submit",
+        "privacyText": "By clicking Submit, we will send an email to the address you provided. None of the data you enter here will be stored; it will only be used for communication purposes.",
+        "phoneHelpText": "Or you can call us at 555-555-555"
+    },
+    "contactComponent": {
+        "questionText": "Need to Contact Us?",
+        "text": "If you want more information, get in touch with us and we will help you:",
+        "buttonText": "Contact"
+    },
+    "footerComponent": {
+        "servicesTitle": "Our Services: ",
+        "service1": "Registrations, Deregistrations and Changes in Social Security",
+        "service2": "Social Security Contributions",
+        "service3": "Payroll Preparation and Cost Documents",
+        "service4": "Consultation and Submission of Social Security Electronic Notifications",
+        "service5": "Annual Income Certificates for Employees",
+        "service6": "Preparation and Submission of Employment Contracts and Extensions",
+        "service7": "Processing of Sick Leave and Work Accidents",
+        "service8": "Special System for Household Employees",
+        "service9": "Submission of Personal Income Tax Forms and Annual Summary",
+        "service10": "Special Scheme for Self-Employed Workers",
+        "service11": "Inheritance and Wills",
+        "service12": "Commercial Proceedings",
+        "service13": "Civil Contracts",
+        "service14": "Divorces",
+        "service15": "Criminal Trials",
+        "service16": "Real Estate Contracts",
+        "socialMedia": "You can also find us on our social media: ",
+        "mapText": "And you can also find us at: "
+    }
+}

@@ -1,0 +1,33 @@
+#contact_container{
+    background-color:  #29304C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4dvh;
+}
+
+#contact_ask{
+    color: #D6CFB3;
+    margin-bottom: 20px;
+}
+
+#contact_text{
+    color: #D6CFB3;
+    margin-bottom: 20px;
+}
+
+#contact_button{
+    background-color: #D6CFB3;
+    color: #29304C;
+    width: 100px;
+    height: 50px;
+    font-size: large;
+    font-weight: bold;
+    border: none;
+}
+
+#contact_button:hover{
+    cursor: pointer;
+    background-color: #ece5cb;
+}

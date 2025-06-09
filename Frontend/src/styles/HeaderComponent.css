@@ -1,0 +1,103 @@
+#header_header{
+    background-color: #29304C;
+    z-index: 0;
+    min-height: fit-content;
+    min-width: fit-content;
+}
+
+#header_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Centra verticalmente */
+    justify-content: space-around;
+
+}
+
+#header_logo_img{
+    height: 192px;
+    width: 192px;
+}
+
+#header_logo_img:hover{
+    cursor: pointer;
+}
+
+#header_div_buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem; /* Espacio entre elementos */ 
+    height: 200px;
+    align-items: center;
+}
+
+.header_navbar_button{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    color: #D6CFB3;
+    border: solid 5px #D6CFB3;
+    width: 150px;
+    height: 60px; 
+    text-align: center;
+    padding: 10px;
+}
+
+/*modificados para marcar el botón en la página correspondiente:*/
+.header_navbar_button:not(.active):hover{
+    cursor: pointer;
+    background-color: #384268;
+}
+
+.header_navbar_button.active {
+  background-color: #384268;
+}
+/*-------------------------------------------------------------------*/
+
+#header_navbar_div_sections{
+    position: relative;
+}
+
+#header_navbar_dropdown{
+    position: absolute;
+    top: 100%;  /* justo debajo del botón */
+    left: 0;    /* alineado a la izquierda del botón */
+    z-index: 10; /* para que esté encima */
+}
+
+.header_navbar_list_element{
+    background-color: #D6CFB3;
+    color: #384268;
+    z-index: 5;
+    width: 150px;
+    height: 30px; 
+    text-align: center;
+    align-content: center;
+}
+
+.header_navbar_list_element:first-of-type {
+  margin-top: 5px;
+}
+
+.header_navbar_list_element:last-child {
+    margin-bottom: 5px;
+}
+
+.header_navbar_list_element:hover{
+    cursor: pointer;
+    background-color: #aaa58f;
+}
+
+#header_language_img{
+    background-color: #29304C;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: solid #D6CFB3 2px;
+    object-fit: cover;
+    margin: 20px;
+}
+
+#header_language_img:hover{
+    cursor: pointer;
+    opacity: 70%;
+}

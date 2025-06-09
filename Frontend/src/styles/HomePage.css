@@ -1,0 +1,64 @@
+#homePage_container{
+    display: flex;
+    flex-direction: column;
+}
+
+#homePage_title_text{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 50px;
+    color: #5B627E;
+}
+
+#homePage_judicial_row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10dvw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#homePage_judicial_row:hover{
+    cursor: pointer;
+}
+
+#homePage_judicial_img{
+    border-radius: 50%;
+    width: 128px;
+    height: 128px;
+    object-fit: cover;
+}
+
+#homePage_judicial_text{
+    font-size: 25px;
+    color: #5B627E;
+    margin-left: 20px;
+}
+
+#homePage_laboral_row{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-right: 10dvw;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+#homePage_laboral_row:hover{
+    cursor: pointer;
+}
+
+#homePage_laboral_img{
+    border-radius: 50%;
+    width: 128px;
+    height: 128px;
+    object-fit: cover;
+}
+
+#homePage_laboral_text{
+    font-size: 25px;
+    color: #5B627E;
+    margin-right: 20px;
+}

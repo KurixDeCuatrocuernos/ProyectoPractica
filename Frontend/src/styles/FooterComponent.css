@@ -1,0 +1,150 @@
+#footer_footer{
+    background-color: #D6CFB3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#footer_left_list{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer_title_text{
+    font-size: large;
+}
+
+.footer_service{
+    color: black;
+    text-decoration: none;
+}
+
+#footer_right_list{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 2rem;
+}
+
+#footer_social_list_imgs{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 1rem;
+}
+
+#footer_facebook_background{
+    background-color: #0866FF;
+    display: flex;
+    flex-direction: column;
+    width: 64px;
+    height: 64px;
+    justify-content: center;
+    align-items: center;  
+    border-radius: 15%;
+}
+
+#footer_facebook_img{
+    width: 54px;
+    height: 54px;
+}
+
+#footer_facebook_img:hover{
+    cursor: pointer;
+}
+
+#footer_instagram_background{
+    background-color: #FD3DB5;
+    display: flex;
+    flex-direction: column;
+    width: 64px;
+    height: 64px;
+    justify-content: center;
+    align-items: center;  
+    border-radius: 15%;
+}
+
+#footer_instagram_img{
+    width: 54px;
+    height: 54px;
+}
+
+#footer_instagram_img:hover{
+    cursor: pointer;
+}
+
+#footer_linkedin_background{
+    background-color: white;
+    width: 54px;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10%;
+}
+
+#footer_linkedin_img{
+    width: 70px;
+    height: 80px;
+}
+
+#footer_linkedin_img:hover{
+    cursor:pointer;
+}
+
+#footer_twitter_background{
+    background-color: #41464A;
+    display: flex;
+    flex-direction: column;
+    width: 64px;
+    height: 64px;
+    justify-content: center;
+    align-items: center;  
+    border-radius: 15%;
+    margin-left: 1rem;
+}
+
+#footer_twitter_img{
+    width: 54px;
+    height: 54px;
+}
+
+#footer_twitter_img{
+    cursor:pointer;
+}
+
+#footer_bluesky_background{
+    display: flex;
+    flex-direction: column;
+    width: 64px;
+    height: 64px;
+    justify-content: center;
+    align-items: center;  
+    border-radius: 15%;
+}
+
+#footer_bluesky_img{
+    width: 70px;
+    height: 64px;
+}
+
+#footer_bluesky_img:hover{
+    cursor: pointer;
+}
+
+#footer_ubication_list{
+    display: flex;
+    flex-direction: column;
+}
+
+#footer_map_img{
+    align-self: center;
+    margin-top: 20px;
+    min-height: 300px;
+    min-width: 300px;
+}
+
+#footer_map_img:hover{
+    cursor: pointer;
+}
