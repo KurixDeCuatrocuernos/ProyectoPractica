@@ -14,6 +14,7 @@ function HeaderComponent() {
     const { language, toggleLanguage, currentTexts } = useLanguage();
     const navigate = useNavigate();
     const [showServices, setShowServices] = useState(false);
+    {/*Variables para marcar el botón*/}
     const isInAboutUs = location.pathname === "/about_us";
     const isInContact = location.pathname === "/contact";
 
@@ -23,8 +24,7 @@ function HeaderComponent() {
             setFlag(uk);    
         } else {
             setFlag(spain);
-        }
-          
+        }     
     }
 
     return (
@@ -32,6 +32,7 @@ function HeaderComponent() {
             <div id='header_row'>
                 <img id='header_logo_img' src={logo} alt="Logo Andrés Escudero" onClick={() => navigate("/home")}/>
                 <div id='header_div_buttons'>
+                    {/*Añadida funcionalidad para que el botón se quede marcado al estar en la página*/}
                     <p className={`header_navbar_button ${isInAboutUs ? "active" : ""}`} onClick={() => navigate("/about_us")}>{currentTexts.headerComponent.button1}</p>
                     <p className={`header_navbar_button ${isInContact ? "active" : ""}`} onClick={() => navigate("/contact")}>{currentTexts.headerComponent.button2}</p>
                     <div id="header_navbar_div_sections" onMouseEnter={() => setShowServices(true)} onMouseLeave={() => setShowServices(false)}>

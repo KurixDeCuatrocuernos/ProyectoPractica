@@ -13,13 +13,13 @@
 
 .LoginForm_fields_input{
     background-color: #D6CFB3;
-  /* Esquinas superiores redondeadas */
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-
-  border: none;
-  border-bottom: solid black 2px; 
-  padding: 0.5rem 1rem;
+    /* Esquinas superiores redondeadas */
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    color: black;
+    border: none;
+    border-bottom: solid black 2px; 
+    padding: 0.5rem 1rem;
 }
 
 .LoginForm_fields_input:hover{

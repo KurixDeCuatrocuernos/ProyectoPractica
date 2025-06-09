@@ -41,6 +41,10 @@
     color: black;
 }
 
+.contactPage_inputElement:hover{
+    background-color: #eee6c9;
+}
+
 .contactPage_form_helpText{
     text-align: justify;
     color: #5B627E;
@@ -63,6 +67,11 @@
     height: 10dvh;
     padding-left: 10px;
     color: black;
+ 
+}
+
+#contactPage_inputArea:hover{
+    background-color: #eee6c9;
 }
 
 #contactPage_button{
