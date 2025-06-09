@@ -11,6 +11,8 @@ function HomePage (){
     const { currentTexts } = useLanguage();
     const navigate = useNavigate();
 
+    // Todo funciona normal
+
     return (
         <div id="homePage_container">
             <NavComponent text={currentTexts.navComponent.homePageText}/>
