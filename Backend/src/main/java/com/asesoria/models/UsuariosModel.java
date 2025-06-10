@@ -54,6 +54,11 @@ public class UsuariosModel {
 		this.email = email;
 		this.password = password;
 	}
+	
+	public UsuariosModel(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
 
 	public long getId() {
 		return Id;

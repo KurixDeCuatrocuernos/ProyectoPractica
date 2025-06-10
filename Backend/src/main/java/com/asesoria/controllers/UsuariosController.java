@@ -146,7 +146,6 @@ public class UsuariosController {
 				} else {
 					user.setRole(10);
 					userRepo.save(user);
-					System.out.println(singInUser());
 					rs.put("status", 200);
 					rs.put("message", "Usuario registrado en la base de datos, a falta de confirmar su cuenta");
 					String json = om.writeValueAsString(rs);
@@ -165,12 +164,18 @@ public class UsuariosController {
 			return ResponseEntity.ok(json);
 		}
 	}
-	
+	/*
 	@PostMapping("/signin")
-	public String singInUser() {
-		return "Prueba del: Usuario Logueado con éxito";
+	public String singInUser(@RequestBody UsuariosModel user) {
+		Map<String, Object> rs = new HashMap<>();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			
+		} catch (Exception e) {
+			
+		}
 	}
-	
+	*/
 	@GetMapping("/testConnection")
 	public ResponseEntity<String> testConnection() throws JsonProcessingException {
 		Map<String, Object> rs = new HashMap<>();
