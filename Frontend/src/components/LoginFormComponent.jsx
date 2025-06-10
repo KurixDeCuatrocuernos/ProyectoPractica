@@ -1,6 +1,6 @@
 import '../styles/LoginFormComponent.css'
-import { useLanguage } from '../context/LanguageContext';
-import { useRef, useState } from "react";
+import { useLanguage } from '../context/LanguageContext'
+import { useRef, useState } from "react"
 import validate from '../utils/Validate.js'
 
 function LoginFormComponent() {
@@ -12,7 +12,7 @@ function LoginFormComponent() {
     const [emailErrorMessage, setEmailErrorMessage] = useState();
     const [passErrorMessage, setPassErrorMessage] = useState();
     
-    const nextColor = () => {
+    const buttonAction = () => {
         const email = inputEmail.current;
         const password = inputPass.current;
 
@@ -38,6 +38,41 @@ function LoginFormComponent() {
 
     const submitForm = async (email, pass) => {
         console.log ('enviando datos al back: \n Email: '+email+'\n Password: '+pass);
+        try{
+            const response = await fetch('/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: inputEmail.current.value,
+                    password: inputPass.current.value
+                })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                console.warn(data)
+                if (data.status == 200) {
+                    if (currentTexts == 'TextEs') {
+                        console.log(data.mensaje)
+                    } else {
+                        console.log(data.message)
+                    }
+                    window.location.href="/app/home"
+                } else {
+                    if (currentTexts == 'TextEs') {
+                        console.error(data.mensaje)
+                    } else {
+                        console.error(data.message)
+                    }
+                }
+            } else {
+                console.error("Response is not ok!");
+            }
+            
+        } catch (error) {
+            console.error("Hubo un error durante el login: "+error)
+        }
     }
 
     return (
@@ -67,7 +102,7 @@ function LoginFormComponent() {
             <button
                 id="LoginForm_Submit_button"
                 type="button"
-                onClick={nextColor}
+                onClick={buttonAction}
             >
                 {currentTexts.loginFormComponent.submitButton}
             </button>

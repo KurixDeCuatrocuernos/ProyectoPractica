@@ -3,6 +3,9 @@ package com.asesoria.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Validator {
 	
 	/**
@@ -10,8 +13,8 @@ public class Validator {
 	 * @param email texto recibido para comprobar
 	 * @return devuelve true si el texto es un email y false si no lo es
 	 */
-	private static boolean isEmail(String email) {
-        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+	private boolean isEmail(String email) {
+        String regex = "^[A-Za-z0-9+_.//-]+@escudero.juridico.es$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
@@ -22,7 +25,7 @@ public class Validator {
 	 * @param input String con la información que se comparará
 	 * @return Devuelve true si contiene algún verbo SQL y false si no.
 	 */
-	private static boolean hasSQLInjection(String input) {
+	private boolean hasSQLInjection(String input) {
         String regex = "(?i)\\b(select|insert|update|delete|drop|truncate|exec|union|create|alter|--|;|\\*|\\bor\\b|\\band\\b|\\bwhere\\b)\\b";
         if (input == null || input.isEmpty()) {
             return false;
@@ -35,12 +38,12 @@ public class Validator {
 	 * @param input texto que se verificará
 	 * @return true si sólo contiene los elementos de la expresión regular false si contiene algún otro
 	 */
-	private static boolean isTextWithUnderline(String input) {
-        String regex = "^[A-Za-z0-9_!.¿?-#$&]+$";
+	private boolean isTextWithUnderline(String input) {
+        String regex = "^[A-Za-z0-9_!.¿?\\-#$&]+$";
         return input.matches(regex);
     }
 	
-	private static Character getFirstInvalidCharacter(String input) {
+	private Character getFirstInvalidCharacter(String input) {
 	    String regex = "[A-Za-z0-9_!.¿?\\-#$&]";
 
 	    for (char c : input.toCharArray()) {
@@ -52,7 +55,7 @@ public class Validator {
 	    return null; // Todos los caracteres son válidos
 	}
 	
-	private static boolean isText(String input) {
+	private boolean isText(String input) {
         String regex = "^[A-Za-z]+$";
         return input.matches(regex);
     }
@@ -78,9 +81,13 @@ public class Validator {
 			return "This password is too long";
 		} else if (hasSQLInjection(text)) {
 			return "This password contains invalid expressions";
-		} else if (isTextWithUnderline(text)) {
+		} else if (!isTextWithUnderline(text)) {
 			Character firstInvalidCharacter = getFirstInvalidCharacter(text);
-			return "This password contains invalid characters: "+firstInvalidCharacter;
+			if (firstInvalidCharacter == null) {
+				return null;
+			} else {
+				return "This password contains invalid characters: "+firstInvalidCharacter;	
+			}
 		} else {
 			return null;
 		}
