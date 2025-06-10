@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Navigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 import './App.css'
 import HomePage from './pages/HomePage'
 import ErrorPage from './pages/ErrorPage'
@@ -16,6 +17,35 @@ import ContactPage from "./pages/ContactPage"
 function App() {
   const debug = import.meta.env.VITE_DEBUG_LOG
   const shouldShowLayout = location.pathname.startsWith('/app');
+
+    const [isValidUser, setIsValidUser] = useState(false)
+
+    const checkUser = async () => {
+        console.log("se ha checkado el role del usuario")
+        try {
+            const response = await fetch('/check_user')
+            if (response.ok) {
+                const data = await response.json();
+                if (data.status == 200) {
+                    console.log("Usuario logueado con role válido")
+                    setIsValidUser(true)
+                } else {
+                    setIsValidUser(false)
+                    console.error("status: "+data.status+" error: "+data.message)
+                }
+            } else {
+              setIsValidUser(false)
+                console.error("response not ok")
+            }
+        } catch (error) {
+            setIsValidUser(false)
+            console.error(error)
+        }
+    }
+
+    useEffect(() => {
+      if (shouldShowLayout) checkUser()
+    },[])
 
   return (<>
     <LanguageProvider>
@@ -39,12 +69,12 @@ function App() {
           </Routes>
           :
           <Routes>
-            <Route path="/app/" element={<AppHomePage/>}/>
-            <Route path="/app/home" element={<Navigate to="/app/" replace />} />
-            <Route path="/app/main" element={<Navigate to="/app/" replace />} />
+            {isValidUser && <Route path="/app/" element={<AppHomePage/>}/>}
+            {isValidUser && <Route path="/app/home" element={<Navigate to="/app/" replace />} />}
+            {isValidUser && <Route path="/app/main" element={<Navigate to="/app/" replace />} />}
 
             <Route path="*" element={<ErrorPage/>}/>
-          </Routes>
+          </Routes> 
         }
        
       </section>

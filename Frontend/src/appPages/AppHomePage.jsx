@@ -1,10 +1,11 @@
 import '../appStyles/AppHomePage.css'
 
 function AppHomePage() {
+
     return(
-        <>
-            <h1>Estás en la página principal de la aplicación</h1>
-        </>
+        <div id="AppHomePage_container">
+            <p>Pagina AppHome</p>
+        </div>
     );
 }
 

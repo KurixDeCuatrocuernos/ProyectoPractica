@@ -36,6 +36,21 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/testConnectionUsuarios/, '/api/usuarios/testConnection'),
         },
+        '/signin': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/signin/, '/api/usuarios/signin'),
+        },
+        '/check_user': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/check_user/, '/api/usuarios/check_user'),
+        },
+        '/logout': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/logout/, '/api/usuarios/logout'),
+        },
       },
     },
   }

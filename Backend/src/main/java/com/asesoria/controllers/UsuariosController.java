@@ -19,15 +19,37 @@ import com.asesoria.utils.Validator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @CrossOrigin(origins="http://localhost:5173")
 @RequestMapping("/api/usuarios")
 public class UsuariosController {
 	
+	@Autowired
 	UsuariosRepository userRepo;
-
+	
+	@Autowired
 	Validator validator;
 	
+	/**
+	 * Checks if a user identified by their ID has an administrator role.
+	 * This endpoint queries the database for the user's role and returns a boolean indicating
+	 * if they are an administrator (role 20).
+	 *
+	 * @param id The unique identifier of the user whose role is to be checked.
+	 * @return A {@link org.springframework.http.ResponseEntity} containing a JSON string.
+	 * The JSON includes:
+	 * <ul>
+	 * <li>{@code status}: HTTP status code (e.g., 200 for success, 500 for internal errors).</li>
+	 * <li>{@code role}: A boolean indicating if the user has the admin role ({@code true} if role is 20, {@code false} otherwise).</li>
+	 * <li>{@code message}: (Optional) A descriptive message, typically for error scenarios.</li>
+	 * </ul>
+	 * Example successful response for an admin: {@code {"status": 200, "role": true}}
+	 * Example successful response for a non-admin: {@code {"status": 200, "role": false}}
+	 * Example error response: {@code {"status": 500, "message": "Internal Server error"}}
+	 */
 	@GetMapping("/checkAd/{id}")
 	public ResponseEntity<String> checkAdminById(@PathVariable long id) throws JsonProcessingException {
 		Map<String, Object> rs = new HashMap<>(); 
@@ -37,24 +59,24 @@ public class UsuariosController {
 			if (rol == 20) {
 				rs.put("status", 200);
 				rs.put("role", true);
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			} else if (rol != 20) {
 				rs.put("status", 200);
 				rs.put("role", false);
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			} else {
 				rs.put("status", 404);
 				rs.put("message", "Couldn't find the role of that user");
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			}
+			String json = om.writeValueAsString(rs);
+			return ResponseEntity.ok(json);
 		} catch (Exception error) {
 			rs.put("status", 500);
 			rs.put("message", "Internal Server error");
-			String json = om.writeValueAsString(rs);
-			return ResponseEntity.ok(json);
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
 		}
 	}
 	
@@ -67,27 +89,44 @@ public class UsuariosController {
 			if (rol == 10) {
 				rs.put("status", 200);
 				rs.put("role", true);
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			} else if (rol != 10) {
 				rs.put("status", 200);
 				rs.put("role", false);
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			} else {
 				rs.put("status", 404);
 				rs.put("message", "Couldn't find the role of that user");
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			}
+			String json = om.writeValueAsString(rs);
+			return ResponseEntity.ok(json);
 		} catch (Exception error) {
 			rs.put("status", 500);
 			rs.put("message", "Internal Server error");
-			String json = om.writeValueAsString(rs);
-			return ResponseEntity.ok(json);
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
 		}
 	}
 	
+	/**
+	 * Checks if a user identified by their ID has a specific standard user role (role 10).
+	 * This endpoint queries the database for the user's role and returns a boolean indicating
+	 * if they possess the specified role.
+	 *
+	 * @param id The unique identifier of the user whose role is to be checked.
+	 * @return A {@link org.springframework.http.ResponseEntity} containing a JSON string.
+	 * The JSON includes:
+	 * <ul>
+	 * <li>{@code status}: HTTP status code (e.g., 200 for success, 500 for internal errors).</li>
+	 * <li>{@code role}: A boolean indicating if the user has the standard role ({@code true} if role is 10, {@code false} otherwise).</li>
+	 * <li>{@code message}: (Optional) A descriptive message, primarily for error scenarios.</li>
+	 * </ul>
+	 * Example successful response for a user with role 10: {@code {"status": 200, "role": true}}
+	 * Example successful response for a user with a different role: {@code {"status": 200, "role": false}}
+	 * Example error response: {@code {"status": 500, "message": "Internal Server error"}}
+	 */
 	@GetMapping("/verifyUser/{id}")
 	public ResponseEntity<String> verifyUserById(@PathVariable long id) throws JsonProcessingException {
 		Map<String, Object> rs = new HashMap<>(); 
@@ -97,26 +136,27 @@ public class UsuariosController {
 			if (rol != 0) {
 				rs.put("status", 200);
 				rs.put("confirmed", true);
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			} else if (rol == 0) {
 				rs.put("status", 200);
 				rs.put("confirmed", false);
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			} else {
 				rs.put("status", 404);
 				rs.put("message", "Couldn't find the confirmed of that user");
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			}
+			String json = om.writeValueAsString(rs);
+			return ResponseEntity.ok(json);
 		} catch (Exception error) {
 			rs.put("status", 500);
 			rs.put("message", "Internal Server error");
-			String json = om.writeValueAsString(rs);
-			return ResponseEntity.ok(json);
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
 		}
 	}
+	
 	
 	@PostMapping("/post/signup")
 	public ResponseEntity<String> signUpUser(@RequestBody UsuariosModel user) throws JsonProcessingException {
@@ -131,51 +171,227 @@ public class UsuariosController {
 				if (validatedEmail != null) {
 					rs.put("status", 405);
 					rs.put("message", validatedEmail);
-					String json = om.writeValueAsString(rs);
-					return ResponseEntity.ok(json);
 				} else if (validatedName != null) {
 					rs.put("status", 405);
 					rs.put("message", validatedName);
-					String json = om.writeValueAsString(rs);
-					return ResponseEntity.ok(json);
 				} else if (validatedPassword != null) {
 					rs.put("status", 405);
 					rs.put("message", validatedPassword);
-					String json = om.writeValueAsString(rs);
-					return ResponseEntity.ok(json);
 				} else {
 					user.setRole(10);
 					userRepo.save(user);
 					rs.put("status", 200);
 					rs.put("message", "Usuario registrado en la base de datos, a falta de confirmar su cuenta");
-					String json = om.writeValueAsString(rs);
-					return ResponseEntity.ok(json);
 				}	
 			} else {
 				rs.put("status", 400);
 				rs.put("message", "Bad Data Request");
-				String json = om.writeValueAsString(rs);
-				return ResponseEntity.ok(json);
 			}
+			String json = om.writeValueAsString(rs);
+			return ResponseEntity.ok(json);
 		} catch (Exception error) {
 			rs.put("status", 500);
 			rs.put("message", "Internal Server error");
-			String json = om.writeValueAsString(rs);
-			return ResponseEntity.ok(json);
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
 		}
 	}
-	/*
+	
+	/**
+	 * Handles the user registration process.
+	 * This endpoint receives user details (email, name, password), validates them,
+	 * and if valid, saves the new user to the database with a default role of 10.
+	 *
+	 * @param user The {@link UsuariosModel} object containing the user's registration data (email, name, password).
+	 * @return A {@link org.springframework.http.ResponseEntity} containing a JSON string.
+	 * The JSON includes:
+	 * <ul>
+	 * <li>{@code status}: HTTP status code (e.g., 200 for success, 405 for validation errors, 400 for bad data, 500 for internal server errors).</li>
+	 * <li>{@code message}: A descriptive message about the outcome, including validation error details if applicable.</li>
+	 * </ul>
+	 * Example successful response: {@code {"status": 200, "message": "Usuario registrado en la base de datos, a falta de confirmar su cuenta"}}
+	 * Example validation error response: {@code {"status": 405, "message": "Invalid email format"}}
+	 * Example bad data request: {@code {"status": 400, "message": "Bad Data Request"}}
+	 * Example internal error response: {@code {"status": 500, "message": "Internal Server error"}}
+	 */
 	@PostMapping("/signin")
-	public String singInUser(@RequestBody UsuariosModel user) {
+	public ResponseEntity<String> singInUser(@RequestBody UsuariosModel user, HttpServletRequest request) {
+		System.out.println("Han llegado los datos del front: "+user.getEmail()+" & "+user.getPassword());
+		Map<String, Object> rs = new HashMap<>(); 
+		ObjectMapper om = new ObjectMapper();
+		try {
+			if (user.getEmail() instanceof String && user.getPassword() instanceof String) {
+				String validatedEmail = validator.isValidEmail(user.getEmail());
+				String validatedPassword = validator.isValidPassword(user.getPassword());
+				System.out.println("Ha pasado por el validador");
+				if (validatedEmail != null) {
+					rs.put("status", 405);
+					rs.put("message", validatedEmail);
+				} else if (validatedPassword != null) {
+					rs.put("status", 405);
+					rs.put("message", validatedPassword);
+				} else {
+					if (user.getEmail().equals("usuario@escudero.juridico.es") && user.getPassword().equals("123456")) {
+						HttpSession session = request.getSession(true);
+						session.setAttribute("email", user.getEmail());
+						session.setAttribute("role", "10"); // recoger de la base de datos
+						rs.put("status", 200);
+						rs.put("mensaje", "¡Usuario logueado con éxito!");
+						rs.put("message", "User login successful!");
+					} else if (user.getEmail().equals("usuario@escudero.juridico.es") && !user.getPassword().equals("123456") && user.getPassword() != "123456") {
+						rs.put("status", 401);
+						rs.put("mensaje", "Contraseña errónea");
+						rs.put("message", "Invalid Password");
+					} else if (!user.getEmail().equals("usuario@escudero.juridico.es")) {
+						rs.put("status", 403);
+						rs.put("mensaje", "Esa combinación de email y contraseña es incorrecta");
+						rs.put("message", "That email and password combination is incorrect");
+					} else {
+						rs.put("status", 404);
+						rs.put("mensaje", "Ha ocurrido un error desconocido, por faavor, contacta con un administrador");
+						rs.put("message", "There was an unknown error, please contact with an admin");
+					}
+				}	
+			} else {
+				rs.put("status", 400);
+				rs.put("message", "Bad Data Request");
+			}
+			String json = om.writeValueAsString(rs);
+			return ResponseEntity.ok(json);
+		} catch (Exception e) {
+			rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server error: "+e);
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+		}
+	}
+	
+	
+	/**
+	 * Checks the current user's session to determine if they are logged in and their role.
+	 * This endpoint is typically used by the front-end to verify authentication status
+	 * and user permissions upon page load or before accessing protected resources.
+	 *
+	 * @param request The {@link jakarta.servlet.http.HttpServletRequest} object,
+	 * used to retrieve the current user's session.
+	 * @return A {@link org.springframework.http.ResponseEntity} containing a JSON string.
+	 * The JSON includes a {@code status} field indicating the outcome:
+	 * <ul>
+	 * <li>{@code 200}: User is logged in and has the required role (e.g., "10").</li>
+	 * <li>{@code 403}: User is not logged in, or does not have the required role, or the role attribute is missing.</li>
+	 * <li>{@code 500}: An internal server error occurred during the check.</li>
+	 * </ul>
+	 * Example successful response: {@code {"status": 200}}
+	 * Example forbidden response: {@code {"status": 403}}
+	 * Example error response: {@code {"status": 500, "mensaje": "Error interno del servidor...", "message": "Internal Server Error"}}
+	 */
+	@GetMapping("/check_user") // HAY QUE CAMBIARLO A POST
+	public ResponseEntity<String> checkUser(HttpServletRequest request) {
 		Map<String, Object> rs = new HashMap<>();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				String role = session.getAttribute("role").toString();
+				if (role != null) {
+					if (role.equals("10")) {
+						rs.put("status", 200);
+					} else  {
+						rs.put("status", 403);
+					}
+				} else {
+					rs.put("status", 403);
+				}
+			} else {
+				rs.put("status", 403);
+			}
+			String json = om.writeValueAsString(rs);
+			return ResponseEntity.ok(json);
 		} catch (Exception e) {
-			
+			rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server Error");
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
 		}
 	}
-	*/
+	
+	/**
+	 * Handles user logout by invalidating the current HTTP session.
+	 * If a session exists, it's closed and a success message is returned.
+	 * If no active session is found, a specific message indicating this is returned.
+	 *
+	 * @param request The {@link jakarta.servlet.http.HttpServletRequest} object,
+	 * used to retrieve the current user's session.
+	 * @return A {@link org.springframework.http.ResponseEntity} containing a JSON string.
+	 * The JSON includes:
+	 * - {@code status}: HTTP status code (e.g., 200 for success, 400 if no active session, 500 for internal errors).
+	 * - {@code mensaje} (Spanish) / {@code message} (English): A description of the operation's outcome.
+	 * Example successful response: {@code {"status": 200, "mensaje": "¡Sesión cerrada con éxito!", "message": "Session logged out successfully!"}}
+	 * Example no active session response: {@code {"status": 400, "mensaje": "No hay sesión activa para cerrar.", "message": "No active session to log out."}}
+	 * Example error response: {@code {"status": 500, "mensaje": "Error interno del servidor...", "message": "Internal Server error..."}}
+	 */
+	@PostMapping("/logout")
+    public ResponseEntity<String> logoutUser(HttpServletRequest request) {
+        Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+        try {
+            HttpSession session = request.getSession(false);
+
+            if (session != null) {
+                session.invalidate(); //cerrar la sesión
+                System.out.println("Sesión invalidada para el usuario.");
+                rs.put("status", 200);
+                rs.put("mensaje", "¡Sesión cerrada con éxito!");
+                rs.put("message", "Session logged out successfully!");
+            } else {
+               
+                rs.put("status", 400); // Bad Request 
+                rs.put("mensaje", "No hay sesión activa para cerrar.");
+                rs.put("message", "No active session to log out.");
+            }
+            String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+        } catch (Exception e) {
+            rs.put("status", 500);
+            rs.put("mensaje", "Error interno del servidor al cerrar la sesión: " + e.getMessage());
+            rs.put("message", "Internal Server error during logout: " + e.getMessage());
+            try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+        }
+    }
+	
+	/**
+	 * Provides a simple endpoint to test connectivity to the Users backend controller.
+	 * This method always returns a success status and a welcome message,
+	 * unless an unexpected internal server error occurs during the response serialization.
+	 *
+	 * @return A {@link org.springframework.http.ResponseEntity} containing a JSON string.
+	 * The JSON includes:
+	 * <ul>
+	 * <li>{@code status}: HTTP status code (e.g., 200 for success, 500 for internal errors).</li>
+	 * <li>{@code message}: A descriptive message indicating successful connection or an error.</li>
+	 * </ul>
+	 * Example successful response: {@code {"status": 200, "message": "Hola desde el controlador de Usuarios del Backend"}}
+	 * Example error response: {@code {"status": 500, "message": "Internal Server Error"}}
+	 */
 	@GetMapping("/testConnection")
 	public ResponseEntity<String> testConnection() throws JsonProcessingException {
 		Map<String, Object> rs = new HashMap<>();
