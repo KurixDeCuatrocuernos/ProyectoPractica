@@ -25,19 +25,28 @@ function App() {
       </header>
       
       <section>
-        <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/home" element={<Navigate to="/" replace />} />
-          <Route path="/judicial_services" element={<JudicialPage/>}/>
-          <Route path="laboral_services" element={<LaboralPage/>}/>
-          <Route path="/about_us" element={<AboutUsPage/>}/>
-          <Route path="/contact" element={<ContactPage/>}/>
+        {!shouldShowLayout ? 
+          <Routes>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/judicial_services" element={<JudicialPage/>}/>
+            <Route path="laboral_services" element={<LaboralPage/>}/>
+            <Route path="/about_us" element={<AboutUsPage/>}/>
+            <Route path="/contact" element={<ContactPage/>}/>
 
-          <Route path="/connection" element={debug && <TestPage/>}/>
-            
-          <Route path="/app/main" element={<AppHomePage/>}/>
-          <Route path="*" element={<ErrorPage/>}/>
-        </Routes>
+            <Route path="/connection" element={debug && <TestPage/>}/>
+            <Route path="*" element={<ErrorPage/>}/>
+          </Routes>
+          :
+          <Routes>
+            <Route path="/app/" element={<AppHomePage/>}/>
+            <Route path="/app/home" element={<Navigate to="/app/" replace />} />
+            <Route path="/app/main" element={<Navigate to="/app/" replace />} />
+
+            <Route path="*" element={<ErrorPage/>}/>
+          </Routes>
+        }
+       
       </section>
     
       <footer>
