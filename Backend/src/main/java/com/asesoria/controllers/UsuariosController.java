@@ -2,6 +2,7 @@ package com.asesoria.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -235,25 +236,25 @@ public class UsuariosController {
 					rs.put("status", 405);
 					rs.put("message", validatedPassword);
 				} else {
-					if (user.getEmail().equals("usuario@escudero.juridico.es") && user.getPassword().equals("123456")) {
-						HttpSession session = request.getSession(true);
-						session.setAttribute("email", user.getEmail());
-						session.setAttribute("role", "10"); // recoger de la base de datos
-						rs.put("status", 200);
-						rs.put("mensaje", "¡Usuario logueado con éxito!");
-						rs.put("message", "User login successful!");
-					} else if (user.getEmail().equals("usuario@escudero.juridico.es") && !user.getPassword().equals("123456") && user.getPassword() != "123456") {
-						rs.put("status", 401);
-						rs.put("mensaje", "Contraseña errónea");
-						rs.put("message", "Invalid Password");
-					} else if (!user.getEmail().equals("usuario@escudero.juridico.es")) {
-						rs.put("status", 403);
-						rs.put("mensaje", "Esa combinación de email y contraseña es incorrecta");
-						rs.put("message", "That email and password combination is incorrect");
+					Optional<UsuariosModel> userData = userRepo.findByEmail(user.getEmail());
+					if (userData.isPresent()) {
+						System.out.println("Datos de la base de datos: "+userData.get().toString());
+						if (userData.get().getEmail().equals(user.getEmail()) && userData.get().getPassword().equals(user.getPassword())) {
+							HttpSession session = request.getSession(true);
+							session.setAttribute("email", user.getEmail());
+							session.setAttribute("role", userData.get().getRole());
+							rs.put("status", 200);
+							rs.put("mensaje", "¡Usuario logueado con éxito!");
+							rs.put("message", "User login successful!");
+						} else {
+							rs.put("status", 403);
+							rs.put("mensaje", "Esa combinación de email y contraseña es incorrecta");
+							rs.put("message", "That email and password combination is incorrect");
+						}
 					} else {
-						rs.put("status", 404);
-						rs.put("mensaje", "Ha ocurrido un error desconocido, por faavor, contacta con un administrador");
-						rs.put("message", "There was an unknown error, please contact with an admin");
+						rs.put("status", 401);
+						rs.put("mensaje", "No se ha encontrado ese Email en la base de datos");
+						rs.put("message", "That email is not in the database");
 					}
 				}	
 			} else {
@@ -408,5 +409,59 @@ public class UsuariosController {
 			return ResponseEntity.ok(json);
 		}
 	} 
+	
+	
+	// Para la encriptación de Datos según Copilot (lo mismo para los emails):
+	/*
+	  
+	@RestController
+	@RequestMapping("/users")
+	public class UserController {
+
+    	private final UserService userService;
+
+    	public UserController(UserService userService) {
+        	this.userService = userService;
+    	}
+
+    	@PostMapping("/encrypt")
+    	public String encryptPassword(@RequestParam String password) {
+        	return userService.encryptPassword(password);
+    	}
+
+    	@PostMapping("/verify")
+    	public boolean verifyPassword(@RequestParam String rawPassword, @RequestParam String encodedPassword) {
+        	return userService.verifyPassword(rawPassword, encodedPassword);
+    	}
+	}
+       	
+   	@Service
+	public class UserService {
+
+    	private final PasswordEncoder passwordEncoder;
+
+    	public UserService(PasswordEncoder passwordEncoder) {
+        	this.passwordEncoder = passwordEncoder;
+    	}
+
+    	public String encryptPassword(String rawPassword) {
+        	return passwordEncoder.encode(rawPassword);
+    	}
+
+    	public boolean verifyPassword(String rawPassword, String encodedPassword) {
+        	return passwordEncoder.matches(rawPassword, encodedPassword);
+    	}
+	}
+	
+	@Configuration
+	public class SecurityConfig {
+
+    	@Bean
+    	public PasswordEncoder passwordEncoder() {
+        	return new BCryptPasswordEncoder();
+    	}
+	}
+	
+	 */
 	
 }

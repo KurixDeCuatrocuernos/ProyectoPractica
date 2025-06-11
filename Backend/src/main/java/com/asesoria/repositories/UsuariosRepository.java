@@ -12,10 +12,15 @@ public interface UsuariosRepository extends JpaRepository<UsuariosModel, Long>{
 
 	public Optional<UsuariosModel> findById(long Id);
 	
+	Optional<UsuariosModel> findByEmail(String email);
+	
 	public int findRoleById(long id);
 	
 	public int findConfirmedById(long id);
 	
 	public void deleteById(long id);
+	    
+
+
 	
 }

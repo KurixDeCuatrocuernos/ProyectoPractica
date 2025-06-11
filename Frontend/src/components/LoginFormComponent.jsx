@@ -1,23 +1,27 @@
 import '../styles/LoginFormComponent.css'
 import { useLanguage } from '../context/LanguageContext'
 import { useRef, useState } from "react"
-import validate from '../utils/Validate.js'
+import validate from '../utils/Validate.jsx'
+import eye from '../assets/ojo.png'
+import eyeCross from '../assets/ojo-cruzado.png'
 
 function LoginFormComponent() {
 
-    const { currentTexts } = useLanguage(); // suponiendo que esto viene de un hook
+    const { language, currentTexts } = useLanguage();
     const inputEmail = useRef();
     const inputPass = useRef();
+    const [showPassword, setShowPassword] = useState(false);
     const colors = ["black", "red", "green"];
     const [emailErrorMessage, setEmailErrorMessage] = useState();
     const [passErrorMessage, setPassErrorMessage] = useState();
+    const { isValidEmail, isValidPassword } = validate();
     
     const buttonAction = () => {
         const email = inputEmail.current;
         const password = inputPass.current;
 
-        const emailError = validate.isValidEmail(email.value);
-        const passError = validate.isValidPassword(password.value);
+        const emailError = isValidEmail(email.value);
+        const passError = isValidPassword(password.value);
 
         setEmailErrorMessage(emailError);
         setPassErrorMessage(passError);
@@ -34,6 +38,10 @@ function LoginFormComponent() {
 
     const handleTypingPassword = () => {
         inputPass.current.style.color = "black";
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState);
     };
 
     const submitForm = async (email, pass) => {
@@ -53,16 +61,20 @@ function LoginFormComponent() {
                 const data = await response.json();
                 console.warn(data)
                 if (data.status == 200) {
-                    if (currentTexts == 'TextEs') {
+                    if (language === 'textEs') {
                         console.log(data.mensaje)
                     } else {
                         console.log(data.message)
                     }
                     window.location.href="/app/home"
                 } else {
-                    if (currentTexts == 'TextEs') {
+                    inputPass.current.style.color=colors[1]
+                    console.log(currentTexts)
+                    if (language === 'textEs') {
+                        setPassErrorMessage(data.mensaje)
                         console.error(data.mensaje)
                     } else {
+                        setPassErrorMessage(data.message)
                         console.error(data.message)
                     }
                 }
@@ -88,13 +100,20 @@ function LoginFormComponent() {
                 <p style={{color: 'red'}}>
                     {emailErrorMessage}
                 </p>
-                <input
-                    ref={inputPass}
-                    className="LoginForm_fields_input"
-                    type="password"
-                    placeholder={currentTexts.loginFormComponent.inputPassword}
-                    onChange={handleTypingPassword}
-                />
+                 <div id="LoginForm_passwordInputDiv">
+                    <input
+                        ref={inputPass}
+                        className="LoginForm_fields_input"
+                        type={showPassword ? "text" : "password"} // Cambia entre "text" y "password"
+                        placeholder={currentTexts.loginFormComponent.inputPassword}
+                    />
+                    {/* Icono de ojo para mostrar/ocultar contraseña */}
+                    <span id="LoginForm_eyeIcon" onClick={togglePasswordVisibility}>
+                        {showPassword ? <img src={eye} alt="Eye Icon from FlatIcon" /> : <img src={eyeCross} alt="Eye Crossed Icon from Flaticon"/>}
+                        {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
+                        {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
+                    </span>
+                </div>
                 <p style={{color: 'red'}}>
                     {passErrorMessage}
                 </p>
