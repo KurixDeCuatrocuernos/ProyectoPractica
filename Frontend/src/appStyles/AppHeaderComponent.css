@@ -1,0 +1,157 @@
+#AppHeader_container{
+    background-color: #D6CFB3;
+    height: 15dvh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#AppHeader_title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 50px;
+}
+
+#AppHeader_userImage{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+#AppHeader_userName{
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+    min-width: 192px;
+}
+
+#AppHeader_languageContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    min-width: 128px;
+}
+
+#Appheader_language_img{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: solid black 2px;
+    object-fit: cover;
+}
+
+#Appheader_language_img:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
+#AppHeader_label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    min-width: 240px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#AppHeader_label:hover{
+    cursor: pointer;
+}
+
+#AppHeader_mailIcon{
+    height: 64px;
+    width: 64px;
+}
+
+#AppHeader_mailText{
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#AppHeader_button_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+    width: 200px;
+    height: 64px;
+    position: relative;
+    min-width: 192px;
+}
+
+#AppHeader_button_container:hover #AppHeader_leftButton,
+#AppHeader_button_container:hover #AppHeader_centerButton,
+#AppHeader_button_container:hover #AppHeader_rightButton {
+    cursor: pointer;
+    background-color: rgb(244, 17, 17);
+}
+
+#AppHeader_leftButton,
+#AppHeader_centerButton,
+#AppHeader_rightButton {
+    position: absolute;
+    height: 64px;
+    background-color: rgb(218, 12, 12);
+}
+
+#AppHeader_leftButton {
+    width: 64px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    left: 0;
+}
+
+#AppHeader_centerButton {
+    width: 72px; /* Se amplía para cubrir el espacio central */
+    left: 64px;
+}
+
+#AppHeader_rightButton {
+    width: 64px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    right: 0;
+}
+
+#AppHeader_buttonText, #AppHeader_logoutIcon {
+    position: absolute;
+    z-index: 5;
+    width: 64px;
+    transform: translateX(-50%);
+}
+
+#AppHeader_buttonText {
+    color: black;
+    font-weight: bold;
+    font-size: medium;
+    left: 35%;
+}
+
+#AppHeader_buttonText:hover {
+    cursor: pointer;
+}
+
+#AppHeader_logoutIcon {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    left: 65%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#AppHeader_logoutIcon:hover {
+    cursor: pointer;
+}
+
+
