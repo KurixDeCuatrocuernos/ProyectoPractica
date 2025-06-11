@@ -1,0 +1,54 @@
+#AppBillsList_container{
+    background-color: #D6CFB3;
+    height:80%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 1200px;
+}
+
+#AppBillsList_navbar{
+    background-color: #D6CFB3;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    gap: 8px;
+}
+
+#AppBillsList_navbarMyData{
+    background-color: #29304C;
+    width: 250px;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#AppBillsList_navbarMyData:hover {
+    cursor: pointer;
+    background-color: #5B627E;
+}
+
+.AppBillsList_navbarText{
+    font-size: 30px;
+    color: #D6CFB3;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#AppBillsList_navbarNewUser{
+    background-color: #29304C;
+    width: 250px;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#AppBillsList_navbarNewUser:hover{
+    cursor: pointer;
+    background-color: #5B627E;
+}

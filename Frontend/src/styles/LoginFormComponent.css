@@ -13,7 +13,6 @@
 
 .LoginForm_fields_input{
     background-color: #D6CFB3;
-    /* Esquinas superiores redondeadas */
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     color: black;
@@ -23,7 +22,33 @@
 }
 
 .LoginForm_fields_input:hover{
-    background-color: #eee6c9;
+    background-color: #D6CFB3;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    color: black;
+    border: none;
+    border-bottom: solid black 2px; 
+    padding: 0.5rem 1rem;
+    width: 100%; /* Asegura que el input ocupe todo el espacio */
+}
+
+#LoginForm_passwordInputDiv{
+    position: relative; /* Permite posicionar elementos dentro */
+    display: flex;
+    align-items: center;
+    width: fit-content; /* Ajusta el tamaño al contenido */
+}
+
+#LoginForm_eyeIcon {
+position: absolute; /* Posiciona el icono dentro del input */
+    right: 10px; /* Lo coloca a la derecha */
+    top: 50%; /* Lo centra verticalmente */
+    transform: translateY(-50%); /* Ajusta el centrado */
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #LoginForm_Submit_button{

@@ -92,5 +92,32 @@
         "service16": "Real Estate Contracts",
         "socialMedia": "You can also find us on our social media: ",
         "mapText": "And you can also find us at: "
+    },
+    "appHeader": {
+        "mailText1": "You have Bills",
+        "mailText2": "pending to be sent",
+        "logout": "Log-Out"
+    },
+    "appHome": {
+        "homeMessage": "You are in the Application",
+        "user": "User",
+        "bills": "Invoices",
+        "myData": "My Data",
+        "newUser": "New User"
+    },
+    "myDataComponent": {
+        "formTitle": "My Data",
+        "inputPlaceholder": "Type something...",
+        "textButton": "Accept"
+    },
+    "newUserComponent": {
+        "formTitle": "New User/Client",
+        "inputPlaceholder": "Type something...",
+        "textButton": "Accept"
+    },
+    "appBills": {
+        "homeMessage": "You are in the Application",
+        "user": "User",
+        "bills": "Invoices"
     }
 }

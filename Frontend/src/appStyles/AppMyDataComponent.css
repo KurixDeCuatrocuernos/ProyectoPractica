@@ -1,0 +1,164 @@
+#AppMyDataComponent_contentContainer{
+    background-color: #D6CFB3;
+    height:80%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 1200px;
+}
+
+#AppMyDataComponent_contentNavbar{
+    background-color: #D6CFB3;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    gap: 8px;
+}
+
+#AppMyDataComponent_navbarMyData{
+    background-color: #29304C;
+    width: 250px;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#AppMyDataComponent_navbarMyData:hover {
+    cursor: pointer;
+    background-color: #5B627E;
+}
+
+.AppMyDataComponent_navbarText{
+    font-size: 30px;
+    color: #D6CFB3;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#AppMyDataComponent_navbarNewUser{
+    background-color: #29304C;
+    width: 250px;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#AppMyDataComponent_navbarNewUser:hover{
+    cursor: pointer;
+    background-color: #5B627E;
+}
+
+#AppMyDataComponent_formContainer{
+    background-color: #5B627E;
+    margin-right: 500px;
+    margin-left: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 65%;
+    min-width: 700px;
+    max-width: 900px;
+    border-radius: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#AppMyDataComponent_formTitle{
+    color: #D6CFB3;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.AppMyDataComponent_formLine{
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    height: fit-content;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.AppMyDataComponent_formInput{
+    height: 56px;
+    width: 224px;
+    padding: 20px;
+    color: black;
+    background-color: #dee1ed;
+    font-weight: 700;
+    font-size: larger;
+    border-top-left-radius: 6%;
+    border-top-right-radius: 6%;
+    border: none;
+    border-bottom: solid black 3px;
+}
+
+.AppMyDataComponent_formInput:hover {
+    background-color: #f6f6f9;
+}
+
+.AppMyDataComponent_formLine:last-of-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.AppMyDataComponent_errorText{
+    color: rgb(240, 240, 55);
+    font-size: medium;
+    font-weight: 100;
+}
+
+#AppMyDataComponent_buttonContainer{
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#AppMyDataComponent_buttonContainer:hover #AppMyDataComponent_leftButton,
+#AppMyDataComponent_buttonContainer:hover #AppMyDataComponent_centerButton,
+#AppMyDataComponent_buttonContainer:hover #AppMyDataComponent_rightButton {
+    cursor: pointer;
+    background-color: #8cc478;
+}
+
+#AppMyDataComponent_leftButton{
+    background-color: #648F55;
+    height: 64px;
+    width: 64px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+#AppMyDataComponent_centerButton{
+    background-color: #648F55;
+    height: 64px;
+    width: 64px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#AppMyDataComponent_textButton{
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+}
+
+#AppMyDataComponent_rightButton {
+    background-color: #648F55;
+    height: 64px;
+    width: 64px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}

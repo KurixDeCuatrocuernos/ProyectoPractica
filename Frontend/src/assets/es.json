@@ -92,5 +92,32 @@
         "service16": "Contratos de Inmuebles",
         "socialMedia": "¡También puedes encontrarnos en nuestras redes sociales!: ",
         "mapText": "Y también puedes encontrarnos en: "
+    },
+    "appHeader": {
+        "mailText1": "Tienes Facturas",
+        "mailText2": "sin Enviar",
+        "logout": "Cerrar Sesión"
+    },
+    "appHome": {
+        "homeMessage": "Estás en la Aplicación",
+        "user": "Usuario",
+        "bills": "Facturas",
+        "myData": "Mis Datos",
+        "newUser": "Nuevo Usuario"
+    },
+    "myDataComponent": {
+        "formTitle": "Mis Datos",
+        "inputPlaceholder": "Escribe algo...",
+        "textButton": "Aceptar"
+    },
+    "newUserComponent": {
+        "formTitle": "Nuevo Usuario/Cliente",
+        "inputPlaceholder": "Escribe algo...",
+        "textButton": "Aceptar"
+    },
+    "appBills": {
+        "homeMessage": "Estás en la Aplicación",
+        "user": "Usuario",
+        "bills": "Facturas"
     }
 }
