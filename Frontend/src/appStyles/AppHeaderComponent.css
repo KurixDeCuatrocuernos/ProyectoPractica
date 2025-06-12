@@ -16,6 +16,10 @@
     margin-left: 50px;
 }
 
+#AppHeader_title:hover {
+    cursor: pointer;
+}
+
 #AppHeader_userImage{
     border-radius: 50%;
     height: 100px;

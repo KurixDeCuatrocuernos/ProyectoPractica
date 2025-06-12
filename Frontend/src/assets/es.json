@@ -8,6 +8,8 @@
         "dropdown2": "Laboral"
     },
     "loginFormComponent": {
+        "access": "Acceder",
+        "logout": "Cerrar Sesión",
         "submitButton": "Acceder",
         "inputEmail": "Escribe tu correo electrónico",
         "inputPassword": "Escribe tu contraseña"
@@ -103,21 +105,41 @@
         "user": "Usuario",
         "bills": "Facturas",
         "myData": "Mis Datos",
-        "newUser": "Nuevo Usuario"
+        "newUser": "Nuevo Usuario",
+        "allUsers": "Ver Usuarios"
     },
     "myDataComponent": {
         "formTitle": "Mis Datos",
         "inputPlaceholder": "Escribe algo...",
+        "passInput1": "Nueva Contraseña...",
+        "passInput2": "Repite nueva Contraseña...",
+        "passError": "Error recogiendo la contraseña",
         "textButton": "Aceptar"
     },
     "newUserComponent": {
         "formTitle": "Nuevo Usuario/Cliente",
-        "inputPlaceholder": "Escribe algo...",
-        "textButton": "Aceptar"
+        "nameTitleText": "Introduce el nombre del usuario, ten en cuenta que no puede contener números ni símbolos",
+        "emailTitleText": "Introduce el email del nuevo usuario, ten en cuenta que debe terminar con @escudero.juridico.es",
+        "passwordTitleText": "Introduce una contraseña, ten en cuenta que como mínimo ha de tener 6 caracteres y ha de contener letras, números y algún símbolo",
+        "repeatPassTitleText": "Repite la contraseña, ten en cuenta que deben ser iguales y cuidado con las mayúsculas y minúsculas",
+        "roleTitletext": "Elige un role para el usuario, escribe usuario o user si se trata de un cliente y admin o administrador si es un administrador",
+        "nameLabel": "Nombre de Usuario",
+        "emailLabel": "Correo Electrónico",
+        "passLabel1": "Contraseña",
+        "passLabel2": "Repite la Contraseña",
+        "roleLabel": "Rol",
+        "namePlaceholder": "Juan Juanes",
+        "emailPlaceholder": "micorreo@escudero.juridico.es",
+        "passwordPlaceholder": "12345abcd",
+        "rolePlaceholder": "usuario",
+        "textButton": "Aceptar",
+        "unequalPasswords": "¡Las contraseñas no coinciden!"
     },
     "appBills": {
         "homeMessage": "Estás en la Aplicación",
         "user": "Usuario",
-        "bills": "Facturas"
+        "bills": "Facturas",
+        "myBills": "Mis Facturas",
+        "newBill": "Nueva Factura"
     }
 }

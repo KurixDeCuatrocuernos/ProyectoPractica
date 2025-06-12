@@ -8,6 +8,8 @@
         "dropdown2": "Labor"
     },
     "loginFormComponent": {
+        "access": "Access",
+        "logout": "Logout",
         "submitButton": "Log In",
         "inputEmail": "Enter your email",
         "inputPassword": "Enter your password"
@@ -103,21 +105,41 @@
         "user": "User",
         "bills": "Invoices",
         "myData": "My Data",
-        "newUser": "New User"
+        "newUser": "New User",
+        "allUsers": "See Users"
     },
     "myDataComponent": {
         "formTitle": "My Data",
-        "inputPlaceholder": "Type something...",
+        "inputPlaceholder": "Write something...",
+        "passInput1": "New Password...",
+        "passInput2": "Repeat New Password...",
+        "passError": "Error retrieving the password",
         "textButton": "Accept"
     },
     "newUserComponent": {
         "formTitle": "New User/Client",
-        "inputPlaceholder": "Type something...",
-        "textButton": "Accept"
+        "nameTitleText": "Enter the user's name. Keep in mind that it cannot contain numbers or symbols.",
+        "emailTitleText": "Enter the new user's email. Keep in mind that it must end with @escudero.juridico.es.",
+        "passwordTitleText": "Enter a password. Keep in mind that it must be at least 6 characters long and contain letters, numbers, and at least one symbol.",
+        "repeatPassTitleText": "Repeat the password. Keep in mind that they must be identical, and be careful with uppercase and lowercase letters.",
+        "roleTitleText": "Choose a role for the user. Type 'usuario' or 'user' if they are a client, and 'admin' or 'administrador' if they are an administrator.",
+        "nameLabel": "Username",
+        "emailLabel": "Email",
+        "passLabel1": "Password",
+        "passLabel2": "Repeat Password",
+        "roleLabel": "Role",
+        "namePlaceholder": "John Smith",
+        "emailPlaceholder": "myemail@escudero.juridico.es",
+        "passwordPlaceholder": "12345abcd",
+        "rolePlaceholder": "user",
+        "textButton": "Accept",
+        "unequalPasswords": "Passwords does not match!"
     },
     "appBills": {
         "homeMessage": "You are in the Application",
         "user": "User",
-        "bills": "Invoices"
+        "bills": "Invoices",
+        "myBills": "My Invoices",
+        "newBill": "New Invoice"
     }
 }

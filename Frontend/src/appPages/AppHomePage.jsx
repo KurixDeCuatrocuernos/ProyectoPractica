@@ -15,7 +15,7 @@ function AppHomePage() {
                     <h2 id="AppHomePage_ubicationText">{currentTexts.appHome.homeMessage}</h2>
                 </div>
                 <div id='AppHomePage_navbarContainer'>
-                    <div id='AppHomePage_navbarUser'>
+                    <div id='AppHomePage_navbarUser' onClick={()=>navigate('/app/home')}>
                         <p className='AppHomePage_navbarText'>{currentTexts.appHome.user}</p>
                     </div>
                     <div id='AppHomePage_navbarBills' onClick={()=>navigate('/app/bills')}>
