@@ -23,12 +23,8 @@ function App() {
 
   const [isValidUser, setIsValidUser] = useState(false)
 
-  useEffect(() => {
-    document.title="Escudero Asesoría"
-  }, [])
-
   const checkUser = async () => {
-        console.log("se ha checado el role del usuario")
+        console.log("se ha revisado el role del usuario")
         try {
             const response = await fetch('/check_user')
             if (response.ok) {
