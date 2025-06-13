@@ -71,6 +71,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/new_user_submit/, '/api/usuarios/new_user_submit'),
         },
+        '/get_all_users': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_all_users/, '/api/usuarios/post_usuarios'),
+        },
       },
     },
   }

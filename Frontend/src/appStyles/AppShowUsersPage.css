@@ -1,0 +1,61 @@
+body{
+    min-width: 1100px;
+}
+
+#AppShowUsers_backgroundOverlay{
+    background-color:  #29304C;
+    height: 85dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+#AppShowUsers_navbarContainer{
+    background-color: #29304C;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    justify-content: left;
+    min-width: 1170px;
+    /*
+    margin-left: 40px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    */
+    gap: 8px;
+}
+
+.AppShowUsers_navbarButton{
+    background-color: #D6CFB3;
+    width: fit-content;
+    height: 60px;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+    justify-items: center;
+    align-content: center;
+}
+
+.AppShowUsers_buttonBackground{
+    background-color: #29304C;
+    width: 95%;
+    height: 86%;
+    padding: 8px;
+    text-align: center;
+}
+
+.AppShowUsers_buttonBackground:hover,
+.AppShowUsers_buttonBackground:hover .AppShowUsers_navbarText{
+    cursor: pointer;
+    background-color: #5B627E;
+}
+
+.AppShowUsers_navbarText{
+    background-color: #29304C;
+    width: 95%;
+    height: 86%;
+    text-align: center;
+    font-size: 30px;
+    color: #D6CFB3;
+    margin-right: 30px;
+}
+

@@ -1,0 +1,41 @@
+#AppShowUsersComponent_container{
+    background-color: #D6CFB3;
+    height:80%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 1200px;
+}
+
+#AppShowUsersComponent_filtersContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#AppShowUsersComponent_usersContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+#AppShowUsersComponent_table{
+    border-collapse: collapse; 
+    width: 90%;
+    height: fit-content;
+    background-color: #5B627E;
+}
+
+.AppShowUsersComponent_tableRow{
+    height: 90px;
+    background-color: #5B627E;
+    border-bottom: solid black 3px;
+}
+
+.AppShowUsersComponent_title{
+    font-size: 30px;
+    color: #D6CFB3;
+}

@@ -16,6 +16,7 @@ import ContactPage from "./pages/ContactPage"
 import AppNewUser from "./appPages/AppNewUserPage"
 import AppHeaderComponent from "./appComponents/AppHeaderComponent"
 import AppBillsPage from "./appPages/AppBillsPage"
+import AppShowUsers from "./appPages/AppShowUsersPage"
 
 function App() {
   const debug = import.meta.env.VITE_DEBUG_LOG
@@ -73,11 +74,12 @@ function App() {
           </Routes>
           :
           <Routes>
-            {isValidUser && <Route path="/app/" element={<AppHomePage/>}/>}
+            {isValidUser && <Route path="/app/" element={<AppHomePage />} />}
             {isValidUser && <Route path="/app/home" element={<Navigate to="/app/" replace />} />}
             {isValidUser && <Route path="/app/main" element={<Navigate to="/app/" replace />} />}
-            {isValidUser && <Route path="/app/new_user" element={<AppNewUser/>}/>}
-            {isValidUser && <Route path="/app/bills" element={<AppBillsPage/>}/>}
+            {isValidUser && <Route path="/app/new_user" element={<AppNewUser />} />}
+            {isValidUser && <Route path="/app/all_users" element= {<AppShowUsers />} />}
+            {isValidUser && <Route path="/app/bills" element={<AppBillsPage />} />}
             <Route path="*" element={<ErrorPage/>}/>
           </Routes> 
         }
