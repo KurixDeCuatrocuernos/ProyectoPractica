@@ -1,0 +1,37 @@
+#FilterRole_container{
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+#FilterRole_title{
+    color: #29304C;
+    margin-bottom: 5px;
+}
+
+#FilterRole_select{
+    background-color: #29304C;
+    color:  #e2dbbf;
+    width: 250px;
+    padding: 8px;
+    border: solid #5B627E 4px;
+    border-radius: 10%;
+    font-size: medium;
+    font-weight: 550;
+    text-align: center;
+}
+
+#FilterRole_select:hover {
+    cursor: pointer;
+}
+
+.FilterRole_option{
+    color: #D6CFB3;
+    font-weight: 400;
+}
+
+.FilterRole_option:hover {
+    cursor: pointer;
+    background-color: #D6CFB3;
+}
