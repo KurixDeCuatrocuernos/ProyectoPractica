@@ -101,12 +101,14 @@
         "logout": "Cerrar Sesión"
     },
     "appHome": {
-        "homeMessage": "Estás en la Aplicación",
         "user": "Usuario",
         "bills": "Facturas",
         "myData": "Mis Datos",
         "newUser": "Nuevo Usuario",
-        "allUsers": "Ver Usuarios"
+        "allUsers": "Ver Usuarios",
+        "myBills": "Mis Facturas",
+        "newBill": "Nueva Factura",
+        "viewBills": "Ver Facturas"
     },
     "myDataComponent": {
         "formTitle": "Mis Datos",
@@ -136,10 +138,29 @@
         "unequalPasswords": "¡Las contraseñas no coinciden!"
     },
     "appBills": {
-        "homeMessage": "Estás en la Aplicación",
+
+    },
+    "dateFilter": {
+        "title": "Filtrar Facturas en el intervalo:",
+        "startDate": "Selecciona Fecha de Inicio",
+        "endDate": "Selecciona Fecha de Fin"
+    },
+    "roleFilter": {
+        "title": "Filtrar Usuarios por Rol",
+        "selectRole": "Elige un rol",
         "user": "Usuario",
-        "bills": "Facturas",
-        "myBills": "Mis Facturas",
-        "newBill": "Nueva Factura"
+        "advisor": "Asesor",
+        "admin": "Administrador"
+    },
+    "typeFilter": {
+        "title": "Filtrar Facturas por tipo:",
+        "selectType": "Elige un tipo",
+        "client": "Cliente",
+        "provider": "Proveedor",
+        "cost": "Gasto"
+    },
+    "searchBar": {
+        "placeholder": "Buscar Usuario..."
     }
+
 }

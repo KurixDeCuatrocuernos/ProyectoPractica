@@ -111,17 +111,6 @@ function AppNewUserComponent() {
 
     return(
         <div id='AppNewUser_container'>
-            <div id='AppNewUser_navbar'>
-                <div id='AppNewUser_navbarMyData' onClick={() => navigate('/app/home')}>
-                    <p className='AppNewUser_navbarText'>{currentTexts.appHome.myData}</p>
-                </div>
-                <div id='AppNewUser_navbarNewUser' onClick={() => navigate('/app/new_user')}>
-                    <p className='AppNewUser_navbarText'>{currentTexts.appHome.newUser}</p>
-                </div>
-                <div id='AppNewUser_navbarAllUsers' onClick={() => navigate('/app/all_users')}>
-                    <p className='AppNewUser_navbarText'>{currentTexts.appHome.allUsers}</p>
-                </div>
-            </div>
             <div id='AppNewUser_formContainer'>
                 <h1 id='AppNewUser_formTitle'>{currentTexts.newUserComponent.formTitle}</h1>
                 <form>

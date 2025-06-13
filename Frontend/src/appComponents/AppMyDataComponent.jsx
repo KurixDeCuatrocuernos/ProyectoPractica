@@ -57,17 +57,6 @@ function AppMyDataComponent() {
 
     return(
         <div id='AppMyDataComponent_contentContainer'>
-            <div id='AppMyDataComponent_contentNavbar'>
-                <div id='AppMyDataComponent_navbarMyData'>
-                    <p className='AppMyDataComponent_navbarText'>{currentTexts.appHome.myData}</p>
-                </div>
-                <div id='AppMyDataComponent_navbarNewUser' onClick={() => navigate('/app/new_user')}>
-                    <p className='AppMyDataComponent_navbarText'>{currentTexts.appHome.newUser}</p>
-                </div>
-                <div id='AppMyDataComponent_navbarAllUsers' onClick={() => navigate('/app/all_users')}>
-                    <p className='AppMyDataComponent_navbarText'>{currentTexts.appHome.allUsers}</p>
-                </div>
-            </div>
             <div id='AppMyDataComponent_formContainer'>
                 <h1 id='AppMyDataComponent_formTitle'>{currentTexts.myDataComponent.formTitle}</h1>
                 <form id="AppMyDataComponent_form">

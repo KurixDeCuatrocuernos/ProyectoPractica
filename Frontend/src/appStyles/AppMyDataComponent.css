@@ -3,86 +3,23 @@
     height:80%;
     margin: 10px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     min-width: 1200px;
-}
-
-#AppMyDataComponent_contentNavbar{
-    background-color: #D6CFB3;
-    display: flex;
-    flex-direction: column;
-    padding: 4px;
-    gap: 8px;
-}
-
-#AppMyDataComponent_navbarMyData{
-    background-color: #29304C;
-    width: 250px;
-    height: 64px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#AppMyDataComponent_navbarMyData:hover {
-    cursor: pointer;
-    background-color: #5B627E;
-}
-
-.AppMyDataComponent_navbarText{
-    font-size: 30px;
-    color: #D6CFB3;
-    margin-left: 30px;
-    margin-right: 30px;
-}
-
-#AppMyDataComponent_navbarNewUser{
-    background-color: #29304C;
-    width: 250px;
-    height: 64px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#AppMyDataComponent_navbarNewUser:hover{
-    cursor: pointer;
-    background-color: #5B627E;
-}
-
-#AppMyDataComponent_navbarAllUsers {
-    background-color: #29304C;
-    width: 250px;
-    height: 64px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#AppMyDataComponent_navbarAllUsers:hover {
-    cursor: pointer;
-    background-color: #5B627E;
 }
 
 #AppMyDataComponent_formContainer{
     background-color: #5B627E;
-    margin-right: 500px;
-    margin-left: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 65%;
+    width: fit-content;
+    height: fit-content;
     min-width: 700px;
     max-width: 900px;
     border-radius: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
     padding: 20px;
+    margin-top: 30px;
 }
 
 #AppMyDataComponent_form{
@@ -108,15 +45,17 @@
 .AppMyDataComponent_formLine{
     display: flex;
     flex-direction: row;
-    width: 600px;
+    width: 700px;
     height: fit-content;
     justify-content: space-between;
     margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .AppMyDataComponent_formInput{
     height: 56px;
-    width: fit-content;
+    width: 280px;
     padding: 20px;
     color: black;
     background-color: #dee1ed;

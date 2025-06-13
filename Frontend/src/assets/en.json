@@ -101,12 +101,14 @@
         "logout": "Log-Out"
     },
     "appHome": {
-        "homeMessage": "You are in the Application",
         "user": "User",
         "bills": "Invoices",
         "myData": "My Data",
         "newUser": "New User",
-        "allUsers": "See Users"
+        "allUsers": "See Users",
+        "myBills": "My Invoices",
+        "newBill": "New Invoice",
+        "viewBills": "View Invoices"
     },
     "myDataComponent": {
         "formTitle": "My Data",
@@ -136,10 +138,28 @@
         "unequalPasswords": "Passwords does not match!"
     },
     "appBills": {
-        "homeMessage": "You are in the Application",
+
+    },
+    "dateFilter": {
+        "filterTitle": "Filter Invoices in the Interval:",
+        "startDate": "Select Start Date",
+        "endDate": "Select End Date"
+    },
+    "roleFilter": {
+        "title": "Filter Users by Role",
+        "selectRole": "Choose a role",
         "user": "User",
-        "bills": "Invoices",
-        "myBills": "My Invoices",
-        "newBill": "New Invoice"
+        "advisor": "Advisor",
+        "admin": "Administrator"
+    },
+    "typeFilter": {
+        "title": "Filter Invoices by Type:",
+        "selectType": "Choose a type",
+        "client": "Client",
+        "provider": "Provider",
+        "cost": "Expense"
+    },
+    "searchBar": {
+        "placeholder": "Search User..."
     }
 }

@@ -1,6 +1,7 @@
 #AppHeader_container{
     background-color: #D6CFB3;
     height: 15dvh;
+    min-height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
