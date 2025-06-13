@@ -1,6 +1,7 @@
 package com.asesoria.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.asesoria.dto.ShowUserProjection;
 import com.asesoria.dto.UsuariosProjection;
 import com.asesoria.models.UsuariosModel;
 import com.asesoria.repositories.UsuariosRepository;
@@ -529,6 +531,48 @@ public class UsuariosController {
             }
 		}
 	}
+	
+	@PostMapping("/post_usuarios")
+    public ResponseEntity<String> getUsuarios(HttpServletRequest request) {
+        Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+            List<ShowUserProjection> usuarios = userRepo.findAllWithoutBillsAndPassword();
+            if (usuarios.isEmpty()) {
+            	rs.put("status", 404);
+            	rs.put("mensaje", "No se obtuvo ningún usuario");
+            	rs.put("message", "Could not find any user");
+            } else {
+                List<Map<String, Object>> usuariosJson = usuarios.stream().map(usuario -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", usuario.getId());
+                    map.put("name", usuario.getName());
+                    map.put("email", usuario.getEmail());
+                    map.put("role", usuario.getRole());
+                    map.put("confirmed", usuario.getConfirmed());
+                    return map;
+                }).toList();
+                rs.put("status", 200);
+                rs.put("mensaje", "Usuarios recuperados con éxito.");
+                rs.put("message", "Users retrieved successfully.");
+                rs.put("users", usuariosJson);
+            }
+
+            String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+        } catch (Exception e) {
+            rs.put("status", 500);
+            rs.put("mensaje", "Error interno del servidor al obtener los usuarios");
+            rs.put("message", "Internal Server error retrieving users");
+            try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.status(500).body(json);
+            } catch (Exception jsonEx) {
+            	return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+        }
+    }
 	
 	
 	/**
