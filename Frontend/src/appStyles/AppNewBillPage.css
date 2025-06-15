@@ -3,22 +3,20 @@ body{
 }
 
 /*
-#AppShowUsers_container{
+#AppNewBillPage_container {
 
 }
 */
 
-#AppShowUsers_backgroundOverlay{
+#AppNewBillPage_backgroundOverlay{
     background-color:  #29304C;
-    height: fit-content;
-    min-height: 85dvh;
-    padding-bottom: 30px;
+    height: 85dvh;
     display: flex;
     flex-direction: column;
 }
 
-#AppShowUsers_navbarContainer{
-    background-color: #29304C;
+#AppNewBillPage_navbarContainer{
+background-color: #29304C;
     display: flex;
     flex-direction: row;
     width: fit-content;
@@ -32,7 +30,7 @@ body{
     gap: 8px;
 }
 
-.AppShowUsers_navbarButton{
+.AppNewBillPage_navbarButton{
     background-color: #D6CFB3;
     width: fit-content;
     height: 60px;
@@ -43,7 +41,7 @@ body{
     align-content: center;
 }
 
-.AppShowUsers_buttonBackground{
+.AppNewBillPage_buttonBackground{
     background-color: #29304C;
     width: 95%;
     height: 86%;
@@ -51,13 +49,13 @@ body{
     text-align: center;
 }
 
-.AppShowUsers_buttonBackground:hover,
-.AppShowUsers_buttonBackground:hover .AppShowUsers_navbarText{
+.AppNewBillPage_buttonBackground:hover,
+.AppNewBillPage_buttonBackground:hover .AppNewBillPage_navbarText{
     cursor: pointer;
     background-color: #5B627E;
 }
 
-.AppShowUsers_navbarText{
+.AppNewBillPage_navbarText{
     background-color: #29304C;
     width: 95%;
     height: 86%;
@@ -66,4 +64,3 @@ body{
     color: #D6CFB3;
     margin-right: 30px;
 }
-

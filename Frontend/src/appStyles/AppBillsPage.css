@@ -2,9 +2,17 @@ body{
     min-width: 1100px;
 }
 
+/*
+#AppBillsPage_container{
+
+}
+*/
+
 #AppBillsPage_backgroundOverlay{
     background-color:  #29304C;
-    height: 85dvh;
+    height: fit-content;
+    min-height: 85dvh;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: column;
 }
@@ -14,7 +22,8 @@ background-color: #29304C;
     display: flex;
     flex-direction: row;
     width: fit-content;
-    justify-content: space-between;
+    justify-content: left;
+    min-width: 1170px;
     /*
     margin-left: 40px;
     margin-top: 30px;

@@ -137,8 +137,29 @@
         "textButton": "Aceptar",
         "unequalPasswords": "¡Las contraseñas no coinciden!"
     },
+    "appShowUsersComponent": {
+        "title1": "Id",
+        "title2": "Nombre",
+        "title3": "Correo Electrónico",
+        "title4": "Rol",
+        "title5": "Verificado",
+        "title6": "Acciones"
+    },
     "appBills": {
-
+        "title1": "Id",
+        "title2": "Nombre",
+        "title3": "Tipo",
+        "title4": "Autor",
+        "title5": "Fecha de Creación",
+        "title6": "Acciones"
+    },
+    "appAllBills": {
+        "title1": "Id",
+        "title2": "Nombre",
+        "title3": "Tipo",
+        "title4": "Autor",
+        "title5": "Fecha de Creación",
+        "title6": "Acciones"
     },
     "dateFilter": {
         "title": "Filtrar Facturas en el intervalo:",

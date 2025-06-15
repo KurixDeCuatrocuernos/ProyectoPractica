@@ -1,6 +1,6 @@
-#AppShowUsersComponent_container{
+#AppAllBillsComponent_container{
     background-color: #D6CFB3;
-    height: fit-content;
+    height:fit-content;
     min-height: 85dvh;
     padding-bottom: 30px;
     margin: 10px;
@@ -9,35 +9,36 @@
     min-width: 1200px;
 }
 
-#AppShowUsersComponent_filtersContainer{
+#AppAllBillsComponent_filtersContainer{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
-#AppShowUsersComponent_usersContainer{
+#AppAllBillsComponent_billsContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
 }
 
-#AppShowUsersComponent_table{
+#AppAllBillsComponent_table{
     border-collapse: collapse; 
     width: 90%;
     height: fit-content;
     background-color: #5B627E;
 }
 
-.AppShowUsersComponent_tableRow{
+.AppAllBillsComponent_tableRow{
     height: 90px;
     background-color: #5B627E;
     border-bottom: solid black 3px;
 }
 
-.AppShowUsersComponent_title{
+.AppAllBillsComponent_title{
     font-size: 30px;
     color: #D6CFB3;
 }

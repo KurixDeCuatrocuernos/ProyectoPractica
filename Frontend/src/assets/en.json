@@ -137,11 +137,32 @@
         "textButton": "Accept",
         "unequalPasswords": "Passwords does not match!"
     },
+    "appShowUsersComponent": {
+        "title1": "Id",
+        "title2": "Name",
+        "title3": "Email",
+        "title4": "Role",
+        "title5": "Verified",
+        "title6": "Actions"
+    },
     "appBills": {
-
+        "title1": "Id",
+        "title2": "Name",
+        "title3": "Type",
+        "title4": "Author",
+        "title5": "Creation Date",
+        "title6": "Actions"
+    },
+    "appAllBills": {
+        "title1": "Id",
+        "title2": "Name",
+        "title3": "Type",
+        "title4": "Author",
+        "title5": "Creation Date",
+        "title6": "Actions"
     },
     "dateFilter": {
-        "filterTitle": "Filter Invoices in the Interval:",
+        "title": "Filter Invoices in the Interval:",
         "startDate": "Select Start Date",
         "endDate": "Select End Date"
     },

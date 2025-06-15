@@ -17,6 +17,8 @@ import AppNewUser from "./appPages/AppNewUserPage"
 import AppHeaderComponent from "./appComponents/AppHeaderComponent"
 import AppBillsPage from "./appPages/AppBillsPage"
 import AppShowUsers from "./appPages/AppShowUsersPage"
+import AppNewBill from "./appPages/AppNewBillPage"
+import AppAllBills from "./appPages/AppAllBillsPage"
 
 function App() {
   const debug = import.meta.env.VITE_DEBUG_LOG
@@ -80,6 +82,8 @@ function App() {
             {isValidUser && <Route path="/app/new_user" element={<AppNewUser />} />}
             {isValidUser && <Route path="/app/all_users" element= {<AppShowUsers />} />}
             {isValidUser && <Route path="/app/bills" element={<AppBillsPage />} />}
+            {isValidUser && <Route path="/app/new_bills" element={<AppNewBill/>}/>}
+            {isValidUser && <Route path="/app/view_bills" element={<AppAllBills />}/>}
             <Route path="*" element={<ErrorPage/>}/>
           </Routes> 
         }
