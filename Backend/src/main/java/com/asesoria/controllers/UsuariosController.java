@@ -1,6 +1,7 @@
 package com.asesoria.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.asesoria.dto.ShowUserProjection;
+import com.asesoria.dto.UsuariosProjection;
 import com.asesoria.models.UsuariosModel;
 import com.asesoria.repositories.UsuariosRepository;
 import com.asesoria.utils.Validator;
@@ -242,7 +245,9 @@ public class UsuariosController {
 						if (userData.get().getEmail().equals(user.getEmail()) && userData.get().getPassword().equals(user.getPassword())) {
 							HttpSession session = request.getSession(true);
 							session.setAttribute("email", user.getEmail());
+							session.setAttribute("id", userData.get().getId());
 							session.setAttribute("role", userData.get().getRole());
+							session.setAttribute("name", userData.get().getName());
 							rs.put("status", 200);
 							rs.put("mensaje", "¡Usuario logueado con éxito!");
 							rs.put("message", "User login successful!");
@@ -253,8 +258,8 @@ public class UsuariosController {
 						}
 					} else {
 						rs.put("status", 401);
-						rs.put("mensaje", "No se ha encontrado ese Email en la base de datos");
-						rs.put("message", "That email is not in the database");
+						rs.put("mensaje", "Esa combinación de email y contraseña es incorrecta");
+						rs.put("message", "That email and password combination is incorrect");
 					}
 				}	
 			} else {
@@ -330,6 +335,35 @@ public class UsuariosController {
 		}
 	}
 	
+	@PostMapping("/check_log")
+	public ResponseEntity<String> checkLog(HttpServletRequest request) {
+		Map<String, Object> rs = new HashMap<>();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				rs.put("status", 200);
+				rs.put("log", true);
+				rs.put("name", session.getAttribute("name"));
+			} else {
+				rs.put("status", 403);
+				rs.put("log", false);
+			}
+			 String json = om.writeValueAsString(rs);
+             return ResponseEntity.ok(json);
+		} catch (Exception e) {
+			rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server Error");
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+		}
+	}
+	
 	/**
 	 * Handles user logout by invalidating the current HTTP session.
 	 * If a session exists, it's closed and a success message is returned.
@@ -380,6 +414,168 @@ public class UsuariosController {
     }
 	
 	/**
+	 * Obtiene los datos del usuario actual basado en la sesión activa.
+	 * 
+	 * <p>Este método recibe una solicitud HTTP y busca el usuario en la base de datos
+	 * utilizando el ID almacenado en la sesión. Si el usuario existe, devuelve sus datos
+	 * en formato JSON. Si no se encuentra, devuelve un mensaje de error.</p>
+	 * 
+	 * @param request La solicitud HTTP que contiene la sesión del usuario.
+	 * @return ResponseEntity con un JSON que contiene el estado de la respuesta y los datos del usuario si existe.
+	 *         - {@code 200} si el usuario se encuentra correctamente.
+	 *         - {@code 404} si el usuario no está en la sesión.
+	 *         - {@code 500} si ocurre un error interno del servidor.
+	 */
+	@PostMapping("/get_current_data")
+	public ResponseEntity<String> getCurrentData(HttpServletRequest request) {
+		Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+		try {		
+			HttpSession session = request.getSession(false);
+			Optional<UsuariosProjection> currentUser = userRepo.findUserWithoutSensitiveData((long) session.getAttribute("id"));
+			if (currentUser.isPresent()) {
+				rs.put("status", 200);
+	            rs.put("user", currentUser.get());
+			} else {
+				rs.put("status", 404);
+	            rs.put("mensaje", "No se ha encontrado al usuario en la sesión actual.");
+	            rs.put("message", "Could not find the current session's user");
+			}
+			 String json = om.writeValueAsString(rs);
+             return ResponseEntity.ok(json);
+		} catch (Exception e) {
+			rs.put("status", 500);
+            rs.put("mensaje", "Error interno del servidor al cerrar la sesión: " + e.getMessage());
+            rs.put("message", "Internal Server error during logout: " + e.getMessage());
+            try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+		}
+	}
+	
+	@GetMapping("/get_current_name")
+	public ResponseEntity<String> getCurrentName(HttpServletRequest request) {
+		Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+		try {		
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				rs.put("status", 200);
+	            rs.put("name", session.getAttribute("name"));
+			} else {
+				rs.put("status", 404);
+	            rs.put("mensaje", "No se ha encontrado al usuario en la sesión actual.");
+	            rs.put("message", "Could not find the current session's user");
+			}
+			 String json = om.writeValueAsString(rs);
+             return ResponseEntity.ok(json);
+		} catch (Exception e) {
+			rs.put("status", 500);
+            rs.put("mensaje", "Error interno del servidor al cerrar la sesión: " + e.getMessage());
+            rs.put("message", "Internal Server error during logout: " + e.getMessage());
+            try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+		}
+	}
+	
+	@PostMapping("/new_user_submit")
+	public ResponseEntity<String> postNewUser(@RequestBody UsuariosModel newUser) {
+		Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+		try {
+			if (newUser != null) {
+				if (validator.isValidName(newUser.getName()) != null) {
+					rs.put("status", 403);
+					rs.put("mensaje", "No se pudo crear al usuario: "+validator.isValidName(newUser.getName()));
+					rs.put("message", "Could not create the user: "+validator.isValidName(newUser.getName()));
+				} else if (validator.isValidEmail(newUser.getEmail()) != null) {
+					rs.put("status", 403);
+					rs.put("mensaje", "No se pudo crear al usuario: "+validator.isValidEmail(newUser.getEmail()));
+					rs.put("message", "Could not create the user: "+validator.isValidEmail(newUser.getEmail()));
+				} else if (validator.isValidPassword(newUser.getPassword()) != null) {
+					rs.put("status", 403);
+					rs.put("mensaje", "No se pudo crear al usuario: "+validator.isValidPassword(newUser.getPassword()));
+					rs.put("message", "Could not create the user: "+validator.isValidPassword(newUser.getPassword()));
+				} else if (newUser.getRole() == 0) {
+					rs.put("status", 403);
+					rs.put("mensaje", "No se pudo crear al usuario: Role is 0");
+					rs.put("message", "Could not create the user:  Role is 0");
+				} else {
+					// insertar al usuario en la base de datos
+					rs.put("status", 200);
+					System.out.println("Se ha creado el usuario: "+newUser.toString());
+				}
+			} else {
+				rs.put("status", 400);
+	            rs.put("mensaje", "No se han recibido datos del nuevo usuario");
+	            rs.put("message", "\"No data has been received for the new user");
+			}
+			String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+		} catch (Exception e) {
+			rs.put("status", 500);
+            rs.put("mensaje", "Error interno del servidor");
+            rs.put("message", "Internal Server error");
+            try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+		}
+	}
+	
+	@PostMapping("/post_usuarios")
+    public ResponseEntity<String> getUsuarios(HttpServletRequest request) {
+        Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+            List<ShowUserProjection> usuarios = userRepo.findAllWithoutBillsAndPassword();
+            if (usuarios.isEmpty()) {
+            	rs.put("status", 404);
+            	rs.put("mensaje", "No se obtuvo ningún usuario");
+            	rs.put("message", "Could not find any user");
+            } else {
+                List<Map<String, Object>> usuariosJson = usuarios.stream().map(usuario -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", usuario.getId());
+                    map.put("name", usuario.getName());
+                    map.put("email", usuario.getEmail());
+                    map.put("role", usuario.getRole());
+                    map.put("confirmed", usuario.getConfirmed());
+                    return map;
+                }).toList();
+                rs.put("status", 200);
+                rs.put("mensaje", "Usuarios recuperados con éxito.");
+                rs.put("message", "Users retrieved successfully.");
+                rs.put("users", usuariosJson);
+            }
+
+            String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+        } catch (Exception e) {
+            rs.put("status", 500);
+            rs.put("mensaje", "Error interno del servidor al obtener los usuarios");
+            rs.put("message", "Internal Server error retrieving users");
+            try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.status(500).body(json);
+            } catch (Exception jsonEx) {
+            	return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+        }
+    }
+	
+	
+	/**
 	 * Provides a simple endpoint to test connectivity to the Users backend controller.
 	 * This method always returns a success status and a welcome message,
 	 * unless an unexpected internal server error occurs during the response serialization.
@@ -408,7 +604,9 @@ public class UsuariosController {
 			String json = om.writeValueAsString(rs);
 			return ResponseEntity.ok(json);
 		}
-	} 
+	}
+	
+
 	
 	
 	// Para la encriptación de Datos según Copilot (lo mismo para los emails):

@@ -16,6 +16,9 @@ import ContactPage from "./pages/ContactPage"
 import AppNewUser from "./appPages/AppNewUserPage"
 import AppHeaderComponent from "./appComponents/AppHeaderComponent"
 import AppBillsPage from "./appPages/AppBillsPage"
+import AppShowUsers from "./appPages/AppShowUsersPage"
+import AppNewBill from "./appPages/AppNewBillPage"
+import AppAllBills from "./appPages/AppAllBillsPage"
 
 function App() {
   const debug = import.meta.env.VITE_DEBUG_LOG
@@ -23,12 +26,8 @@ function App() {
 
   const [isValidUser, setIsValidUser] = useState(false)
 
-  useEffect(() => {
-    document.title="Escudero Asesoría"
-  }, [])
-
   const checkUser = async () => {
-        console.log("se ha checado el role del usuario")
+        console.log("se ha revisado el role del usuario")
         try {
             const response = await fetch('/check_user')
             if (response.ok) {
@@ -77,11 +76,14 @@ function App() {
           </Routes>
           :
           <Routes>
-            {isValidUser && <Route path="/app/" element={<AppHomePage/>}/>}
+            {isValidUser && <Route path="/app/" element={<AppHomePage />} />}
             {isValidUser && <Route path="/app/home" element={<Navigate to="/app/" replace />} />}
             {isValidUser && <Route path="/app/main" element={<Navigate to="/app/" replace />} />}
-            {isValidUser && <Route path="/app/new_user" element={<AppNewUser/>}/>}
-            {isValidUser && <Route path="/app/bills" element={<AppBillsPage/>}/>}
+            {isValidUser && <Route path="/app/new_user" element={<AppNewUser />} />}
+            {isValidUser && <Route path="/app/all_users" element= {<AppShowUsers />} />}
+            {isValidUser && <Route path="/app/bills" element={<AppBillsPage />} />}
+            {isValidUser && <Route path="/app/new_bills" element={<AppNewBill/>}/>}
+            {isValidUser && <Route path="/app/view_bills" element={<AppAllBills />}/>}
             <Route path="*" element={<ErrorPage/>}/>
           </Routes> 
         }

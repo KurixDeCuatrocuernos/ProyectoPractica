@@ -1,14 +1,16 @@
 import '../appStyles/AppHeaderComponent.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import spain from '../assets/SpainFlag.png'
 import uk from '../assets/UnitedKingdomFlag.png'
 import mail from '../assets/MailIcon.png'
 import salir from '../assets/salida.png'
+import { useNavigate } from 'react-router-dom'
 
 function AppHeaderComponent() {
     const[flag, setFlag] = useState(spain);
     const { language, toggleLanguage, currentTexts } = useLanguage();
+    const navigate = useNavigate();
 
     const setLanguage = async() => {
         toggleLanguage();
@@ -17,6 +19,30 @@ function AppHeaderComponent() {
         } else {
             setFlag(spain);
         }     
+    }
+
+    const [userName, setUserName] = useState('Nombre de Usuario')
+
+    const setName = async() => {
+        try {
+            const response = await fetch('/get_current_name')
+            if (response.ok) {
+                const data = await response.json()
+                if (data.status === 200) {
+                    setUserName(data.name);
+                } else {
+                    if (language === 'textEs') {
+                        console.log(data.mensaje)
+                    } else {
+                        console.log(data.message)
+                    }
+                }
+            } else {
+                console.log("The response is not Ok!")
+            }
+        } catch (error) {
+            console.log("There was a problem connecting with the API")
+        }
     }
 
     const logout = async() => {
@@ -41,12 +67,16 @@ function AppHeaderComponent() {
             console.log("There was a problem connecting with the API")
         }
     }
+
+    useEffect(()=>{
+        setName();
+    },[])
         
     return(
         <div id='AppHeader_container'>
-            <div id='AppHeader_title'>
+            <div id='AppHeader_title' onClick={() => navigate('/app/home')}>
                 <img id='AppHeader_userImage' src={spain} alt="User's Image" />
-                <h2 id='AppHeader_userName'>Nombre de Usuario</h2>
+                <h2 id='AppHeader_userName'>{userName}</h2>
             </div>
             <div id='AppHeader_languageContainer'>
                 <img id='Appheader_language_img' src={flag} alt='country language flag' onClick={setLanguage}/>

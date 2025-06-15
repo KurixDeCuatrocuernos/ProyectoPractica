@@ -1,6 +1,7 @@
 #AppHeader_container{
     background-color: #D6CFB3;
     height: 15dvh;
+    min-height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -14,6 +15,10 @@
     align-items: center;
     gap: 1rem;
     margin-left: 50px;
+}
+
+#AppHeader_title:hover {
+    cursor: pointer;
 }
 
 #AppHeader_userImage{

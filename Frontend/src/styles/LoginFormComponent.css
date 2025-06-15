@@ -1,3 +1,116 @@
+/*LOGGED LOGINFORM*/
+#LoginForm_loggedContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#LoginForm_loggedUserName{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#LoginForm_loggedButtonsContainer{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: fit-content;
+    gap: 1rem;
+}
+
+#LoginForm_loggedEnterButton{
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+}
+
+#LoginForm_loggedEnterButton:hover #LoginForm_leftAccessButton,
+#LoginForm_loggedEnterButton:hover #LoginForm_centerAccessButton {
+    cursor: pointer;
+    background-color: #4e8d36;
+}
+
+#LoginForm_leftAccessButton{
+    background-color: #325D23;
+    height: 50px;
+    width: 50px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+#LoginForm_centerAccessButton{
+    background-color: #325D23;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#LoginForm_centerAccessButton .LoginForm_loggedButtonText{
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    width: max-content;
+    position: absolute;
+    z-index: 5;
+    right: 20%;
+}
+
+
+#LoginForm_loggedLogoutButton{
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+}
+
+#LoginForm_loggedLogoutButton:hover #LoginForm_rightLogoutButton,
+#LoginForm_loggedLogoutButton:hover #LoginForm_centerLogoutButton {
+    cursor: pointer;
+    background-color: #b887ca;
+}
+
+#LoginForm_centerLogoutButton{
+    background-color: #9B70AA;
+    color: white;
+    height: 50px;
+    width: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+#LoginForm_centerLogoutButton .LoginForm_loggedButtonText {
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    position: absolute;
+    z-index: 5;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: max-content;
+    max-width: 70%;
+    text-align: center;
+}
+
+#LoginForm_rightLogoutButton{
+    background-color: #9B70AA;
+    height: 50px;
+    width: 50px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+/*NON-LOGGED LOGINFORM*/
+
 #LoginForm_form{
     display: flex;
     flex-direction: row;

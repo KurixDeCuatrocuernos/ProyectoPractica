@@ -2,14 +2,22 @@ body{
     min-width: 1100px;
 }
 
-#AppHomePage_backgroundOverlay{
+/*
+#AppAllBillsPage_container{
+
+}
+*/
+
+#AppAllBillsPage_backgroundOverlay{
     background-color:  #29304C;
-    height: 85dvh;
+    height: fit-content;
+    min-height: 85dvh;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: column;
 }
 
-#AppHomePage_navbarContainer{
+#AppAllBillsPage_navbarContainer{
 background-color: #29304C;
     display: flex;
     flex-direction: row;
@@ -24,7 +32,7 @@ background-color: #29304C;
     gap: 8px;
 }
 
-.AppHomePage_navbarButton{
+.AppAllBillsPage_navbarButton{
     background-color: #D6CFB3;
     width: fit-content;
     height: 60px;
@@ -35,7 +43,7 @@ background-color: #29304C;
     align-content: center;
 }
 
-.AppHomePage_buttonBackground{
+.AppAllBillsPage_buttonBackground{
     background-color: #29304C;
     width: 95%;
     height: 86%;
@@ -43,13 +51,13 @@ background-color: #29304C;
     text-align: center;
 }
 
-.AppHomePage_buttonBackground:hover,
-.AppHomePage_buttonBackground:hover .AppHomePage_navbarText{
+.AppAllBillsPage_buttonBackground:hover,
+.AppAllBillsPage_buttonBackground:hover .AppAllBillsPage_navbarText{
     cursor: pointer;
     background-color: #5B627E;
 }
 
-.AppHomePage_navbarText{
+.AppAllBillsPage_navbarText{
     background-color: #29304C;
     width: 95%;
     height: 86%;
@@ -58,5 +66,3 @@ background-color: #29304C;
     color: #D6CFB3;
     margin-right: 30px;
 }
-
-

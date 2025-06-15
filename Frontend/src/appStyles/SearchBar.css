@@ -1,0 +1,79 @@
+#SearchBar_container{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+}
+
+#SearchBar_searchBarContainer{
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+}
+
+#SearchBar_leftBar{
+    background-color: #29304C;
+    height: 50px;
+    width: 50px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom: solid #8A90A6 4px;
+}
+
+#SearchBar_input{
+    background-color: #29304C;
+    height: 50px;
+    width: 210px;
+    border: none;
+    border-bottom: solid #8A90A6 4px;
+    color: beige;
+    font-size: medium;
+    font-weight: bold;
+    outline: none;
+    caret-color: #8A90A6;
+    padding-left: 10px;
+}
+
+#SearchBar_input::placeholder {
+    color: beige;
+    font-weight: 500; 
+    opacity: 60%; 
+}
+
+#SearchBar_input:focus,
+#SearchBar_input:focus #SearchBar_leftBar,
+#SearchBar_input:focus #SearchBar_rightBar{
+    background-color: #3a446b;
+}
+
+#SearchBar_input:focus {
+    background-color: #3a446b;
+}
+
+#SearchBar_container:focus-within #SearchBar_leftBar,
+#SearchBar_container:focus-within #SearchBar_rightBar {
+    background-color: #3a446b;
+}
+
+#SearchBar_leftBar,
+#SearchBar_rightBar,
+#SearchBar_input {
+    cursor: text; /* Cambia el cursor a "escribir" */
+}
+
+#SearchBar_rightBar{
+    background-color: #29304C;
+    height: 50px;
+    width: 50px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-bottom: solid #8A90A6 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#SearchBar_searchImage{
+    width: 32px;
+    height: 32px;
+}

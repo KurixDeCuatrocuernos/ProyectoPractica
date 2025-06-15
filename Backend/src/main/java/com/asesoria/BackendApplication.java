@@ -106,19 +106,5 @@ public class BackendApplication {
 		}
 
 	}	
-	
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	} 
-	
-//	@Bean
-//	public CommandLineRunner run(RestTemplate restTemplate, FacturaRepository facturaRepo) {
-//		return args -> {
-//			String url = "http://localhost:9000/api/facturas/1";
-//			String response = restTemplate.getForObject(url, String.class);
-//			System.out.println("Se obtuvo la factura: "+response);
-//		};
-//	}
 
 }

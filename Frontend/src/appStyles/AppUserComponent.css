@@ -1,0 +1,39 @@
+#AppUserComponent_container{
+    background-color: #5B627E;
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    margin: 10px;
+    border-bottom: solid black 3px;
+}
+
+.AppUserComponent_userData{
+    font-size: larger;
+    color: #D6CFB3;
+    height: 100%;
+}
+
+#AppUserComponent_actions{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.AppUserComponent_action {
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    color: #D6CFB3;
+    font-size: medium;
+
+}
+
+.AppUserComponent_action:hover {
+    cursor: pointer;
+    opacity: 70%;
+}
+
+

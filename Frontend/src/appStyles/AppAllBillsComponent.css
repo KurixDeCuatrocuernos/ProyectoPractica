@@ -1,4 +1,4 @@
-#AppBillsList_container{
+#AppAllBillsComponent_container{
     background-color: #D6CFB3;
     height:fit-content;
     min-height: 85dvh;
@@ -9,7 +9,7 @@
     min-width: 1200px;
 }
 
-#AppBillsList_filtersContainer{
+#AppAllBillsComponent_filtersContainer{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -18,27 +18,27 @@
     margin-bottom: 30px;
 }
 
-#AppBillsList_billsContainer{
+#AppAllBillsComponent_billsContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
 }
 
-#AppBillsList_table{
+#AppAllBillsComponent_table{
     border-collapse: collapse; 
     width: 90%;
     height: fit-content;
     background-color: #5B627E;
 }
 
-.AppBillsList_tableRow{
+.AppAllBillsComponent_tableRow{
     height: 90px;
     background-color: #5B627E;
     border-bottom: solid black 3px;
 }
 
-.AppBillsList_title{
+.AppAllBillsComponent_title{
     font-size: 30px;
     color: #D6CFB3;
 }

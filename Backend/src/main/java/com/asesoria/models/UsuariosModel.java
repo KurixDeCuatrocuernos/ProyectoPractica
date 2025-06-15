@@ -59,6 +59,16 @@ public class UsuariosModel {
 		this.email = email;
 		this.password = password;
 	}
+	
+	
+
+	public UsuariosModel(long id, String name, String email, int role, int confirmed) {
+		Id = id;
+		this.name = name;
+		this.email = email;
+		this.role = role;
+		this.confirmed = confirmed;
+	}
 
 	public long getId() {
 		return Id;

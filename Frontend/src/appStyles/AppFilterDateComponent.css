@@ -1,0 +1,33 @@
+#FilterDate_container{
+    min-height: auto;
+    min-width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#FilterDate_title{
+    color: #29304C;
+    margin-bottom: 5px;
+}
+
+.FilterDate_DatePicker{
+    background-color: #29304C;
+    color:  #e2dbbf;
+    width: 250px;
+    padding: 8px;
+    border: solid #5B627E 4px;
+    border-radius: 10%;
+    font-size: medium;
+    font-weight: 550;
+    text-align: center;
+}
+
+.FilterDate_DatePicker:hover{
+    cursor: pointer;
+}
+
+.FilterDate_DatePicker::placeholder {
+    opacity: 80%;
+    color: #D6CFB3; 
+    font-weight: 550;
+}

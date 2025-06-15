@@ -51,6 +51,31 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/logout/, '/api/usuarios/logout'),
         },
+        '/get_current_data': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_current_data/, '/api/usuarios/get_current_data'),
+        },
+        '/check_log': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/check_log/, '/api/usuarios/check_log'),
+        },
+        '/get_current_name': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_current_name/, '/api/usuarios/get_current_name'),
+        },
+        '/new_user_submit': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/new_user_submit/, '/api/usuarios/new_user_submit'),
+        },
+        '/get_all_users': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_all_users/, '/api/usuarios/post_usuarios'),
+        },
       },
     },
   }
