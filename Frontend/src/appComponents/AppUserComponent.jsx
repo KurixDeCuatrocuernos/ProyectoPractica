@@ -2,7 +2,6 @@ import '../appStyles/AppUserComponent.css'
 
 function AppUserComponent({ id, name, email, role, confirmed }) {
     return(
-        <>
         <tr id='AppUserComponent_container'>
             <td className='AppUserComponent_userData'>{id}</td>
             <td className='AppUserComponent_userData'>{name}</td>
@@ -15,7 +14,6 @@ function AppUserComponent({ id, name, email, role, confirmed }) {
                 <h2 className='AppUserComponent_action'>Delete</h2>
             </td>
         </tr>
-        </>
     )
 }
 
