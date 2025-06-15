@@ -4,12 +4,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useLanguage } from '../context/LanguageContext';
 
-function AppFilterDateComponent() {
+function AppFilterDateComponent({ startDate, endDate, setStartDate, setEndDate }) {
 
     const {currentTexts} = useLanguage();
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-
 
     return(
         <div id='FilterDate_container'>

@@ -2,10 +2,9 @@ import { useState } from 'react'
 import '../appStyles/AppFilterTypeComponent.css'
 import { useLanguage } from '../context/LanguageContext'
 
-function AppFilterTypeComponent() {
+function AppFilterTypeComponent({ setType }) {
 
     const {currentTexts} = useLanguage()
-    const [type, setType] = useState('')
 
     return(
         <div id='FilterType_container'>

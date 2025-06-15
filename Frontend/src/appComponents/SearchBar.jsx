@@ -1,12 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import '../appStyles/SearchBar.css'
 import find from '../assets/busqueda.png'
 import { useLanguage } from '../context/LanguageContext';
 
-function SearchBar() {
+function SearchBar({ setSearch }) {
 
     const {currentTexts} = useLanguage()
-    const [search, setSearch] = useState();
     const inputRef = useRef(null); // Referencia al input
 
     const focusInput = () => {

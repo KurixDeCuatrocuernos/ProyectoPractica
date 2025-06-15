@@ -2,10 +2,9 @@ import { useState } from 'react'
 import '../appStyles/AppFilterRoleComponent.css'
 import { useLanguage } from '../context/LanguageContext'
 
-function AppFilterRoleComponent() {
+function AppFilterRoleComponent({ setRole }) {
 
     const {currentTexts} = useLanguage()
-    const [role, setRole] = useState('')
 
     return (
         <div id="FilterRole_container">
