@@ -1,0 +1,166 @@
+#AppFormBillComponent_overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        min-height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+}
+
+#AppFormBillComponent_container {
+    background-color: #5B627E;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: fit-content;
+}
+
+#AppFormBillComponent_title{
+    color: #D6CFB3;
+}
+
+#AppFormBillComponent_formContainer{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.AppFormBillComponent_formLabel{
+    color: #D6CFB3;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: larger;
+    text-align: left;
+}
+
+.AppFormBillComponent_formInput{
+    background-color: #D6CFB3;
+    color: #29304C;
+    font-size: medium;
+    font-weight: 600;
+    padding-left: 15px;
+    height: 40px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: solid black 4px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+}
+
+.AppFormBillComponent_formSelect{
+    background-color: #D6CFB3;
+    color: #29304C;
+    font-size: medium;
+    font-weight: 600;
+    height: 40px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: solid black 4px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+}
+
+.AppFormBillComponent_formOption{
+    color: #29304C;
+    font-size: medium;
+    font-weight: 600;
+}
+
+.AppFormBillComponent_formFileInput{
+    color: #D6CFB3;
+    height: fit-content;
+    width: fit-content;
+}
+
+.AppFormBillComponent_formFileInput:hover {
+    background-color: red;
+}
+
+#AppFormBillComponent_buttonContainer {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#AppFormBillComponent_cancelButtonContainer{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: fit-content;
+}
+
+#AppFormBillComponent_cancelButtonContainer>div:first-child{
+    height: 40px;
+    width: 40px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    background-color: red;
+}
+
+#AppFormBillComponent_cancelButton {
+    padding: 10px;
+    height: 40px;
+    width: 80px;
+    background-color: red;
+    color: white;
+    font-size: medium;
+    border: none;
+}
+
+#AppFormBillComponent_cancelButtonContainer>div:last-child{
+    height: 40px;
+    width: 40px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background-color: red;
+}
+
+#AppFormBillComponent_cancelButtonContainer:hover>div,
+#AppFormBillComponent_cancelButtonContainer:hover>button {
+    cursor: pointer;
+    background-color: rgb(155, 5, 5);
+}
+
+#AppFormBillComponent_submitButtonContainer{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: fit-content;
+}
+
+#AppFormBillComponent_submitButtonContainer>div:first-child{
+    height: 40px;
+    width: 40px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    background-color: green;
+}
+
+#AppFormBillComponent_submitButton {
+    padding: 10px;
+    height: 40px;
+    width: 80px;
+    background-color: green;
+    color: white;
+    font-size: medium;
+    border: none;
+}
+
+#AppFormBillComponent_submitButtonContainer>div:last-child{
+    height: 40px;
+    width: 40px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background-color: green;
+}
+
+#AppFormBillComponent_submitButtonContainer:hover>div,
+#AppFormBillComponent_submitButtonContainer:hover>button {
+    cursor: pointer;
+    background-color: rgb(2, 180, 2);
+}
+

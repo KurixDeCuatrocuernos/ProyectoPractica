@@ -10,7 +10,9 @@ body{
 
 #AppNewBillPage_backgroundOverlay{
     background-color:  #29304C;
+    min-height: fit-content;
     height: 85dvh;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: column;
 }
