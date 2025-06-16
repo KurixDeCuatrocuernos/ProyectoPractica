@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.asesoria.dto.ShowUserProjection;
 import com.asesoria.dto.UsuariosProjection;
+import com.asesoria.models.RoleModel;
 import com.asesoria.models.UsuariosModel;
+import com.asesoria.repositories.RoleRepository;
 import com.asesoria.repositories.UsuariosRepository;
+import com.asesoria.services.UsuariosService;
 import com.asesoria.utils.Validator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +39,13 @@ public class UsuariosController {
 	UsuariosRepository userRepo;
 	
 	@Autowired
+	UsuariosService userService;
+	
+	@Autowired
 	Validator validator;
+	
+	@Autowired
+	RoleRepository roleRepo;
 	
 	/**
 	 * Checks if a user identified by their ID has an administrator role.
@@ -182,7 +192,8 @@ public class UsuariosController {
 					rs.put("status", 405);
 					rs.put("message", validatedPassword);
 				} else {
-					user.setRole(10);
+					Optional<RoleModel> role = roleRepo.findByName("ROLE_ADMIN"); 
+					user.setRole(role.get());
 					userRepo.save(user);
 					rs.put("status", 200);
 					rs.put("message", "Usuario registrado en la base de datos, a falta de confirmar su cuenta");
@@ -239,15 +250,20 @@ public class UsuariosController {
 					rs.put("status", 405);
 					rs.put("message", validatedPassword);
 				} else {
-					Optional<UsuariosModel> userData = userRepo.findByEmail(user.getEmail());
+					
+					Optional<UsuariosModel> userData = userRepo.findByEmailWithRole(user.getEmail());
+//					System.out.println("Se ha buscado al usuario con esas credenciales: "+userData.get().toString());
 					if (userData.isPresent()) {
 						System.out.println("Datos de la base de datos: "+userData.get().toString());
 						if (userData.get().getEmail().equals(user.getEmail()) && userData.get().getPassword().equals(user.getPassword())) {
+				
+							Optional<RoleModel> role = roleRepo.findById(userData.get().getRole().getId());
+							
 							HttpSession session = request.getSession(true);
 							session.setAttribute("email", user.getEmail());
 							session.setAttribute("id", userData.get().getId());
-							session.setAttribute("role", userData.get().getRole());
 							session.setAttribute("name", userData.get().getName());
+							session.setAttribute("role", role.get().getName());
 							rs.put("status", 200);
 							rs.put("mensaje", "¡Usuario logueado con éxito!");
 							rs.put("message", "User login successful!");
@@ -308,15 +324,20 @@ public class UsuariosController {
 			HttpSession session = request.getSession(false);
 			if (session != null) {
 				String role = session.getAttribute("role").toString();
-				if (role != null) {
-					if (role.equals("10")) {
-						rs.put("status", 200);
-					} else  {
-						rs.put("status", 403);
-					}
-				} else {
+				// HAY QUE AÑADIR EL RESTO DE ROLES
+				if (role.equals("ROLE_USER")) {
+					rs.put("status", 200);
+					rs.put("level", 10);
+				} else if (role.equals("ROLE_ADVISOR")) {
+					rs.put("status", 200);
+					rs.put("level", 20);
+				} else if (role.equals("ROLE_ADMIN")) {
+					rs.put("status", 200);
+					rs.put("level", 30);
+				} else  {
 					rs.put("status", 403);
 				}
+
 			} else {
 				rs.put("status", 403);
 			}
@@ -503,7 +524,7 @@ public class UsuariosController {
 					rs.put("status", 403);
 					rs.put("mensaje", "No se pudo crear al usuario: "+validator.isValidPassword(newUser.getPassword()));
 					rs.put("message", "Could not create the user: "+validator.isValidPassword(newUser.getPassword()));
-				} else if (newUser.getRole() == 0) {
+				} else if (newUser.getRole() == null) {
 					rs.put("status", 403);
 					rs.put("mensaje", "No se pudo crear al usuario: Role is 0");
 					rs.put("message", "Could not create the user:  Role is 0");
@@ -544,12 +565,13 @@ public class UsuariosController {
             	rs.put("mensaje", "No se obtuvo ningún usuario");
             	rs.put("message", "Could not find any user");
             } else {
+            	
                 List<Map<String, Object>> usuariosJson = usuarios.stream().map(usuario -> {
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", usuario.getId());
                     map.put("name", usuario.getName());
                     map.put("email", usuario.getEmail());
-                    map.put("role", usuario.getRole());
+                    map.put("role", usuario.getRole().getName());
                     map.put("confirmed", usuario.getConfirmed());
                     return map;
                 }).toList();
