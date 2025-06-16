@@ -72,10 +72,18 @@ function AppShowUsersComponent () {
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        {users.map((user) => (
-                            <AppUserComponent key={user.id} id={user.id} name={user.name} email={user.email} role={user.role} confirmed={user.confirmed}/>
-                        ))}
+                        {users
+                            .filter(user =>
+                                search === "" || 
+                                user.name.toLowerCase().includes(search.toLowerCase()) || 
+                                user.email.toLowerCase().includes(search.toLowerCase()) || 
+                                user.role.toLowerCase().includes(search.toLowerCase())
+                            ) // Primero filtramos por búsqueda
+                            .filter(user => role === "" || user.role === role) // Luego filtramos por rol solo en los resultados de arriba
+                            .map(user => (
+                                <AppUserComponent key={user.id} id={user.id} name={user.name} email={user.email} role={user.role} confirmed={user.confirmed}/>
+                            ))
+                        }
                         
                     </tbody>
                 </table>

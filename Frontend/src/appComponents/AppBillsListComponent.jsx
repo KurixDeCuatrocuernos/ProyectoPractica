@@ -49,6 +49,7 @@ function AppBillsListComponent() {
                         </tr>
                     </thead>
                     <tbody>
+                        {/* Falta el filtrado (para ello es preciso recoger las facturas de la base de datos) */}
                         
                         {bills.map((bill, index) => (
                             <Bill key={index}/>

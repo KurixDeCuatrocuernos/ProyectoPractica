@@ -81,6 +81,7 @@ function LoginFormComponent() {
                     if (language === 'textEs') {
                         setPassErrorMessage(data.mensaje)
                         console.error(data.mensaje)
+                        console.log("el status es: "+data.status)
                     } else {
                         setPassErrorMessage(data.message)
                         console.error(data.message)
@@ -106,6 +107,8 @@ function LoginFormComponent() {
                 if (data.status === 200) {
                     setIsLogged(data.log)
                     setUserName(data.name)
+                } else if (data.status === 403){
+                    console.log("Session not initialized")
                 } else {
                     console.log('error checking session')
                 }

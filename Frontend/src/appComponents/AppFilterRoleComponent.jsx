@@ -10,10 +10,10 @@ function AppFilterRoleComponent({ setRole }) {
         <div id="FilterRole_container">
             <h2 id="FilterRole_title">{currentTexts.roleFilter.title}</h2>
             <select id="FilterRole_select" onChange={(event)=>setRole(event.target.value)} defaultValue="">
-                <option value="" disabled hidden>{currentTexts.roleFilter.selectRole}</option>
-                <option className='FilterRole_option' value="USER">{currentTexts.roleFilter.user}</option>
-                <option className='FilterRole_option' value="ADVISOR">{currentTexts.roleFilter.advisor}</option>
-                <option className='FilterRole_option' value="ADMIN">{currentTexts.roleFilter.admin}</option>
+                <option className='FilterRole_option' value="" >{currentTexts.roleFilter.selectRole}</option>
+                <option className='FilterRole_option' value="ROLE_USER">{currentTexts.roleFilter.user}</option>
+                <option className='FilterRole_option' value="ROLE_ADVISOR">{currentTexts.roleFilter.advisor}</option>
+                <option className='FilterRole_option' value="ROLE_ADMIN">{currentTexts.roleFilter.admin}</option>
             </select>
         </div>
     )
