@@ -36,6 +36,9 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/testConnectionUsuarios/, '/api/usuarios/testConnection'),
         },
+
+
+
         '/signin': {
           target: backendUri,
           changeOrigin: true,
@@ -75,6 +78,20 @@ export default defineConfig(({ mode }) => {
           target: backendUri,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/get_all_users/, '/api/usuarios/post_usuarios'),
+        },
+
+
+        '/get_roles': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_roles/, '/api/role/post_roles')
+        },
+
+
+        '/get_types':{
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_types/, '/api/bills_type/post_types')
         },
       },
     },
