@@ -1,17 +1,17 @@
 import '../appStyles/AppBillComponent.css'
 import { useLanguage } from '../context/LanguageContext'
 
-function AppBillComponent({ id, name, type, usrName, dateSubmit }) {
+function AppBillComponent({ id, title, type, autor, uploadDate }) {
     
     const { currentTexts } = useLanguage()
     
     return(
        <tr id='BillComponent_container'>
-            <td className='BillComponent_billData'>0</td>
-            <td className='BillComponent_billData'>Factura Mayo</td>
-            <td className='BillComponent_billData'>Gasto</td>
-            <td className='BillComponent_billData'>Usuario Prueba</td>
-            <td className='BillComponent_billData'> 1/06/2025</td>
+            <td className='BillComponent_billData'>{id}</td>
+            <td className='BillComponent_billData'>{title}</td>
+            <td className='BillComponent_billData'>{type}</td>
+            <td className='BillComponent_billData'>{autor}</td>
+            <td className='BillComponent_billData'>{new Date(uploadDate).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
             <td id='BillComponent_actions'>
                 <h2 className='BillComponent_action'>Edit</h2>
                 <h2 className='BillComponent_action'>Download</h2>
