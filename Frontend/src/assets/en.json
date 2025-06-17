@@ -153,6 +153,11 @@
         "title5": "Creation Date",
         "title6": "Actions"
     },
+    "appNewBillComponent": {
+        "title": "Saved Invoices: ",
+        "emptyMessage": "There are no pending invoices to upload",
+        "addBill": "Add Invoice"
+    },
     "appAllBills": {
         "title1": "Id",
         "title2": "Name",
@@ -164,23 +169,32 @@
     "dateFilter": {
         "title": "Filter Invoices in the Interval:",
         "startDate": "Select Start Date",
-        "endDate": "Select End Date"
+        "endDate": "Select End Date",
+        "resetButton": "Reset dates"
     },
     "roleFilter": {
         "title": "Filter Users by Role",
-        "selectRole": "Choose a role",
-        "user": "User",
-        "advisor": "Advisor",
-        "admin": "Administrator"
+        "selectRole": "Choose a role"
     },
     "typeFilter": {
         "title": "Filter Invoices by Type:",
-        "selectType": "Choose a type",
-        "client": "Client",
-        "provider": "Provider",
-        "cost": "Expense"
+        "selectType": "Choose a type"
     },
     "searchBar": {
         "placeholder": "Search User..."
+    },
+    "appBillForm": {
+        "title": "New Invoice Record",
+        "label1": "Name: ",
+        "placeholder1": "Enter a title for the invoice",
+        "label2": "Invoice Type: ",
+        "optionDefault": "Select a type",
+        "optionAnother": "Other",
+        "placeholder2": "Enter the new type",
+        "label3": "Issue Date: ",
+        "label4": "File: ",
+        
+        "cancelButton": "Cancel",
+        "saveButton": "Save"
     }
 }

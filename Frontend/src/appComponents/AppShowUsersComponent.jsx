@@ -72,12 +72,14 @@ function AppShowUsersComponent () {
                         </tr>
                     </thead>
                     <tbody>
-                        {users
+                        {
+                        users
                             .filter(user =>
                                 search === "" || 
                                 user.name.toLowerCase().includes(search.toLowerCase()) || 
                                 user.email.toLowerCase().includes(search.toLowerCase()) || 
-                                user.role.toLowerCase().includes(search.toLowerCase())
+                                user.role.toLowerCase().includes(search.toLowerCase()) ||
+                                user.id.toString().toLowerCase().includes(search.toLowerCase())
                             ) // Primero filtramos por búsqueda
                             .filter(user => role === "" || user.role === role) // Luego filtramos por rol solo en los resultados de arriba
                             .map(user => (

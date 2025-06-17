@@ -51,6 +51,11 @@
     border-top-right-radius: 5%;
 }
 
+.AppFormBillComponent_formInput:hover {
+    cursor: pointer;
+    background-color: #f3ebca;
+}
+
 .AppFormBillComponent_formSelect{
     background-color: #D6CFB3;
     color: #29304C;
@@ -62,6 +67,11 @@
     border-bottom: solid black 4px;
     border-top-left-radius: 5%;
     border-top-right-radius: 5%;
+}
+
+.AppFormBillComponent_formSelect:hover {
+    background-color: #f3ebca;
+    cursor: pointer;
 }
 
 .AppFormBillComponent_formOption{
@@ -77,7 +87,8 @@
 }
 
 .AppFormBillComponent_formFileInput:hover {
-    background-color: red;
+    cursor: pointer;
+    background-color: blue;
 }
 
 #AppFormBillComponent_buttonContainer {
