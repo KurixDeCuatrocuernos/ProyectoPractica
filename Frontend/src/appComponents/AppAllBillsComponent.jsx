@@ -12,8 +12,9 @@ function AppAllBillsComponent() {
     /* Sería preciso ver cómo el filtro puede limitar cuáles se muestran de esos que se han recogido */
     /* Por ejemplo, mediante un if en el .map() */
 
-    const {currentTexts} = useLanguage()
-    const currentYear = new Date().getFullYear();
+    const {language, currentTexts} = useLanguage()
+    const currentYear = new Date().getFullYear()
+    const [hasMounted, setHasMounted] = useState(false)
     const [bills, setBills] = useState([])
 
     const [search, setSearch] = useState("");
@@ -21,32 +22,39 @@ function AppAllBillsComponent() {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
 
-    const getBills = () => {
+    const getBills = async() => {
         //Aquí se deberían recoger las facturas
-        const newBills = ([
-            { id: 1,  name: "Factura Enero",      type: "Cliente",   autor: "Asesor Prueba", uploadDate: new Date(currentYear, 0, 1).toISOString() },
-            { id: 2,  name: "Factura Febrero",    type: "Gasto",     autor: "Asesor Prueba", uploadDate: new Date(currentYear, 1, 1).toISOString() },
-            { id: 3,  name: "Factura Marzo",      type: "Proveedor", autor: "Asesor Prueba", uploadDate: new Date(currentYear, 2, 1).toISOString() },
-            { id: 4,  name: "Factura Abril",      type: "Proveedor", autor: "Asesor Prueba", uploadDate: new Date(currentYear, 3, 1).toISOString() },
-            { id: 5,  name: "Factura Mayo",       type: "Gasto",     autor: "Asesor Prueba", uploadDate: new Date(currentYear, 4, 1).toISOString() },
-            { id: 6,  name: "Factura Junio",      type: "Gasto",     autor: "Asesor Prueba", uploadDate: new Date(currentYear, 5, 1).toISOString() },
-            { id: 7,  name: "Factura Julio",      type: "Cliente",   autor: "Asesor Prueba", uploadDate: new Date(currentYear, 6, 1).toISOString() },
-            { id: 8,  name: "Factura Agosto",     type: "Cliente",   autor: "Asesor Prueba", uploadDate: new Date(currentYear, 7, 1).toISOString() },
-            { id: 9,  name: "Factura Septiembre", type: "Gasto",     autor: "Asesor Prueba", uploadDate: new Date(currentYear, 8, 1).toISOString() },
-            { id: 10, name: "Factura Ocubre",     type: "Proveedor", autor: "Asesor Prueba", uploadDate: new Date(currentYear, 9, 1).toISOString() },
-            { id: 11, name: "Factura Noviembre",  type: "Cliente",   autor: "Asesor Prueba", uploadDate: new Date(currentYear, 10, 1).toISOString() },
-            { id: 12, name: "Factura Diciembre",  type: "Proveedor", autor: "Asesor Prueba", uploadDate: new Date(currentYear, 11, 1).toISOString() }
-        ])
-        setBills(newBills)
+        try {
+            const response = await fetch('/get_all_bills', {method:'GET'})
+            if (response.ok) {
+                const data = await response.json()
+                if (data.status === 200) {
+                    setBills(data.facturas)
+                } else {
+                    (language === 'textEs') 
+                        ? console.log(data.mensaje) 
+                        : console.log(data.message)
+                }
+            } else {
+                console.log('Response is not Ok!')
+            }
+        } catch (error) {
+            console.log("Hubo un error al conectar con la API")
+        }
     }
 
     useEffect(() => {
         getBills()
+        setHasMounted(true)
     }, [])
 
     useEffect(() => {
-        console.log("se ha elegido el valor del tipo: ",type)
+        if (hasMounted) console.log("se ha elegido el valor del tipo:", type) 
     }, [type])
+
+    useEffect(() => {
+        if (hasMounted) console.log("Bills ha adquirido los valores: ",bills) 
+    }, [bills])
 
     return (
         <div id="AppAllBillsComponent_container">
@@ -78,22 +86,26 @@ function AppAllBillsComponent() {
                     <tbody>
                         {
                         bills
+                            .sort((a, b) => new Date(b.value.uploadDate) - new Date(a.value.uploadDate))
                             .filter(bill =>
                                 search === "" || 
-                                bill.name.toLowerCase().includes(search.toLowerCase()) || 
-                                bill.type.toLowerCase().includes(search.toLowerCase()) || 
-                                bill.autor.toLowerCase().includes(search.toLowerCase()) ||
-                                bill.id.toString().toLowerCase().includes(search.toLowerCase())
+                                bill.value.name.toLowerCase().includes(search.toLowerCase()) || 
+                                bill.value.type.toLowerCase().includes(search.toLowerCase()) || 
+                                bill.value.autor.toLowerCase().includes(search.toLowerCase()) ||
+                                bill.value.id.toString().toLowerCase().includes(search.toLowerCase())
                             ) // Primero filtramos por búsqueda
-                            .filter(bill => type === "" || bill.type.toLowerCase() === type.toLowerCase()) // Luego filtramos por tipo solo en los resultados de arriba
+                            .filter(bill => type === "" || bill.value.type.toLowerCase() === type.toLowerCase()) // Luego filtramos por tipo solo en los resultados de arriba
                             .filter(bill => {
                                 if (!startDate || !endDate) return true; // Si alguna fecha es "" o null, no filtrar
-                                const billDate = new Date(bill.uploadDate); // Convertir `uploadDate` a objeto Date
+                                const billDate = new Date(bill.value.uploadDate); // Convertir `uploadDate` a objeto Date
                                 return billDate >= new Date(startDate) && billDate <= new Date(endDate);
                             })
-                            .map(bill => (
-                                <Bill key={bill.id} id={bill.id} title={bill.name} type={bill.type} autor={bill.autor} uploadDate={bill.uploadDate} />
-                            ))
+                            .map(billObj => {
+                                const bill = billObj.value
+                                return (
+                                    <Bill key={bill.id} id={bill.id} title={bill.title} type={bill.type} autor={bill.user} uploadDate={bill.uploadDate} file={bill.pdf}/>
+                                );
+                            })
                         }
 
                     </tbody>

@@ -1,7 +1,7 @@
 #AppNewBillComponent_container{
     background-color: #29304C;
     border: solid black 4px;
-    width: 400px;
+    width: 450px;
     height: 60px;
     display: flex;
     flex-direction: row;

@@ -81,6 +81,28 @@ export default defineConfig(({ mode }) => {
         },
 
 
+        '/get_all_bills': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_all_bills/, '/api/facturas/get_bills')
+        },
+        '/get_my_bills': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_my_bills/, '/api/facturas/get_current_user_bills')
+        },
+        '/get_saved_bills': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_saved_bills/, '/api/facturas/get_saved_bills')
+        },
+        '/post_new_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_new_bill/, '/api/facturas/post_new_bill')
+        },
+
+
         '/get_roles': {
           target: backendUri,
           changeOrigin: true,

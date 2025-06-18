@@ -1,7 +1,7 @@
 import '../appStyles/AppBillComponent.css'
 import { useLanguage } from '../context/LanguageContext'
 
-function AppBillComponent({ id, title, type, autor, uploadDate }) {
+function AppBillComponent({ id, title, type, autor, uploadDate, file }) {
     
     const { currentTexts } = useLanguage()
     

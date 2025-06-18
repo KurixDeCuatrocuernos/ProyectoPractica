@@ -43,9 +43,9 @@ function AppFilterTypeComponent({ setType }) {
                 <option className='FilterType_option' value="" default>{currentTexts.typeFilter.selectType}</option>
                 {
                     types.map(type => {
-                        const filteredType = type.value.charAt(0).toUpperCase() + type.value.slice(1).toLowerCase();
+                        const filteredType = type.name.charAt(0).toUpperCase() + type.name.slice(1).toLowerCase();
                         return (
-                            <option className='FilterType_option' key={type.value} value={type.value}>{filteredType}</option>
+                            <option className='FilterType_option' key={type.id} value={type.name}>{filteredType}</option>
                         )
                     })
                 }
