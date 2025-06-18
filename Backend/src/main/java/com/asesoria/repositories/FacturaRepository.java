@@ -10,11 +10,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.asesoria.dto.FacturaProjection;
 import com.asesoria.models.BillsTypeModel;
 import com.asesoria.models.ClientesModel;
 import com.asesoria.models.FacturaModel;
 import com.asesoria.models.ProveedoresModel;
-import com.asesoria.models.UsuariosModel;
 
 @Repository
 public interface FacturaRepository extends JpaRepository<FacturaModel, Long> {
@@ -33,6 +33,39 @@ public interface FacturaRepository extends JpaRepository<FacturaModel, Long> {
 	
 	@Query("SELECT f FROM FacturaModel f WHERE f.userId.id = :userId AND f.validDate IS NOT NULL")
 	List<FacturaModel> findByUserIdAndValidDateIsNotNull(@Param("userId") long userId);
+	
+	List<FacturaModel> findByValidDateIsNotNull();
+	
+	@Query("SELECT f.id AS id, f.title AS title, f.uploadDate AS uploadDate, " +
+		       "f.validDate AS validDate, f.pdf AS pdf, u.name AS user, bt.name AS type " +
+		       "FROM FacturaModel f " +
+		       "JOIN f.userId u " +
+		       "JOIN f.billTypeId bt")
+	List<FacturaProjection> findFacturaProjections();
+	
+	 @Query("SELECT f.id AS id, f.title AS title, f.uploadDate AS uploadDate, " +
+	           "f.validDate AS validDate, f.pdf AS pdf, u.name AS user, bt.name AS type " +
+	           "FROM FacturaModel f " +
+	           "JOIN f.userId u " +
+	           "JOIN f.billTypeId bt")
+	 List<FacturaProjection> findAllFacturasProjected();
+	 
+	 @Query("SELECT f.id AS id, f.title AS title, f.uploadDate AS uploadDate, " +
+		       "f.validDate AS validDate, f.pdf AS pdf, u.name AS user, bt.name AS type " +
+		       "FROM FacturaModel f " +
+		       "JOIN f.userId u " +
+		       "JOIN f.billTypeId bt " +
+		       "WHERE u.id = :userId AND f.validDate IS NOT NULL")
+	List<FacturaProjection> findFacturasByUserAndValidDate(@Param("userId") long userId);
+	 
+	@Query("SELECT f.id AS id, f.title AS title, f.uploadDate AS uploadDate, " +
+		       "f.validDate AS validDate, f.pdf AS pdf, u.name AS user, bt.name AS type " +
+		       "FROM FacturaModel f " +
+		       "JOIN f.userId u " +
+		       "JOIN f.billTypeId bt " +
+		       "WHERE u.id = :userId AND f.validDate IS NULL")
+	List<FacturaProjection> findFacturasByUserAndValidDateNull(@Param("userId") long userId);
+	 
 	// Método para buscar una factura en un intervalo de fechas con un orden
 	public List<FacturaModel> findByValidDateBetween(Timestamp startDate, Timestamp endDate, Sort sort);
 	

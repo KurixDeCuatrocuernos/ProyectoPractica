@@ -15,6 +15,8 @@ public interface BillsTypeRepository extends JpaRepository<BillsTypeModel, Integ
 	
 	public Optional<BillsTypeModel> findById(int Id);
 	
+	public String findNameById(int id);
+	
 	public List<BillsTypeModel> findAll();
 	
 	public void deleteById(int Id);

@@ -26,6 +26,8 @@ public interface UsuariosRepository extends JpaRepository<UsuariosModel, Long>{
 	@Query("SELECT u.id AS id, u.name AS name, u.email AS email, u.role AS role, u.confirmed AS confirmed FROM UsuariosModel u")
 	List<ShowUserProjection> findAllWithoutBillsAndPassword();
 	
+	public String findNameById(long id); 
+	
 	public int findRoleById(long id);
 	
 	public int findConfirmedById(long id);

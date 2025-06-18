@@ -70,7 +70,8 @@ public class BillsTypeController {
                 rs.put("message", "Types retrieved successfully.");
                 List<Map<String, Object>> typesJson = types.stream().map(type -> {
                     Map<String, Object> map = new HashMap<>();
-                    map.put("value", type.getName());
+                    map.put("id", type.getId());
+                    map.put("name", type.getName());
                     return map;
                 }).toList();
                 rs.put("types", typesJson);
