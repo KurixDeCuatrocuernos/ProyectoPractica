@@ -26,6 +26,10 @@ public class RoleModel {
         this.name = roleName;
     }
 
+	public RoleModel(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

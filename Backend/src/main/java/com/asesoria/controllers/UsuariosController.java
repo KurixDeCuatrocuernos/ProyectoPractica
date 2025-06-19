@@ -8,18 +8,25 @@ import java.util.Optional;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.asesoria.dto.DeleteUserProjection;
+import com.asesoria.dto.NewUserProjection;
 import com.asesoria.dto.ShowUserProjection;
+import com.asesoria.dto.UpdateUserProjection;
 import com.asesoria.dto.UsuariosProjection;
 import com.asesoria.models.RoleModel;
 import com.asesoria.models.UsuariosModel;
+import com.asesoria.repositories.FacturaRepository;
 import com.asesoria.repositories.RoleRepository;
 import com.asesoria.repositories.UsuariosRepository;
 import com.asesoria.services.UsuariosService;
@@ -39,13 +46,16 @@ public class UsuariosController {
 	UsuariosRepository userRepo;
 	
 	@Autowired
+	RoleRepository roleRepo;
+	
+	@Autowired
+	FacturaRepository billRepo;
+	
+	@Autowired
 	UsuariosService userService;
 	
 	@Autowired
 	Validator validator;
-	
-	@Autowired
-	RoleRepository roleRepo;
 	
 	/**
 	 * Checks if a user identified by their ID has an administrator role.
@@ -172,49 +182,192 @@ public class UsuariosController {
 	}
 	
 	
-	@PostMapping("/post/signup")
-	public ResponseEntity<String> signUpUser(@RequestBody UsuariosModel user) throws JsonProcessingException {
-		Map<String, Object> rs = new HashMap<>(); 
-		ObjectMapper om = new ObjectMapper();
-		try {
-			if (user.getEmail() instanceof String && user.getName() instanceof String && user.getPassword() instanceof String) {
-				// Sería mejor crear un util con cada validador
-				String validatedEmail = validator.isValidEmail(user.getEmail());
-				String validatedName = validator.isValidName(user.getName());
-				String validatedPassword = validator.isValidPassword(user.getPassword());
-				if (validatedEmail != null) {
-					rs.put("status", 405);
-					rs.put("message", validatedEmail);
-				} else if (validatedName != null) {
-					rs.put("status", 405);
-					rs.put("message", validatedName);
-				} else if (validatedPassword != null) {
-					rs.put("status", 405);
-					rs.put("message", validatedPassword);
-				} else {
-					Optional<RoleModel> role = roleRepo.findByName("ROLE_ADMIN"); 
-					user.setRole(role.get());
-					userRepo.save(user);
-					rs.put("status", 200);
-					rs.put("message", "Usuario registrado en la base de datos, a falta de confirmar su cuenta");
-				}	
-			} else {
-				rs.put("status", 400);
-				rs.put("message", "Bad Data Request");
-			}
-			String json = om.writeValueAsString(rs);
-			return ResponseEntity.ok(json);
-		} catch (Exception error) {
-			rs.put("status", 500);
-			rs.put("message", "Internal Server error");
+	@PostMapping("/post_new_user") //Metodo para incluir a un usuario
+    public ResponseEntity<String> registrarUsuario(@RequestBody NewUserProjection user, HttpServletRequest request) {
+        Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+        System.out.println("Se ha recogido: "+user.toString());
+        try {
+            // Validación de campos obligatorios
+            if (user.getEmail() == null || user.getName() == null || user.getPassword() == null || user.getRole() == 0) {
+                rs.put("status", 400);
+                rs.put("message", "Compulsory data missing!");
+                rs.put("mensaje", "¡Faltan campos obligatorios!");
+            } else {
+            	// Validaciones
+                String emailError = validator.isValidEmail(user.getEmail());
+                String nameError = validator.isValidName(user.getName());
+                String passwordError = validator.isValidPassword(user.getPassword());
+
+                if (emailError != null || nameError != null || passwordError != null) {
+                	System.out.println("Error: "+emailError+"; "+nameError+"; "+passwordError+";");
+                    rs.put("status", 405);
+                    rs.put("mensaje", "¡Algún dato es incorrecto!");
+                    rs.put("message", "Any data is wrong!");
+                } else {
+                	 // Obtener rol
+                    RoleModel role = new RoleModel();
+                    role.setId(user.getRole());
+                    // Configurar usuario
+                    UsuariosModel newUser = new UsuariosModel(user.getName(), user.getEmail(), user.getPassword(), role, 0);
+                    // Guardar usuario en base de datos
+                    userRepo.save(newUser);
+
+                    rs.put("status", 200);
+                    rs.put("message", "Successfully signup user!");
+                    rs.put("mensaje", "¡Usuario registrado correctamente!");
+                }
+            
+            }
+            String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+        } catch (Exception e) {
+        	rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server error: "+e);
 			try {
                 String json = om.writeValueAsString(rs);
                 return ResponseEntity.ok(json);
             } catch (Exception jsonEx) {
                 return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
             }
-		}
-	}
+        }
+    }
+	
+	@Transactional
+	@PostMapping("/post_update_user")
+    public ResponseEntity<String> postUpdateUser(@RequestBody UpdateUserProjection user, HttpServletRequest request) {
+        Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+        System.out.println("Se ha recogido: "+user.toString());
+        try {
+        	if (user.getId() != null) {
+        		if (user.getEmail() != null) userRepo.updateEmailById(user.getId(), user.getEmail());
+                if (user.getName() != null) userRepo.updateNameById(user.getId(), user.getName());
+                if (user.getPassword() != null) userRepo.updatePasswordById(user.getId(), user.getPassword());
+                if (user.getRole() != 0) {
+                	RoleModel newRole = new RoleModel();
+                	newRole.setId(user.getRole());
+                	userRepo.UpdateRoleById(user.getId(), newRole);
+                }
+                rs.put("status", 200);
+                rs.put("mensaje", "Usuario actualizado correctamente");
+                rs.put("message", "User updated successfully");
+        	} else {
+        		 rs.put("status", 400);
+        		 rs.put("mensaje", "ID de usuario no recibido");
+        		 rs.put("message", "User ID is missing");
+        	}
+            
+            	
+            String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+        } catch (Exception e) {
+        	rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server error: "+e);
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+        }
+    }
+	
+	@Transactional
+	@PostMapping("/post_update_current_user")
+    public ResponseEntity<String> postUpdateCurrentUser(@RequestBody UpdateUserProjection user, HttpServletRequest request) {
+        Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+        System.out.println("Se ha recogido: "+user.toString());
+        try {
+        	
+        	HttpSession session = request.getSession(true);
+        	
+        	if (session.getAttribute("id") != null) {
+        		user.setId((long) session.getAttribute("id"));
+        		
+        		if (user.getEmail() != null) userRepo.updateEmailById(user.getId(), user.getEmail());
+                if (user.getName() != null) userRepo.updateNameById(user.getId(), user.getName());
+                if (user.getPassword() != null) userRepo.updatePasswordById(user.getId(), user.getPassword());
+             
+                rs.put("status", 200);
+                rs.put("mensaje", "Usuario actualizado correctamente");
+                rs.put("message", "User updated successfully");
+        	} else {
+        		 rs.put("status", 400);
+        		 rs.put("mensaje", "No se pudo recoger el Id de sesión actual");
+        		 rs.put("message", "Could not retrieve the current session ID");
+        	}
+            
+            	
+            String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+        } catch (Exception e) {
+        	rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server error: "+e);
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+        }
+    }
+	
+	// metodo para eliminar un usuario
+	@PostMapping("/get_user_deletion") 
+    public ResponseEntity<String> eliminarUsuario(@RequestBody DeleteUserProjection user, HttpServletRequest request) {
+        Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+        try {
+        	if (user.getId() > 0) {
+        		
+        		long insertedBills = 0;
+        		insertedBills = billRepo.countByUserId_Id(user.getId());
+        		
+        		if (insertedBills > 0) {
+        			Optional<UsuariosModel> oldUser = userRepo.findById(user.getId());
+        			if (oldUser.isPresent()) {
+        				oldUser.get().setEmail(null);
+        				oldUser.get().setPassword(null);
+        				oldUser.get().setRole(new RoleModel(1L));
+        				userRepo.save(oldUser.get());
+        			} else {
+                		rs.put("status", 404);
+                        rs.put("mensaje", "Usuario no encontrado");
+                        rs.put("message", "User not found");
+        			}
+        		} else {
+        			 // Eliminar usuario
+                    userRepo.deleteById(user.getId());
+
+                    rs.put("status", 200);
+                    rs.put("mensaje", "Usuario eliminado correctamente");
+                    rs.put("message", "User successfully deleted");
+        		}
+        	} else {
+        		rs.put("status", 400);
+                rs.put("mensaje", "No se ha recibido id válido para eliminar el usuario");
+                rs.put("message", "No valid id was received to delete the user");
+        	}
+        	String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+
+        } catch (Exception e) {
+        	rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server error: "+e);
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+        }
+    }
 	
 	/**
 	 * Handles the user registration process.

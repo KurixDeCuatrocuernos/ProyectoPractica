@@ -65,6 +65,9 @@ public interface FacturaRepository extends JpaRepository<FacturaModel, Long> {
 		       "JOIN f.billTypeId bt " +
 		       "WHERE u.id = :userId AND f.validDate IS NULL")
 	List<FacturaProjection> findFacturasByUserAndValidDateNull(@Param("userId") long userId);
+	
+	// Método para contar las facturas insertadas por un usuario
+	long countByUserId_Id(long userId);
 	 
 	// Método para buscar una factura en un intervalo de fechas con un orden
 	public List<FacturaModel> findByValidDateBetween(Timestamp startDate, Timestamp endDate, Sort sort);

@@ -78,6 +78,14 @@ public class UsuariosModel {
 		this.facturas = facturas;
 	}
 
+	public UsuariosModel(String name, String email, String password, RoleModel role, int confirmed) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+		this.confirmed = confirmed;
+	}
+
 	public long getId() {
 		return Id;
 	}
