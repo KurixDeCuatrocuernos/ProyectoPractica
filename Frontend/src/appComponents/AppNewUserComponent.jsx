@@ -71,19 +71,21 @@ function AppNewUserComponent() {
 
     const submitForm = async() => {
         // Esto es temporal
-        var role = 0
+        var role = 4
         
         if (roleInput?.includes('user')){
-            role = 10
+            role = 2
+        } else if (roleInput?.includes('advisor')) {
+            role = 3
         } else if (roleInput?.includes('admin')) {
-            role = 20
+            role = 4
         }
 
         try {
             const response = await fetch('/new_user_submit', {
                 method: 'POST',
-                headers: {  'Content-Type': 'application/json', },
-                body: JSON.stringify ({
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
                     name: nameInput,
                     email: emailInput,
                     password: passInput1,
@@ -94,6 +96,7 @@ function AppNewUserComponent() {
                 const data = await response.json()
                 if (data.status == 200) {
                     console.log("User Created Successfully")
+                    window.location.reload()
                 } else {
                     if (language === 'textEs') {
                         console.log(data.mensaje)

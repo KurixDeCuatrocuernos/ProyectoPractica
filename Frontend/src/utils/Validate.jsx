@@ -80,7 +80,7 @@ const Validate = () => {
         if (role === null || role.length < 4) return messages[language].roleShort;
         else if (!isText(role)) return messages[language].roleNotText;
         else if (role.length > 255) return messages[language].roleLong;
-        else if (sqlInjectionRegex.test(role)) return messages[language].roleSQLWords;
+        else if (sqlInjectionRegex.test(role)) return messages[language].roleSQLWords; 
         else return null;
     };
 

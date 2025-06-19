@@ -13,7 +13,7 @@ function AppBillsListComponent() {
     /* Sería preciso ver cómo el filtro puede limitar cuáles se muestran de esos que se han recogido */
     /* Por ejemplo, mediante un if en el .map() */
     
-    const {currentTexts} = useLanguage()
+    const { language, currentTexts} = useLanguage()
     const currentYear = new Date().getFullYear()
     const [hasMounted, setHasMounted] = useState(false)
     const [bills, setBills] = useState([])
@@ -40,7 +40,7 @@ function AppBillsListComponent() {
                 console.log('Response is not Ok!')
             }
         } catch (error) {
-            console.log("Hubo un error al conectar con la API")
+            console.log("Hubo un error al conectar con la API: "+error)
         }
     }
     

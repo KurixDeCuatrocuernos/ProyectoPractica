@@ -42,13 +42,13 @@ function AppFilterRoleComponent({ setRole }) {
             <select id="FilterRole_select" onChange={(event)=>setRole(event.target.value)} defaultValue="">
                 <option className='FilterRole_option' value="" default>{currentTexts.roleFilter.selectRole}</option>
                 {
-                    roles.filter(role => !role.value.endsWith("NULL")).map(role => {
-                        const filteredRole = role.value.replace(/^ROLE_/, "")
+                    roles.map(role => {
+                        const filteredRole = role.name.replace(/^ROLE_/, "")
                                                         .charAt(0).toUpperCase() + 
-                                            role.value.replace(/^ROLE_/, "").slice(1).toLowerCase();
+                                            role.name.replace(/^ROLE_/, "").slice(1).toLowerCase();
                         
                         return (
-                            <option key={role.value} className='FilterRole_option' value={role.value}>
+                            <option key={role.id} className='FilterRole_option' value={role.name}>
                                 {filteredRole}
                             </option>
                         );

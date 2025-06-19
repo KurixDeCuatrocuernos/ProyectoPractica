@@ -72,12 +72,27 @@ export default defineConfig(({ mode }) => {
         '/new_user_submit': {
           target: backendUri,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/new_user_submit/, '/api/usuarios/new_user_submit'),
+          rewrite: (path) => path.replace(/^\/new_user_submit/, '/api/usuarios/post_new_user'),
         },
         '/get_all_users': {
           target: backendUri,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/get_all_users/, '/api/usuarios/post_usuarios'),
+        },
+        '/delete_user': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/delete_user/, '/api/usuarios/get_user_deletion'),
+        },
+        '/update_user': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/update_user/, '/api/usuarios/post_update_user'),
+        },
+        '/update_current_user_data': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/update_current_user_data/, '/api/usuarios/post_update_current_user'),
         },
 
 
@@ -107,6 +122,11 @@ export default defineConfig(({ mode }) => {
           target: backendUri,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/get_roles/, '/api/role/post_roles')
+        },
+        '/post_new_role': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_new_role/, '/api/role/post_new_role')
         },
 
 

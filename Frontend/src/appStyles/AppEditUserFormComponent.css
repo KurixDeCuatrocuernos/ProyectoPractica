@@ -1,0 +1,168 @@
+#AppEditUserFormComponent_overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        min-height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+}
+
+#AppEditUserFormComponent_container {
+    background-color: #5B627E;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: fit-content;
+}
+
+#AppEditUserFormComponent_title{
+    color: #D6CFB3;
+}
+
+#AppEditUserFormComponent_formContainer{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.AppEditUserFormComponent_formLabel{
+    color: #D6CFB3;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: larger;
+    text-align: left;
+}
+
+.AppEditUserFormComponent_formInput{
+    background-color: #D6CFB3;
+    color: #29304C;
+    font-size: medium;
+    font-weight: 600;
+    padding-left: 15px;
+    height: 40px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: solid black 4px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+}
+
+.AppEditUserFormComponent_formInput:hover {
+    background-color: #f3ebca;
+}
+
+.AppEditUserFormComponent_formErrorMessage{
+    color: yellow;
+}
+
+.AppEditUserFormComponent_formSelect{
+    background-color: #D6CFB3;
+    color: #29304C;
+    font-size: medium;
+    font-weight: 600;
+    height: 40px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: solid black 4px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+}
+
+.AppEditUserFormComponent_formSelect:hover {
+    background-color: #f3ebca;
+    cursor: pointer;
+}
+
+.AppEditUserFormComponent_formOption{
+    color: #29304C;
+    font-size: medium;
+    font-weight: 600;
+}
+
+#AppEditUserFormComponent_buttonContainer {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#AppEditUserFormComponent_cancelButtonContainer{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: fit-content;
+}
+
+#AppEditUserFormComponent_cancelButtonContainer>div:first-child{
+    height: 40px;
+    width: 40px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    background-color: red;
+}
+
+#AppEditUserFormComponent_cancelButton {
+    padding: 10px;
+    height: 40px;
+    width: 80px;
+    background-color: red;
+    color: white;
+    font-size: medium;
+    border: none;
+}
+
+#AppEditUserFormComponent_cancelButtonContainer>div:last-child{
+    height: 40px;
+    width: 40px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background-color: red;
+}
+
+#AppEditUserFormComponent_cancelButtonContainer:hover>div,
+#AppEditUserFormComponent_cancelButtonContainer:hover>button {
+    cursor: pointer;
+    background-color: rgb(155, 5, 5);
+}
+
+#AppEditUserFormComponent_submitButtonContainer{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: fit-content;
+}
+
+#AppEditUserFormComponent_submitButtonContainer>div:first-child{
+    height: 40px;
+    width: 40px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    background-color: green;
+}
+
+#AppEditUserFormComponent_submitButton {
+    padding: 10px;
+    height: 40px;
+    width: 80px;
+    background-color: green;
+    color: white;
+    font-size: medium;
+    border: none;
+}
+
+#AppEditUserFormComponent_submitButtonContainer>div:last-child{
+    height: 40px;
+    width: 40px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background-color: green;
+}
+
+#AppEditUserFormComponent_submitButtonContainer:hover>div,
+#AppEditUserFormComponent_submitButtonContainer:hover>button {
+    cursor: pointer;
+    background-color: rgb(2, 180, 2);
+}
