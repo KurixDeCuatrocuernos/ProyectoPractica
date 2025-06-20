@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import '../appStyles/AppNewBillPage.css'
 import { useLanguage } from '../context/LanguageContext';
 import { useState } from 'react';
+import NewBillComponent from '../appComponents/AppNewBillListComponent'
 
 function AppNewBillPage() {
 
@@ -86,7 +87,7 @@ function AppNewBillPage() {
                     }
                     
                 </div>
-                {/* AQUÏ VA EL COMPONENTE CON TODA LA LÖGICA */}
+                <NewBillComponent/>
             </div>
         </div>
     )

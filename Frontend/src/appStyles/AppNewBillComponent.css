@@ -1,0 +1,24 @@
+#AppNewBillComponent_container{
+    background-color: #29304C;
+    border: solid black 4px;
+    width: 450px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.AppNewBillComponent_billData{
+    color: azure;
+}
+
+.AppNewBillComponent_billData:first-child:hover {
+    cursor: default;
+    color: azure;
+}
+
+.AppNewBillComponent_billData:hover{
+    cursor: pointer;
+    color: #5B627E;
+}

@@ -2,12 +2,17 @@
     min-height: auto;
     min-width: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 #FilterDate_title{
     color: #29304C;
     margin-bottom: 5px;
+}
+
+#FilterDate_inputContainer{
+    display: flex;
+    flex-direction: column;
 }
 
 .FilterDate_DatePicker{
@@ -30,4 +35,27 @@
     opacity: 80%;
     color: #D6CFB3; 
     font-weight: 550;
+}
+
+#filterDate_buttonContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#FilterDate_resetButton{
+    background-color:  #9B70AA;
+    color: azure;
+    width: 125px;
+    height: 40px;
+    border: none;
+    border-radius: 15%;
+    font-size: medium;
+    font-weight: bold;   
+}
+
+#FilterDate_resetButton:hover {
+    cursor: pointer;
+    background-color:  #bb89ce;
 }

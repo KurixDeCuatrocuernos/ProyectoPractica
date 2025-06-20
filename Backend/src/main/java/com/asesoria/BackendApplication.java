@@ -72,7 +72,6 @@ public class BackendApplication {
 			usuario.setName("Usuario Prueba");
 			usuario.setEmail("usuarioprueba@correo.com");
 			usuario.setPassword("12345");
-			usuario.setRole(0);
 			usuario.setConfirmed(0);
 			userRepo.save(usuario);
 			System.out.println("Usuario Insertado: "+usuario.toString());

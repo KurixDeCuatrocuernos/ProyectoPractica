@@ -56,7 +56,7 @@ public class Validator {
 	}
 	
 	private boolean isText(String input) {
-        String regex = "^[A-Za-z]+$";
+        String regex = "^[A-Za-z _]+$";
         return input.matches(regex);
     }
 

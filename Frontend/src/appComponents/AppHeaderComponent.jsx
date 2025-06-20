@@ -5,6 +5,7 @@ import spain from '../assets/SpainFlag.png'
 import uk from '../assets/UnitedKingdomFlag.png'
 import mail from '../assets/MailIcon.png'
 import salir from '../assets/salida.png'
+import userImage from '../assets/LogoAndresEscudero2.jpeg'
 import { useNavigate } from 'react-router-dom'
 
 function AppHeaderComponent() {
@@ -75,7 +76,7 @@ function AppHeaderComponent() {
     return(
         <div id='AppHeader_container'>
             <div id='AppHeader_title' onClick={() => navigate('/app/home')}>
-                <img id='AppHeader_userImage' src={spain} alt="User's Image" />
+                <img id='AppHeader_userImage' src={userImage} alt="User's Image" />
                 <h2 id='AppHeader_userName'>{userName}</h2>
             </div>
             <div id='AppHeader_languageContainer'>

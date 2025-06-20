@@ -3,9 +3,8 @@ import '../appStyles/AppShowUsersComponent.css'
 import { useLanguage } from '../context/LanguageContext'
 import SearchBar from './SearchBar'
 import RoleFilter from './AppFilterRoleComponent'
-import AppFilterTypeComponent from './AppFilterTypeComponent'
 import AppUserComponent from './AppUserComponent'
-import Bill from './AppBillComponent'
+import AppEditUserFormComponent from './AppEditUserFormComponent'
 
 function AppShowUsersComponent () {
 
@@ -18,6 +17,19 @@ function AppShowUsersComponent () {
 
     const [search, setSearch] = useState('')
     const [role, setRole] = useState('')
+
+    const [showEditForm, setShowEditForm] = useState(false);
+    const [userToEdit, setUserToEdit] = useState(null);
+
+    const openEditForm = (user) => {
+        setUserToEdit(user);
+        setShowEditForm(true);
+    };
+
+    const closeEditForm = () => {
+        setShowEditForm(false);
+        setUserToEdit(null);
+    };
 
     const getUsers = async() => {
         try {
@@ -49,6 +61,10 @@ function AppShowUsersComponent () {
         getUsers()
     }, []);
 
+    useEffect(() => {
+        console.log("se va a filtrar con el role: "+role)
+    },[role])
+
     return (
         <div id='AppShowUsersComponent_container'>
             <div id='AppShowUsersComponent_filtersContainer'>
@@ -72,13 +88,29 @@ function AppShowUsersComponent () {
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        {users.map((user) => (
-                            <AppUserComponent key={user.id} id={user.id} name={user.name} email={user.email} role={user.role} confirmed={user.confirmed}/>
-                        ))}
-                        
+                        {
+                        users
+                            .filter(user =>
+                                search === "" ||
+                                (user.name && user.name.toLowerCase().includes(search.toLowerCase())) ||
+                                (user.email && user.email.toLowerCase().includes(search.toLowerCase())) ||
+                                (user.role && user.role.toLowerCase().includes(search.toLowerCase())) ||
+                                (user.id && user.id.toString().toLowerCase().includes(search.toLowerCase()))
+                            ) // Primero filtramos por búsqueda
+                            .filter(user => role === "" || user.role === role) // Luego filtramos por rol solo en los resultados de arriba
+                            .map(user => (
+                                <AppUserComponent key={user.id} id={user.id} name={user.name} email={user.email} role={user.role} confirmed={user.confirmed} onEdit={() => openEditForm(user)}/>
+                            ))
+                        }
                     </tbody>
                 </table>
+                    {showEditForm && (
+                        <AppEditUserFormComponent
+                            show={true}
+                            handleClose={closeEditForm}
+                            user={userToEdit} // <-- si necesitas datos del usuario dentro
+                        />
+                    )}
             </div>
         </div>
     )

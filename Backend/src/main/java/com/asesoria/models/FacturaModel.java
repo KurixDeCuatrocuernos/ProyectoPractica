@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
@@ -23,6 +24,9 @@ public class FacturaModel {
 	@Column(name="Id")
 	private long Id;
 	
+	@Column(name="title")
+	private String title;
+	
 	@Column(name="upload_date", nullable = true)
 	private Timestamp uploadDate;
 	
@@ -30,10 +34,10 @@ public class FacturaModel {
 	private Timestamp validDate;
 	
 	@Lob
-	@Column(name="bill")
+	@Column(name="bill", columnDefinition = "LONGBLOB")
 	private byte[] pdf;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="usuario_id", referencedColumnName="Id")
 	private UsuariosModel userId;
 
@@ -52,10 +56,32 @@ public class FacturaModel {
 	// Empty Builder Method
 	public FacturaModel() {}
 
-	public FacturaModel(Timestamp uploadDate, Timestamp validDate, byte[] pdf, UsuariosModel userId,
+	public FacturaModel(String title, Timestamp uploadDate, Timestamp validDate, byte[] pdf, UsuariosModel userId,
 			ProveedoresModel providerId, ClientesModel clientId, BillsTypeModel billTypeId) {
+		this.title = title;
 		this.uploadDate = uploadDate;
 		this.validDate = validDate;
+		this.pdf = pdf;
+		this.userId = userId;
+		this.providerId = providerId;
+		this.clientId = clientId;
+		this.billTypeId = billTypeId;
+	}
+
+	public FacturaModel(String title, Timestamp uploadDate, byte[] pdf, UsuariosModel userId,
+			ProveedoresModel providerId, ClientesModel clientId, BillsTypeModel billTypeId) {
+		this.title = title;
+		this.uploadDate = uploadDate;
+		this.pdf = pdf;
+		this.userId = userId;
+		this.providerId = providerId;
+		this.clientId = clientId;
+		this.billTypeId = billTypeId;
+	}
+
+	public FacturaModel(String title, byte[] pdf, UsuariosModel userId, ProveedoresModel providerId,
+			ClientesModel clientId, BillsTypeModel billTypeId) {
+		this.title = title;
 		this.pdf = pdf;
 		this.userId = userId;
 		this.providerId = providerId;
@@ -69,6 +95,14 @@ public class FacturaModel {
 
 	public void setId(long id) {
 		Id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Timestamp getUploadDate() {
@@ -132,7 +166,8 @@ public class FacturaModel {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + Arrays.hashCode(pdf);
-		result = prime * result + Objects.hash(Id, billTypeId, clientId, providerId, uploadDate, userId, validDate);
+		result = prime * result
+				+ Objects.hash(Id, billTypeId, clientId, providerId, title, uploadDate, userId, validDate);
 		return result;
 	}
 
@@ -147,17 +182,20 @@ public class FacturaModel {
 		FacturaModel other = (FacturaModel) obj;
 		return Id == other.Id && Objects.equals(billTypeId, other.billTypeId)
 				&& Objects.equals(clientId, other.clientId) && Arrays.equals(pdf, other.pdf)
-				&& Objects.equals(providerId, other.providerId) && Objects.equals(uploadDate, other.uploadDate)
-				&& Objects.equals(userId, other.userId) && Objects.equals(validDate, other.validDate);
+				&& Objects.equals(providerId, other.providerId) && Objects.equals(title, other.title)
+				&& Objects.equals(uploadDate, other.uploadDate) && Objects.equals(userId, other.userId)
+				&& Objects.equals(validDate, other.validDate);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("FacturaModel [Id=").append(Id).append(", uploadDate=").append(uploadDate).append(", validDate=")
-				.append(validDate).append(", pdf=").append(Arrays.toString(pdf)).append("]");
+		builder.append("FacturaModel [Id=").append(Id).append(", title=").append(title).append(", uploadDate=")
+				.append(uploadDate).append(", validDate=").append(validDate).append(", pdf=")
+				.append(Arrays.toString(pdf)).append(", userId=").append(userId).append(", providerId=")
+				.append(providerId).append(", clientId=").append(clientId).append(", billTypeId=").append(billTypeId)
+				.append("]");
 		return builder.toString();
 	}
-	
 	
 }

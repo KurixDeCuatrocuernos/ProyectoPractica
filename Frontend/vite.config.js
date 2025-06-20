@@ -36,6 +36,9 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/testConnectionUsuarios/, '/api/usuarios/testConnection'),
         },
+
+
+
         '/signin': {
           target: backendUri,
           changeOrigin: true,
@@ -69,12 +72,88 @@ export default defineConfig(({ mode }) => {
         '/new_user_submit': {
           target: backendUri,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/new_user_submit/, '/api/usuarios/new_user_submit'),
+          rewrite: (path) => path.replace(/^\/new_user_submit/, '/api/usuarios/post_new_user'),
         },
         '/get_all_users': {
           target: backendUri,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/get_all_users/, '/api/usuarios/post_usuarios'),
+        },
+        '/delete_user': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/delete_user/, '/api/usuarios/get_user_deletion'),
+        },
+        '/update_user': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/update_user/, '/api/usuarios/post_update_user'),
+        },
+        '/update_current_user_data': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/update_current_user_data/, '/api/usuarios/post_update_current_user'),
+        },
+
+
+        '/get_all_bills': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_all_bills/, '/api/facturas/get_bills')
+        },
+        '/get_my_bills': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_my_bills/, '/api/facturas/get_current_user_bills')
+        },
+        '/get_saved_bills': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_saved_bills/, '/api/facturas/get_saved_bills')
+        },
+        '/post_new_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_new_bill/, '/api/facturas/post_new_bill')
+        },
+        '/post_delete_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_delete_bill/, '/api/facturas/post_deletion')
+        },
+        '/post_upload_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_upload_bill/, '/api/facturas/put_submit_bill')
+        },
+        '/post_upload_new_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_upload_new_bill/, '/api/facturas/post_save_and_submit_bill')
+        },
+        '/post_update_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_update_bill/, '/api/facturas/post_update_bill_data')
+        },
+
+
+        '/get_roles': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_roles/, '/api/role/post_roles')
+        },
+        '/post_new_role': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_new_role/, '/api/role/post_new_role')
+        },
+
+
+        '/get_types':{
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get_types/, '/api/bills_type/post_types')
         },
       },
     },

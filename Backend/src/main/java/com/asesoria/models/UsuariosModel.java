@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -30,8 +35,9 @@ public class UsuariosModel {
 	@Column(name="password")
 	private String password;
 	
-	@Column(name="role")
-	private int role;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "role_id")
+	private RoleModel role;
 	
 	@Column(name="confirmed")
 	private int confirmed;
@@ -41,12 +47,14 @@ public class UsuariosModel {
 	
 	public UsuariosModel() {}
 
-	public UsuariosModel(String name, String email, String password, int role, int confirmed) {
+	public UsuariosModel(String name, String email, String password, RoleModel role, int confirmed,
+			List<FacturaModel> facturas) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.role = role;
 		this.confirmed = confirmed;
+		this.facturas = facturas;
 	}
 
 	public UsuariosModel(String name, String email, String password) {
@@ -59,13 +67,21 @@ public class UsuariosModel {
 		this.email = email;
 		this.password = password;
 	}
-	
-	
 
-	public UsuariosModel(long id, String name, String email, int role, int confirmed) {
+	public UsuariosModel(long id, String name, String email, RoleModel role, int confirmed,
+			List<FacturaModel> facturas) {
 		Id = id;
 		this.name = name;
 		this.email = email;
+		this.role = role;
+		this.confirmed = confirmed;
+		this.facturas = facturas;
+	}
+
+	public UsuariosModel(String name, String email, String password, RoleModel role, int confirmed) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
 		this.role = role;
 		this.confirmed = confirmed;
 	}
@@ -102,11 +118,11 @@ public class UsuariosModel {
 		this.password = password;
 	}
 
-	public int getRole() {
+	public RoleModel getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(RoleModel role) {
 		this.role = role;
 	}
 
@@ -128,7 +144,7 @@ public class UsuariosModel {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Id, confirmed, email, name, password, role);
+		return Objects.hash(Id, confirmed, email, name, password);
 	}
 
 	@Override
@@ -141,18 +157,17 @@ public class UsuariosModel {
 			return false;
 		UsuariosModel other = (UsuariosModel) obj;
 		return Id == other.Id && confirmed == other.confirmed && Objects.equals(email, other.email)
-				&& Objects.equals(name, other.name) && Objects.equals(password, other.password) && role == other.role;
+				&& Objects.equals(name, other.name) && Objects.equals(password, other.password);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("UsuariosModel [Id=").append(Id).append(", name=").append(name).append(", email=").append(email)
-				.append(", password=").append(password).append(", role=").append(role).append(", confirmed=")
-				.append(confirmed).append("]");
+				.append(", password=").append(password).append(", confirmed=").append(confirmed).append("]");
 		return builder.toString();
 	}
 
-
+	
 	
 }
