@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -68,7 +69,28 @@ public interface FacturaRepository extends JpaRepository<FacturaModel, Long> {
 	
 	// Método para contar las facturas insertadas por un usuario
 	long countByUserId_Id(long userId);
-	 
+	
+	@Modifying
+	@Query("UPDATE FacturaModel u SET u.validDate = :validDate WHERE u.Id = :id")
+	int updateValidDateById(@Param("id") Long id, @Param("validDate") Timestamp validDate);
+	
+	@Modifying
+	@Query("UPDATE FacturaModel f SET f.title = :title WHERE f.Id = :id")
+	int updateTitleById(@Param("id") Long id, @Param("title") String title);
+	
+	@Modifying
+	@Query("UPDATE FacturaModel f SET f.uploadDate = :uploadDate WHERE f.Id = :id")
+	int updateUploadDateById(@Param("id") Long id, @Param("uploadDate") Timestamp uploadDate);
+	
+	@Modifying
+	@Query("UPDATE FacturaModel f SET f.pdf = :pdf WHERE f.Id = :id")
+	int updatePdfById(@Param("id") Long id, @Param("pdf") byte[] pdf);
+	
+	@Modifying
+	@Query("UPDATE FacturaModel f SET f.billTypeId = :type WHERE f.Id = :id")
+	int updateTypeById(@Param("id") Long id, @Param("type") BillsTypeModel type);
+	
+	
 	// Método para buscar una factura en un intervalo de fechas con un orden
 	public List<FacturaModel> findByValidDateBetween(Timestamp startDate, Timestamp endDate, Sort sort);
 	
