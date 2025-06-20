@@ -51,9 +51,18 @@
     border-top-right-radius: 5%;
 }
 
+.AppFormBillComponent_formInput:first-of-type:hover {
+    cursor: text;
+    background-color: #f3ebca;
+}
+
 .AppFormBillComponent_formInput:hover {
     cursor: pointer;
     background-color: #f3ebca;
+}
+
+.AppFormBillComponent_formErrorMessage{
+    color: yellow;
 }
 
 .AppFormBillComponent_formSelect{
@@ -80,15 +89,35 @@
     font-weight: 600;
 }
 
-.AppFormBillComponent_formFileInput{
-    color: #D6CFB3;
-    height: fit-content;
-    width: fit-content;
+.AppFormBillComponent_hiddenFileInput {
+  display: none;
 }
 
-.AppFormBillComponent_formFileInput:hover {
-    cursor: pointer;
-    background-color: blue;
+.AppFormBillComponent_formFileLabel {
+  background-color: #1e1e1e;
+  color: #D6CFB3;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.AppFormBillComponent_formFileLabel:hover {
+    background-color: #333333;
+}
+
+.AppFormBillComponent_customFileLabel:hover {
+  background-color: #2f2f2f;
+}
+
+.AppFormBillComponent_formFileInputContainer {
+ display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.AppFormBillComponent_selectedFileText{
+    color: #D6CFB3;
 }
 
 #AppFormBillComponent_buttonContainer {

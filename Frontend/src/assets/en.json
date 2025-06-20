@@ -184,7 +184,8 @@
         "placeholder": "Search User..."
     },
     "appBillForm": {
-        "title": "New Invoice Record",
+        "title1": "New Invoice Record",
+        "title2": "Editing Invoice",
         "label1": "Name: ",
         "placeholder1": "Enter a title for the invoice",
         "label2": "Invoice Type: ",
@@ -193,6 +194,9 @@
         "placeholder2": "Enter the new type",
         "label3": "Issue Date: ",
         "label4": "File: ",
+        "label5": "New File: ",
+        "inputButtonText": "Select File",
+        "noneFile": "No File Selected",
         
         "cancelButton": "Cancel",
         "saveButton": "Save"

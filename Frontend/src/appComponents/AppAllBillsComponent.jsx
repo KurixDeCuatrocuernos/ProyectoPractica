@@ -89,9 +89,9 @@ function AppAllBillsComponent() {
                             .sort((a, b) => new Date(b.value.uploadDate) - new Date(a.value.uploadDate))
                             .filter(bill =>
                                 search === "" || 
-                                bill.value.name.toLowerCase().includes(search.toLowerCase()) || 
+                                bill.value.title.toLowerCase().includes(search.toLowerCase()) || 
                                 bill.value.type.toLowerCase().includes(search.toLowerCase()) || 
-                                bill.value.autor.toLowerCase().includes(search.toLowerCase()) ||
+                                bill.value.user.toLowerCase().includes(search.toLowerCase()) ||
                                 bill.value.id.toString().toLowerCase().includes(search.toLowerCase())
                             ) // Primero filtramos por búsqueda
                             .filter(bill => type === "" || bill.value.type.toLowerCase() === type.toLowerCase()) // Luego filtramos por tipo solo en los resultados de arriba

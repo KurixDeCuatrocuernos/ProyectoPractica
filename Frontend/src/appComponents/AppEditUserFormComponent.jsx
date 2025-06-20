@@ -25,14 +25,17 @@ function AppEditUserFormComponent({ show, handleClose, user }) {
 
     const checkData = async() => {
         var modifiedPassword = false;
+        
         if (isValidName(name) !== null) {
             setIsValidForm(false)
             setNameError(isValidName(name))
         }
+
         if (isValidEmail(email) !== null) {
             setIsValidForm(false)
             setEmailError(isValidEmail(email))
         }
+
         if (password !== '') {
             modifiedPassword = true
             if (isValidPassword(password)) {
@@ -40,15 +43,18 @@ function AppEditUserFormComponent({ show, handleClose, user }) {
                 setPassError(isValidPassword(password))
             }
         }
+
         if (String(roles) === "0") {
             if (isValidRole(newRole.toLocaleUpperCase())) {
                 setIsValidForm(false)
                 setRolesError(isValidRole(newRole))
             }
         }
-        console.log("Role elegido: "+roles)
 
-        if (isValidForm) {
+        console.log("Role elegido: "+roles)
+        console.log("formulario: "+isValidForm)
+
+        if (isValidForm===true) {
             
             if(String(roles) === "0") {
                 const fullRole = `ROLE_${newRole.toUpperCase()}`;

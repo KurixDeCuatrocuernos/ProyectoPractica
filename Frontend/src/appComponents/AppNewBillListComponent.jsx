@@ -46,7 +46,7 @@ function AppNewBillListComponent() {
                             ? savedBills
                             .sort((a, b) => new Date(b.uploadDate) - new Date(a.uploadDate))
                             .map((bill, index) => (
-                                <Bill key={index} id={bill.id} saved={true} title={bill.title} date={bill.uploadDate} type={bill.type} file={bill.file} setSavedBills={setSavedBills} setAddedBills={setAddedBills}/>
+                                <Bill key={index} id={bill.id} saved={true} title={bill.title} date={bill.uploadDate} type={bill.type} file={bill.pdf} setSavedBills={setSavedBills} setAddedBills={setAddedBills}/>
                             ))
                             : <h1 className="AppNewBillListComponent_emptyMessage">{currentTexts.appNewBillComponent.emptyMessage}</h1>
                     }
@@ -60,7 +60,7 @@ function AppNewBillListComponent() {
                             <Bill key={index} id={index} saved={false} title={bill.title} date={bill.date} type={bill.type} file={bill.file} setSavedBills={setSavedBills} setAddedBills={setAddedBills}/>
                         ))
                 }
-                {showForm && <BillForm show={showForm} setAddedBills={setAddedBills} handleClose={() => setShowForm(false)}/>}
+                {showForm && <BillForm show={showForm} setAddedBills={setAddedBills} handleClose={() => setShowForm(false)} onEdit={false} />}
             </div>
         </div>
     )

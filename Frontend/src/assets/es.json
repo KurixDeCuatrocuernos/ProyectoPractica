@@ -184,7 +184,8 @@
         "placeholder": "Buscar Usuario..."
     },
     "appBillForm": {
-        "title": "Nuevo Registro de Factura",
+        "title1": "Nuevo Registro de Factura",
+        "title2": "Modificando Factura",
         "label1": "Nombre: ",
         "placeholder1": "Introduce un título para la factura",
         "label2": "Tipo de Factura: ",
@@ -193,6 +194,9 @@
         "placeholder2": "Introduce el nuevo tipo",
         "label3": "Fecha de Emisión: ",
         "label4": "Archivo: ",
+        "label5": "Nuevo Archivo: ",
+        "inputButtonText": "Seleccionar archivo",
+        "noneFile": "Ningún archivo seleccionado",
 
         "cancelButton": "Cancelar",
         "saveButton": "Guardar" 

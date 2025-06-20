@@ -116,6 +116,26 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/post_new_bill/, '/api/facturas/post_new_bill')
         },
+        '/post_delete_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_delete_bill/, '/api/facturas/post_deletion')
+        },
+        '/post_upload_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_upload_bill/, '/api/facturas/put_submit_bill')
+        },
+        '/post_upload_new_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_upload_new_bill/, '/api/facturas/post_save_and_submit_bill')
+        },
+        '/post_update_bill': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_update_bill/, '/api/facturas/post_update_bill_data')
+        },
 
 
         '/get_roles': {

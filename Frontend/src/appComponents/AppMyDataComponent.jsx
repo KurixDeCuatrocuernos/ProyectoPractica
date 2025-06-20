@@ -85,7 +85,11 @@ function AppMyDataComponent() {
         }
 
         if (isValidForm) {
-            updateUser()
+            if (currentEmail===emailInput && currentName===nameInput && modifiedPassword === false){
+                console.log("No se ha modificado nada")
+            } else {
+                updateUser()
+            }
         } else {
             console.log("Formulario Inválido")
         }
