@@ -70,6 +70,10 @@ public interface FacturaRepository extends JpaRepository<FacturaModel, Long> {
 	// Método para contar las facturas insertadas por un usuario
 	long countByUserId_Id(long userId);
 	
+	// Método para detectar si hay facturas sin publicar
+	@Query("SELECT COUNT(f) FROM FacturaModel f WHERE f.userId.id = :userId AND f.validDate IS NULL")
+	long countByUserIdAndValidDateIsNull(@Param("userId") long userId);
+	
 	@Modifying
 	@Query("UPDATE FacturaModel u SET u.validDate = :validDate WHERE u.Id = :id")
 	int updateValidDateById(@Param("id") Long id, @Param("validDate") Timestamp validDate);

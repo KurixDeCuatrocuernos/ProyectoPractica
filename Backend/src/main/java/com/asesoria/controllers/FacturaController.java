@@ -215,6 +215,37 @@ public class FacturaController {
 		}
 	} 
 	
+	@GetMapping("/check_saved_bills")
+    public ResponseEntity<String> getCheckSavedBills(HttpServletRequest request) {
+        Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+        try {
+        	HttpSession session = request.getSession(false);
+            long facturas = facturaRepo.countByUserIdAndValidDateIsNull((long) session.getAttribute("id"));
+
+            if (facturas > 0) {
+                rs.put("status", 200);
+                rs.put("result", true);
+            } else {
+                rs.put("status", 200);
+                rs.put("result", false);
+            }
+            
+            String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+        } catch (Exception e) {
+        	 rs.put("status", 500);
+             rs.put("mensaje", "Error interno del servidor al obtener las facturas");
+             rs.put("message", "Internal Server error retrieving invoices");
+             try {
+                 String json = om.writeValueAsString(rs);
+                 return ResponseEntity.status(500).body(json);
+             } catch (Exception jsonEx) {
+             	return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+             }
+        }
+    }
+	
 	@GetMapping("/get_valid_bills") // Para obtener facturas que sí tienen validDate
     public ResponseEntity<String> getValidBills() {
         Map<String, Object> rs = new HashMap<>();

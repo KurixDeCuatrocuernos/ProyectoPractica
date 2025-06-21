@@ -248,7 +248,7 @@ public class UsuariosController {
                 if (user.getRole() != 0) {
                 	RoleModel newRole = new RoleModel();
                 	newRole.setId(user.getRole());
-                	userRepo.UpdateRoleById(user.getId(), newRole);
+                	userRepo.updateRoleById(user.getId(), newRole);
                 }
                 rs.put("status", 200);
                 rs.put("mensaje", "Usuario actualizado correctamente");
@@ -417,6 +417,11 @@ public class UsuariosController {
 							session.setAttribute("id", userData.get().getId());
 							session.setAttribute("name", userData.get().getName());
 							session.setAttribute("role", role.get().getName());
+							if (userData.get().getConfirmed()==0) { 
+								session.setAttribute("validationWarning", true); 
+							} else { 
+								session.setAttribute("validationWarning", false); 
+							}
 							rs.put("status", 200);
 							rs.put("mensaje", "¡Usuario logueado con éxito!");
 							rs.put("message", "User login successful!");
@@ -450,6 +455,140 @@ public class UsuariosController {
 		}
 	}
 	
+	@Transactional
+	@PostMapping("/update_password_validating_user")
+	public ResponseEntity<String> getValidatedUserUpdaatingPassword(@RequestBody Map<String, String> body, HttpServletRequest request) {
+		Map<String, Object> rs = new HashMap<>();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			String password = body.get("password");
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				int updateP = userRepo.updatePasswordById((long) session.getAttribute("id"), password);
+				int updateC = userRepo.updateConfirmedById((long) session.getAttribute("id"), 1);
+				session.setAttribute("validationWarning", false);
+				rs.put("status", 200);
+				
+			} else {
+				rs.put("status", 400);
+				rs.put("message", "No se ha iniciado sesión");
+				rs.put("message", "Session is not started");
+			}
+			String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+		} catch (Exception e) {
+			rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server Error");
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+		}
+	}
+	
+	@PostMapping("/check_current_password")
+	public ResponseEntity<String> getCheckCurrentPassword(@RequestBody Map<String, String> body, HttpServletRequest request) {
+		Map<String, Object> rs = new HashMap<>();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			String password = body.get("password");
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				
+				Optional<UsuariosModel> user = userRepo.findById((long) session.getAttribute("id"));
+				if (user.isPresent()) {
+					System.out.println("Se va a comparar: "+user.get().getPassword()+", con: "+password);
+					
+					boolean result = user.get().getPassword().equals(password);
+					rs.put("status", 200);
+					rs.put("result", result);
+				} else {
+					rs.put("status", 404);
+					rs.put("message", "No se ha encontrado al usuario de la sesión");
+					rs.put("message", "Session's user not found");
+				}
+				
+			} else {
+				rs.put("status", 400);
+				rs.put("message", "No se ha iniciado sesión");
+				rs.put("message", "Session is not started");
+			}
+			String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+		} catch (Exception e) {
+			rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server Error");
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+		}
+	}
+	
+	@GetMapping("/off_current_validation")
+	public ResponseEntity<String> getOffValidation(HttpServletRequest request) {
+		Map<String, Object> rs = new HashMap<>();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				session.setAttribute("validationWarning", false);
+				rs.put("status", 200);
+			} else {
+				rs.put("status", 400);
+				rs.put("message", "No se ha iniciado sesión");
+				rs.put("message", "Session is not started");
+			}
+			String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+		} catch (Exception e) {
+			rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server Error");
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+		}
+	}
+	
+	@GetMapping("/check_validation_from_user")
+	public ResponseEntity<String> getUserValidationStatus(HttpServletRequest request) {
+		Map<String, Object> rs = new HashMap<>();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				boolean validation = (boolean) session.getAttribute("validationWarning");
+				rs.put("status", 200);
+				rs.put("result", validation);
+			} else {
+				rs.put("status", 400);
+				rs.put("message", "No se ha iniciado sesión");
+				rs.put("message", "Session is not started");
+			}
+			String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+		} catch (Exception e) {
+			rs.put("status", 500);
+			rs.put("mensaje", "Error interno del servidor: "+e);
+			rs.put("message", "Internal Server Error");
+			try {
+                String json = om.writeValueAsString(rs);
+                return ResponseEntity.ok(json);
+            } catch (Exception jsonEx) {
+                return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+            }
+		}
+	}
 	
 	/**
 	 * Checks the current user's session to determine if they are logged in and their role.

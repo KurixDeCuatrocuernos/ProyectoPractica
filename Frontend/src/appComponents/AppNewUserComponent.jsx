@@ -187,7 +187,7 @@ function AppNewUserComponent() {
                         </div>
                         <div className='AppNewUser_formColumn'>
                             <h3 className='AppNewUser_formInputTitle' title={currentTexts.newUserComponent.emailTitleText}>{currentTexts.newUserComponent.emailLabel}</h3>
-                            <input id="AppNewUser_emailInput" className='AppNewUser_formInput' type="text" placeholder={currentTexts.newUserComponent.emailPlaceholder} onChange={(event)=>setEmailInput(event.target.value.trim())}/>
+                            <input id="AppNewUser_emailInput" className='AppNewUser_formInput' type="text" placeholder={currentTexts.newUserComponent.emailPlaceholder} onChange={(event)=>setEmailInput(event.target.value.trim())} name="email" autoComplete="email"/>
                             <p className='AppNewUser_errorText'>{emailError}</p>
                         </div>
                     </div>
@@ -195,7 +195,7 @@ function AppNewUserComponent() {
                         <div className='AppNewUser_formColumn'>
                             <h3 className='AppNewUser_formInputTitle' title={currentTexts.newUserComponent.passwordTitleText}>{currentTexts.newUserComponent.passLabel1}</h3>
                             <div className='AppNewUser_inputWrapper'>
-                                <input id="AppNewUser_passInput1" className='AppNewUser_formInput' type={showPassword1} placeholder={currentTexts.newUserComponent.passwordPlaceholder} onChange={(event)=>setPassInput1(event.target.value.trim())}/>
+                                <input id="AppNewUser_passInput1" className='AppNewUser_formInput' type={showPassword1} placeholder={currentTexts.newUserComponent.passwordPlaceholder} onChange={(event)=>setPassInput1(event.target.value.trim())} name="new-password" autoComplete="new-password"/>
                                 <img className='AppNewUser_eyeButton' src={passImage1} alt="Eye Icon from FlatIcon" onClick={togglePassword1}/>
                                 {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
                                 {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
@@ -205,7 +205,7 @@ function AppNewUserComponent() {
                         <div className='AppNewUser_formColumn'>
                             <h3 className='AppNewUser_formInputTitle' title={currentTexts.newUserComponent.repeatPassTitleText}>{currentTexts.newUserComponent.passLabel2}</h3> 
                             <div className='AppNewUser_inputWrapper'>
-                                <input id="AppNewUser_passInput2" className='AppNewUser_formInput' type={showPassword2} placeholder={currentTexts.newUserComponent.passwordPlaceholder} onChange={(event)=>setPassInput2(event.target.value.trim())}/>
+                                <input id="AppNewUser_passInput2" className='AppNewUser_formInput' type={showPassword2} placeholder={currentTexts.newUserComponent.passwordPlaceholder} onChange={(event)=>setPassInput2(event.target.value.trim())} name="confirm-password" autoComplete="new-password"/>
                                 <img className='AppNewUser_eyeButton' src={passImage2} alt="Eye Icon from FlatIcon" onClick={togglePassword2}/>
                                 {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
                                 {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}

@@ -94,6 +94,26 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/update_current_user_data/, '/api/usuarios/post_update_current_user'),
         },
+        '/check_validation': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/check_validation/, '/api/usuarios/check_validation_from_user'),
+        },
+        '/off_validation': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/off_validation/, '/api/usuarios/off_current_validation'),
+        },
+        '/check_current_password': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/check_current_password/, '/api/usuarios/check_current_password'),
+        },
+        '/post_update_password': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/post_update_password/, '/api/usuarios/update_password_validating_user'),
+        },
 
 
         '/get_all_bills': {
@@ -136,6 +156,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/post_update_bill/, '/api/facturas/post_update_bill_data')
         },
+        '/check_bills': {
+          target: backendUri,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/check_bills/, '/api/facturas/check_saved_bills')
+        },
 
 
         '/get_roles': {
@@ -155,6 +180,7 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/get_types/, '/api/bills_type/post_types')
         },
+
       },
     },
   }

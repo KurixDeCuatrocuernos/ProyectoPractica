@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Validate from '../utils/Validate';
 import eye from '../assets/ojo.png'
 import eyeCross from '../assets/ojo-cruzado.png'
+import ValidationComponent from './AppValidationComponent.jsx'
 
 function AppMyDataComponent() {
 
@@ -29,6 +30,8 @@ function AppMyDataComponent() {
     const [nameInput, setNameInput] = useState('')
     const [passInput1, setPassInput1] = useState('')
     const [passInput2, setPassInput2] = useState('')
+
+    const [showValidationWarning,setShowValidationWarning] = useState(false);
 
     const setData = async() => {
         try {
@@ -149,8 +152,27 @@ function AppMyDataComponent() {
         }
     }
 
+    const checkValidation = async() => {
+        try {
+            const response = await fetch('/check_validation')
+            if (response.ok) {
+                const data = await response.json()
+                if (data.status === 200) {
+                    setShowValidationWarning(data.result)
+                } else {
+                    (language === 'textEs') ? console.log(data.mensaje) : console.log(data.message)
+                }
+            } else {
+                console.log("Response is not Ok!")
+            }
+        } catch (error) {
+            console.log("Hubo un error al conectar con la API")
+        }
+    }
+
     useEffect(()=>{
         setData()
+        checkValidation()
     }, [])
 
     useEffect(() => {
@@ -161,21 +183,10 @@ function AppMyDataComponent() {
         }
     }, [passInput1])
 
-    useEffect(() => {
-        if (emailError !== '') setEmailError('')
-    },[emailInput])
-
-    useEffect(() => {
-        if (nameError !== '') setNameError('')
-    },[nameInput])
-
-    useEffect(() => {
-        if (passError1 !== '') setPassError1('')
-    },[passInput1])
-
-    useEffect(() => {
-        if (passInput2 !== '') setPassError2('')
-    },[passInput2])
+    useEffect(() => { if (emailError !== '') setEmailError('') },[emailInput])
+    useEffect(() => { if (nameError !== '') setNameError('') },[nameInput])
+    useEffect(() => { if (passError1 !== '') setPassError1('') },[passInput1])
+    useEffect(() => { if (passInput2 !== '') setPassError2('') },[passInput2])
 
     return(
         <div id='AppMyDataComponent_contentContainer'>
@@ -224,6 +235,7 @@ function AppMyDataComponent() {
                     </div>
                 </form>
             </div>
+            {showValidationWarning && <ValidationComponent setShowValidationWarning={setShowValidationWarning}/>}
         </div>
     )
 }

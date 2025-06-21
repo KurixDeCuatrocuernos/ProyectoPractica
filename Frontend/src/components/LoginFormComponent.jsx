@@ -53,7 +53,6 @@ function LoginFormComponent() {
     };
 
     const submitForm = async (email, pass) => {
-        console.log ('enviando datos al back: \n Email: '+email+'\n Password: '+pass);
         try{
             const response = await fetch('/signin', {
                 method: 'POST',
@@ -146,7 +145,7 @@ function LoginFormComponent() {
     // ESTE MËTODO DEBE ELIMINARSE EN PRODUCCIÓN
     const setData = () => {
         setTestEmail("usuario@escudero.juridico.es");
-        setTestPass("123456");
+        setTestPass("123456!a");
     }
 
     useEffect(()=>{
@@ -186,6 +185,7 @@ function LoginFormComponent() {
                         placeholder={currentTexts.loginFormComponent.inputEmail}
                         onChange={handleTypingEmail}
                         defaultValue={testEmail}
+                        name="email" autoComplete="email"
                     />
                     <p style={{color: 'red'}}>
                         {emailErrorMessage}
@@ -197,6 +197,7 @@ function LoginFormComponent() {
                             type={showPassword ? "text" : "password"} // Cambia entre "text" y "password"
                             placeholder={currentTexts.loginFormComponent.inputPassword}
                             defaultValue={testPass}
+                            name="password" autoComplete="current-password"
                         />
                         {/* Icono de ojo para mostrar/ocultar contraseña */}
                         <span id="LoginForm_eyeIcon" onClick={togglePasswordVisibility}>
