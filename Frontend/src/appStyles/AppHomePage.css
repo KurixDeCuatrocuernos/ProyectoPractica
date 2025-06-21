@@ -4,9 +4,13 @@ body{
 
 #AppHomePage_backgroundOverlay{
     background-color:  #29304C;
-    height: 85dvh;
+    min-height: 85dvh;
+    height: fit-content;
     display: flex;
     flex-direction: column;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #AppHomePage_navbarContainer{

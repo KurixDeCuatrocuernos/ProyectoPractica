@@ -130,6 +130,7 @@
         "passLabel1": "Password",
         "passLabel2": "Repeat Password",
         "roleLabel": "Role",
+        "roleDefaultOption": "Select a Role",
         "namePlaceholder": "John Smith",
         "emailPlaceholder": "myemail@escudero.juridico.es",
         "passwordPlaceholder": "12345abcd",

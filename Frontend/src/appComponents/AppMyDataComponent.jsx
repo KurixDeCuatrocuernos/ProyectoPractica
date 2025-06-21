@@ -3,6 +3,8 @@ import '../appStyles/AppMyDataComponent.css'
 import { useLanguage } from "../context/LanguageContext";
 import { useNavigate } from 'react-router-dom';
 import Validate from '../utils/Validate';
+import eye from '../assets/ojo.png'
+import eyeCross from '../assets/ojo-cruzado.png'
 
 function AppMyDataComponent() {
 
@@ -13,6 +15,10 @@ function AppMyDataComponent() {
 
     const [currentEmail, setCurrentEmail] = useState('')
     const [currentName, setCurrentName] = useState('')
+    const [passImage1, setPassImage1] = useState(eye)
+    const [showPassword1, setShowPassword1] = useState("password")
+    const [passImage2, setPassImage2] = useState(eye)
+    const [showPassword2, setShowPassword2] = useState("password")
 
     const [emailError, setEmailError] = useState('')
     const [nameError, setNameError] = useState('')
@@ -99,7 +105,7 @@ function AppMyDataComponent() {
         try {
             const response = await fetch('/update_current_user_data', {
                 method: 'POST',
-                headers: { 'Content-Type':'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     email: emailInput !== currentEmail ? emailInput : null,
                     name: nameInput !== currentName ? nameInput : null,
@@ -120,6 +126,26 @@ function AppMyDataComponent() {
             }
         } catch (error) {
             console.log("Hubo un error al conectar con la API")
+        }
+    }
+
+    const togglePassword1 = () => {
+        if (passImage1 === eye && showPassword1 === "password") {
+            setPassImage1(eyeCross)
+            setShowPassword1("text")
+        } else {
+            setPassImage1(eye)
+            setShowPassword1("password")
+        }
+    }
+
+        const togglePassword2 = () => {
+        if (passImage2 === eye && showPassword2 === "password") {
+            setPassImage2(eyeCross)
+            setShowPassword2("text")
+        } else {
+            setPassImage2(eye)
+            setShowPassword2("password")
         }
     }
 
@@ -164,7 +190,10 @@ function AppMyDataComponent() {
                         </div>
                         <div className='AppMyDataComponent_formColumn'>
                             <h3 className='AppMyDataComponent_formInputTitle' title={currentTexts.newUserComponent.passwordTitleText}>{currentTexts.newUserComponent.passLabel1}</h3>
-                            <input className='AppMyDataComponent_formInput' type="text" placeholder={currentTexts.myDataComponent.passInput1} onChange={(event) => setPassInput1(event.target.value) }/>
+                            <input className='AppMyDataComponent_formInput' type={showPassword1} placeholder={currentTexts.myDataComponent.passInput1} onChange={(event) => setPassInput1(event.target.value) }/>
+                            <img className='AppMyDataComponent_eyeButton' src={passImage1} alt="Eye Icon from FlatIcon" onClick={togglePassword1}/>
+                            {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
+                            {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
                             <p className='AppMyDataComponent_errorText'>{passError1}</p>
                         </div>
                     </div>
@@ -176,7 +205,10 @@ function AppMyDataComponent() {
                         </div>
                         <div className='AppMyDataComponent_formColumn'>
                             <h3 className='AppMyDataComponent_formInputTitle' title={currentTexts.newUserComponent.repeatPassTitleText}>{currentTexts.newUserComponent.passLabel2}</h3> 
-                            <input className='AppMyDataComponent_formInput' type="text" placeholder={currentTexts.myDataComponent.passInput2} onChange={(event) => setPassInput2(event.target.value) }/>
+                            <input className='AppMyDataComponent_formInput' type={showPassword2} placeholder={currentTexts.myDataComponent.passInput2} onChange={(event) => setPassInput2(event.target.value) }/>
+                            <img className='AppMyDataComponent_eyeButton' src={passImage2} alt="Eye Icon from FlatIcon" onClick={togglePassword2}/>
+                            {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
+                            {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
                             <p className='AppMyDataComponent_errorText'>{passError2}</p>
                         </div>
                     </div>

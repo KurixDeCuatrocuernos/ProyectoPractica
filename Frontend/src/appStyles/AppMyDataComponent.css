@@ -1,11 +1,12 @@
 #AppMyDataComponent_contentContainer{
     background-color: #D6CFB3;
-    height:80%;
-    margin: 10px;
+    height:fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
     min-width: 1200px;
+    padding-bottom: 50px;
 }
 
 #AppMyDataComponent_formContainer{
@@ -81,6 +82,20 @@
     color: rgb(240, 240, 55);
     font-size: medium;
     font-weight: 100;
+}
+
+.AppMyDataComponent_eyeButton {
+    width: fit-content;
+    color: black;
+    position: relative;
+    padding-right: 5px;
+    padding-left: 5px;
+    right: 50px;
+    top: 10px;
+}
+
+.AppMyDataComponent_eyeButton:hover {
+    cursor: pointer;
 }
 
 #AppMyDataComponent_buttonContainer{

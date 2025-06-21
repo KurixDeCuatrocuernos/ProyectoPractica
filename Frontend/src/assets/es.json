@@ -130,6 +130,7 @@
         "passLabel1": "Contraseña",
         "passLabel2": "Repite la Contraseña",
         "roleLabel": "Rol",
+        "roleDefaultOption": "Selecciona un Rol",
         "namePlaceholder": "Juan Juanes",
         "emailPlaceholder": "micorreo@escudero.juridico.es",
         "passwordPlaceholder": "12345abcd",
