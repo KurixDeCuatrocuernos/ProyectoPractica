@@ -396,7 +396,8 @@ public class FacturaController {
 	@PostMapping(value = "/post_new_bill", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> postNewBill(
 	        @RequestParam("title") String title,
-	        @RequestParam("type") int type,
+	        @RequestParam(value = "type", required = false) Integer type,
+	        @RequestParam(value = "newType", required = false) String newType, 
 	        @RequestParam("uploadDate") long uploadDateMillis,
 	        @RequestParam("pdf") MultipartFile pdf, 
 	        HttpServletRequest request) {
@@ -408,13 +409,31 @@ public class FacturaController {
 	    try {
 	        FacturaModel factura = new FacturaModel();
 	        UsuariosModel user = new UsuariosModel();
-	        user.setId((long) session.getAttribute("id"));
 	        BillsTypeModel tipo = new BillsTypeModel();
-	        tipo.setId(type);
-
+	        user.setId((long) session.getAttribute("id"));
+	        
+	        if (type != null) {
+	        	tipo.setId(type);
+	        } else {
+	        	tipo.setName(newType.toUpperCase());
+	        	List<BillsTypeModel> currentTypes = typeRepo.findAll();
+	        	boolean exists = false;
+	        	for (BillsTypeModel element : currentTypes) {
+	        		if (element.getName() != null && element.getName().equalsIgnoreCase(newType)) { 
+	        			exists = true;
+	        			tipo = element;
+	        		}
+	        	}
+	        	if (exists == false) {
+	        		
+		        	typeRepo.save(tipo);
+	        	}
+	        	
+	        }
+	        
 	        factura.setTitle(title);
 	        factura.setUploadDate(new Timestamp(uploadDateMillis));
-	        factura.setBillTypeId(tipo); 
+	        factura.setBillTypeId(tipo);
 	        factura.setUserId(user);
 	        factura.setPdf(pdf.getBytes());
 
@@ -512,7 +531,8 @@ public class FacturaController {
 	@PostMapping(value = "/post_save_and_submit_bill", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> postSaveAndSubmitBill(
 	        @RequestParam("title") String title,
-	        @RequestParam("type") int type,
+	        @RequestParam(value = "type", required = false) Integer type,
+	        @RequestParam(value = "newType", required = false) String newType, 
 	        @RequestParam("uploadDate") long uploadDateMillis,
 	        @RequestParam("pdf") MultipartFile pdf, 
 	        HttpServletRequest request) {
@@ -524,9 +544,27 @@ public class FacturaController {
 	    try {
 	        FacturaModel factura = new FacturaModel();
 	        UsuariosModel user = new UsuariosModel();
-	        user.setId((long) session.getAttribute("id"));
 	        BillsTypeModel tipo = new BillsTypeModel();
-	        tipo.setId(type);
+	        user.setId((long) session.getAttribute("id"));
+	        
+	        if (type != null) {
+	        	tipo.setId(type);
+	        } else {
+	        	tipo.setName(newType.toUpperCase());
+	        	List<BillsTypeModel> currentTypes = typeRepo.findAll();
+	        	boolean exists = false;
+	        	for (BillsTypeModel element : currentTypes) {
+	        		if (element.getName() != null && element.getName().equalsIgnoreCase(newType)) { 
+	        			exists = true;
+	        			tipo = element;
+	        		}
+	        	}
+	        	if (exists == false) {
+	        		
+		        	typeRepo.save(tipo);
+	        	}
+	        	
+	        }
 
 	        factura.setTitle(title);
 	        factura.setUploadDate(new Timestamp(uploadDateMillis));

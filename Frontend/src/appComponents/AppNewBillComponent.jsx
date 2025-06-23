@@ -18,7 +18,11 @@ function AppNewBillComponent({ id, saved, title, date, type, file, setSavedBills
         
         const formData = new FormData();
         formData.append("title", title);
-        formData.append("type", parseInt(type));
+        if (isNaN(Number(type))) {
+            formData.append("newType", type);
+        } else {
+            formData.append("type", type);
+        }
         formData.append("uploadDate", new Date(date).getTime());
 
         console.log("al subir la factura se envía el archivo: "+file)
@@ -53,10 +57,14 @@ function AppNewBillComponent({ id, saved, title, date, type, file, setSavedBills
         
         const formData = new FormData();
         formData.append("title", title);
-        formData.append("type", parseInt(type));
+        if (isNaN(Number(type))) {
+            formData.append("newType", type);
+        } else {
+            formData.append("type", type);
+        }
         formData.append("uploadDate", new Date(date).getTime());
 
-        console.log("al subir la factura se envía el archivo: "+file)
+        console.log("Se ha enviado: "+title+"; "+type+"; "+new Date(date).getTime())
 
         formData.append("pdf", file)
         if (window.confirm("¿Estás seguro de que quieres guardar esta factura?")) {
@@ -142,6 +150,7 @@ function AppNewBillComponent({ id, saved, title, date, type, file, setSavedBills
     return (
         <div id='AppNewBillComponent_container'>
             <h1 className='AppNewBillComponent_billData'>{title}</h1>
+            <h1 className='AppNewBillComponent_billData'>{type}</h1>
             <h1 className='AppNewBillComponent_billData'>{formatDate(date)}</h1>
             {saved===false ? 
                 <p className='AppNewBillComponent_billData' onClick={()=>saveBill()}>Guardar</p> 
