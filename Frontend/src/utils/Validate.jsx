@@ -14,6 +14,9 @@ const Validate = () => {
             passNotText: "Esto no es un texto",
             passLong: "Esta contraseña es demasiado larga",
             passSQLWords: "Esa contraseña contiene palabras prohibidas",
+            passNotNumber: "La Contraseña debe tener al menos un dígito",
+            passNotSymbol: "La contraseña debe tener algún símbolo",
+            passNotLetters: "La contraseña debe tener letras",
             nameShort: "Ese Nombre es demasiado corto",
             nameNotText: "Eso no es un texto",
             nameLong: "Ese nombre en demasiado largo",
@@ -34,6 +37,9 @@ const Validate = () => {
             passNotText: "This is not a text",
             passLong: "This password is too long",
             passSQLWords: "That password contains forbidden words",
+            passNotNumber: "Password must contain a number",
+            passNotSymbol: "Password must contain a symbol",
+            passNotLetters: "Password must contain a letter",
             nameShort: "That name is too short",
             nameNotText: "That is not a text",
             nameLong: "That name is too long",
@@ -64,6 +70,9 @@ const Validate = () => {
         else if (!isText(pass)) return messages[language].passNotText;
         else if (pass.length > 255) return messages[language].passLong;
         else if (sqlInjectionRegex.test(pass)) return messages[language].passSQLWords;
+        else if (!/\d/.test(pass)) return messages[language].passNotNumber
+        else if (!/[!-/:-@[-`{-~]/.test(pass)) return messages[language].passNotSymbol
+        else if (!/[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]/.test(pass)) return messages[language].passNotLetters
         else return null;
     };
 

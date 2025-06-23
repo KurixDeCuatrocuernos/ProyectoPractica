@@ -215,6 +215,37 @@ public class FacturaController {
 		}
 	} 
 	
+	@GetMapping("/check_saved_bills")
+    public ResponseEntity<String> getCheckSavedBills(HttpServletRequest request) {
+        Map<String, Object> rs = new HashMap<>();
+        ObjectMapper om = new ObjectMapper();
+        try {
+        	HttpSession session = request.getSession(false);
+            long facturas = facturaRepo.countByUserIdAndValidDateIsNull((long) session.getAttribute("id"));
+
+            if (facturas > 0) {
+                rs.put("status", 200);
+                rs.put("result", true);
+            } else {
+                rs.put("status", 200);
+                rs.put("result", false);
+            }
+            
+            String json = om.writeValueAsString(rs);
+            return ResponseEntity.ok(json);
+        } catch (Exception e) {
+        	 rs.put("status", 500);
+             rs.put("mensaje", "Error interno del servidor al obtener las facturas");
+             rs.put("message", "Internal Server error retrieving invoices");
+             try {
+                 String json = om.writeValueAsString(rs);
+                 return ResponseEntity.status(500).body(json);
+             } catch (Exception jsonEx) {
+             	return ResponseEntity.status(500).body("{\"status\": 500, \"message\": \"Error al serializar el mensaje de error\"}");
+             }
+        }
+    }
+	
 	@GetMapping("/get_valid_bills") // Para obtener facturas que sí tienen validDate
     public ResponseEntity<String> getValidBills() {
         Map<String, Object> rs = new HashMap<>();
@@ -365,7 +396,8 @@ public class FacturaController {
 	@PostMapping(value = "/post_new_bill", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> postNewBill(
 	        @RequestParam("title") String title,
-	        @RequestParam("type") int type,
+	        @RequestParam(value = "type", required = false) Integer type,
+	        @RequestParam(value = "newType", required = false) String newType, 
 	        @RequestParam("uploadDate") long uploadDateMillis,
 	        @RequestParam("pdf") MultipartFile pdf, 
 	        HttpServletRequest request) {
@@ -377,13 +409,31 @@ public class FacturaController {
 	    try {
 	        FacturaModel factura = new FacturaModel();
 	        UsuariosModel user = new UsuariosModel();
-	        user.setId((long) session.getAttribute("id"));
 	        BillsTypeModel tipo = new BillsTypeModel();
-	        tipo.setId(type);
-
+	        user.setId((long) session.getAttribute("id"));
+	        
+	        if (type != null) {
+	        	tipo.setId(type);
+	        } else {
+	        	tipo.setName(newType.toUpperCase());
+	        	List<BillsTypeModel> currentTypes = typeRepo.findAll();
+	        	boolean exists = false;
+	        	for (BillsTypeModel element : currentTypes) {
+	        		if (element.getName() != null && element.getName().equalsIgnoreCase(newType)) { 
+	        			exists = true;
+	        			tipo = element;
+	        		}
+	        	}
+	        	if (exists == false) {
+	        		
+		        	typeRepo.save(tipo);
+	        	}
+	        	
+	        }
+	        
 	        factura.setTitle(title);
 	        factura.setUploadDate(new Timestamp(uploadDateMillis));
-	        factura.setBillTypeId(tipo); 
+	        factura.setBillTypeId(tipo);
 	        factura.setUserId(user);
 	        factura.setPdf(pdf.getBytes());
 
@@ -481,7 +531,8 @@ public class FacturaController {
 	@PostMapping(value = "/post_save_and_submit_bill", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> postSaveAndSubmitBill(
 	        @RequestParam("title") String title,
-	        @RequestParam("type") int type,
+	        @RequestParam(value = "type", required = false) Integer type,
+	        @RequestParam(value = "newType", required = false) String newType, 
 	        @RequestParam("uploadDate") long uploadDateMillis,
 	        @RequestParam("pdf") MultipartFile pdf, 
 	        HttpServletRequest request) {
@@ -493,9 +544,27 @@ public class FacturaController {
 	    try {
 	        FacturaModel factura = new FacturaModel();
 	        UsuariosModel user = new UsuariosModel();
-	        user.setId((long) session.getAttribute("id"));
 	        BillsTypeModel tipo = new BillsTypeModel();
-	        tipo.setId(type);
+	        user.setId((long) session.getAttribute("id"));
+	        
+	        if (type != null) {
+	        	tipo.setId(type);
+	        } else {
+	        	tipo.setName(newType.toUpperCase());
+	        	List<BillsTypeModel> currentTypes = typeRepo.findAll();
+	        	boolean exists = false;
+	        	for (BillsTypeModel element : currentTypes) {
+	        		if (element.getName() != null && element.getName().equalsIgnoreCase(newType)) { 
+	        			exists = true;
+	        			tipo = element;
+	        		}
+	        	}
+	        	if (exists == false) {
+	        		
+		        	typeRepo.save(tipo);
+	        	}
+	        	
+	        }
 
 	        factura.setTitle(title);
 	        factura.setUploadDate(new Timestamp(uploadDateMillis));

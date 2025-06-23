@@ -46,11 +46,11 @@ public interface UsuariosRepository extends JpaRepository<UsuariosModel, Long>{
 
 	@Modifying
 	@Query("UPDATE UsuariosModel u SET u.role = :role WHERE u.Id = :id")
-	int UpdateRoleById(@Param("id") Long id, @Param("role") RoleModel role);
+	int updateRoleById(@Param("id") Long id, @Param("role") RoleModel role);
 	
 	@Modifying
 	@Query("UPDATE UsuariosModel u SET u.confirmed = :confirmed WHERE u.Id = :id")
-	int actualizarConfirmadoPorId(@Param("id") Long id, @Param("confirmed") int confirmed);
+	int updateConfirmedById(@Param("id") Long id, @Param("confirmed") int confirmed);
 	
 	public String findNameById(long id); 
 	

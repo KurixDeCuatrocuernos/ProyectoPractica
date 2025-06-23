@@ -3,6 +3,9 @@ import '../appStyles/AppMyDataComponent.css'
 import { useLanguage } from "../context/LanguageContext";
 import { useNavigate } from 'react-router-dom';
 import Validate from '../utils/Validate';
+import eye from '../assets/ojo.png'
+import eyeCross from '../assets/ojo-cruzado.png'
+import ValidationComponent from './AppValidationComponent.jsx'
 
 function AppMyDataComponent() {
 
@@ -13,6 +16,10 @@ function AppMyDataComponent() {
 
     const [currentEmail, setCurrentEmail] = useState('')
     const [currentName, setCurrentName] = useState('')
+    const [passImage1, setPassImage1] = useState(eye)
+    const [showPassword1, setShowPassword1] = useState("password")
+    const [passImage2, setPassImage2] = useState(eye)
+    const [showPassword2, setShowPassword2] = useState("password")
 
     const [emailError, setEmailError] = useState('')
     const [nameError, setNameError] = useState('')
@@ -23,6 +30,8 @@ function AppMyDataComponent() {
     const [nameInput, setNameInput] = useState('')
     const [passInput1, setPassInput1] = useState('')
     const [passInput2, setPassInput2] = useState('')
+
+    const [showValidationWarning,setShowValidationWarning] = useState(false);
 
     const setData = async() => {
         try {
@@ -99,7 +108,7 @@ function AppMyDataComponent() {
         try {
             const response = await fetch('/update_current_user_data', {
                 method: 'POST',
-                headers: { 'Content-Type':'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     email: emailInput !== currentEmail ? emailInput : null,
                     name: nameInput !== currentName ? nameInput : null,
@@ -123,8 +132,47 @@ function AppMyDataComponent() {
         }
     }
 
+    const togglePassword1 = () => {
+        if (passImage1 === eye && showPassword1 === "password") {
+            setPassImage1(eyeCross)
+            setShowPassword1("text")
+        } else {
+            setPassImage1(eye)
+            setShowPassword1("password")
+        }
+    }
+
+        const togglePassword2 = () => {
+        if (passImage2 === eye && showPassword2 === "password") {
+            setPassImage2(eyeCross)
+            setShowPassword2("text")
+        } else {
+            setPassImage2(eye)
+            setShowPassword2("password")
+        }
+    }
+
+    const checkValidation = async() => {
+        try {
+            const response = await fetch('/check_validation')
+            if (response.ok) {
+                const data = await response.json()
+                if (data.status === 200) {
+                    setShowValidationWarning(data.result)
+                } else {
+                    (language === 'textEs') ? console.log(data.mensaje) : console.log(data.message)
+                }
+            } else {
+                console.log("Response is not Ok!")
+            }
+        } catch (error) {
+            console.log("Hubo un error al conectar con la API")
+        }
+    }
+
     useEffect(()=>{
         setData()
+        checkValidation()
     }, [])
 
     useEffect(() => {
@@ -135,21 +183,10 @@ function AppMyDataComponent() {
         }
     }, [passInput1])
 
-    useEffect(() => {
-        if (emailError !== '') setEmailError('')
-    },[emailInput])
-
-    useEffect(() => {
-        if (nameError !== '') setNameError('')
-    },[nameInput])
-
-    useEffect(() => {
-        if (passError1 !== '') setPassError1('')
-    },[passInput1])
-
-    useEffect(() => {
-        if (passInput2 !== '') setPassError2('')
-    },[passInput2])
+    useEffect(() => { if (emailError !== '') setEmailError('') },[emailInput])
+    useEffect(() => { if (nameError !== '') setNameError('') },[nameInput])
+    useEffect(() => { if (passError1 !== '') setPassError1('') },[passInput1])
+    useEffect(() => { if (passInput2 !== '') setPassError2('') },[passInput2])
 
     return(
         <div id='AppMyDataComponent_contentContainer'>
@@ -164,7 +201,10 @@ function AppMyDataComponent() {
                         </div>
                         <div className='AppMyDataComponent_formColumn'>
                             <h3 className='AppMyDataComponent_formInputTitle' title={currentTexts.newUserComponent.passwordTitleText}>{currentTexts.newUserComponent.passLabel1}</h3>
-                            <input className='AppMyDataComponent_formInput' type="text" placeholder={currentTexts.myDataComponent.passInput1} onChange={(event) => setPassInput1(event.target.value) }/>
+                            <input className='AppMyDataComponent_formInput' type={showPassword1} placeholder={currentTexts.myDataComponent.passInput1} onChange={(event) => setPassInput1(event.target.value) }/>
+                            <img className='AppMyDataComponent_eyeButton' src={passImage1} alt="Eye Icon from FlatIcon" onClick={togglePassword1}/>
+                            {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
+                            {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
                             <p className='AppMyDataComponent_errorText'>{passError1}</p>
                         </div>
                     </div>
@@ -176,7 +216,10 @@ function AppMyDataComponent() {
                         </div>
                         <div className='AppMyDataComponent_formColumn'>
                             <h3 className='AppMyDataComponent_formInputTitle' title={currentTexts.newUserComponent.repeatPassTitleText}>{currentTexts.newUserComponent.passLabel2}</h3> 
-                            <input className='AppMyDataComponent_formInput' type="text" placeholder={currentTexts.myDataComponent.passInput2} onChange={(event) => setPassInput2(event.target.value) }/>
+                            <input className='AppMyDataComponent_formInput' type={showPassword2} placeholder={currentTexts.myDataComponent.passInput2} onChange={(event) => setPassInput2(event.target.value) }/>
+                            <img className='AppMyDataComponent_eyeButton' src={passImage2} alt="Eye Icon from FlatIcon" onClick={togglePassword2}/>
+                            {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
+                            {/* Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a> */}
                             <p className='AppMyDataComponent_errorText'>{passError2}</p>
                         </div>
                     </div>
@@ -192,6 +235,7 @@ function AppMyDataComponent() {
                     </div>
                 </form>
             </div>
+            {showValidationWarning && <ValidationComponent setShowValidationWarning={setShowValidationWarning}/>}
         </div>
     )
 }

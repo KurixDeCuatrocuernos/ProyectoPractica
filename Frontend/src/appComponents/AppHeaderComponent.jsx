@@ -12,6 +12,7 @@ function AppHeaderComponent() {
     const[flag, setFlag] = useState(spain);
     const { language, toggleLanguage, currentTexts } = useLanguage();
     const navigate = useNavigate();
+    const [billsToPublic, setBillsToPublic] = useState(false);
 
     const setLanguage = async() => {
         toggleLanguage();
@@ -47,7 +48,7 @@ function AppHeaderComponent() {
     }
 
     const logout = async() => {
-         const response = await fetch('/logout', {
+        const response = await fetch('/logout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,8 +70,27 @@ function AppHeaderComponent() {
         }
     }
 
+    const checkBills = async() => {
+        const response = await fetch('/check_bills')
+        try {
+            const data = await response.json()
+            if (data.status==200) {
+                setBillsToPublic(data.result)
+            } else {
+                if (currentTexts == 'TextEs') {
+                    console.error(data.mensaje)
+                } else {
+                    console.error(data.message)
+                }
+            }
+        } catch (error) {
+            console.log("There was a problem connecting with the API")
+        }
+    }
+
     useEffect(()=>{
         setName();
+        checkBills();
     },[])
         
     return(
@@ -82,11 +102,16 @@ function AppHeaderComponent() {
             <div id='AppHeader_languageContainer'>
                 <img id='Appheader_language_img' src={flag} alt='country language flag' onClick={setLanguage}/>
             </div>
-            <div id='AppHeader_label'>
-                <img id='AppHeader_mailIcon'src={mail} alt="Mail Icon from FlatIcon" />
-                {/*Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a>*/}
-                <p id='AppHeader_mailText'>{currentTexts.appHeader.mailText1}<br/>{currentTexts.appHeader.mailText2}</p>
-            </div>
+            {
+                billsToPublic === true ?
+                <div id='AppHeader_label' onClick={() => navigate('/app/new_bills')}>
+                    <img id='AppHeader_mailIcon'src={mail} alt="Mail Icon from FlatIcon" />
+                    {/*Uicons de <a href="https://www.flaticon.com/uicons">Flaticon</a>*/}
+                    <p id='AppHeader_mailText'>{currentTexts.appHeader.mailText1}<br/>{currentTexts.appHeader.mailText2}</p>
+                </div>
+                :
+                ''
+            }
             <div id='AppHeader_button_container' onClick={() => logout()}>
                 <p id='AppHeader_buttonText'>{currentTexts.appHeader.logout}</p>
                 <img id='AppHeader_logoutIcon' src={salir} alt="Logout Icon from FlatIcon" />

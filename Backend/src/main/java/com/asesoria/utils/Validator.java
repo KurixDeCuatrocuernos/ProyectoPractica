@@ -75,22 +75,28 @@ public class Validator {
 	}
 	
 	public String isValidPassword(String text) {
-		if (text == null || text.length() < 5) {
-			return "This password is too short";
-		} else if (text.length() > 19) {
-			return "This password is too long";
-		} else if (hasSQLInjection(text)) {
-			return "This password contains invalid expressions";
-		} else if (!isTextWithUnderline(text)) {
-			Character firstInvalidCharacter = getFirstInvalidCharacter(text);
-			if (firstInvalidCharacter == null) {
-				return null;
-			} else {
-				return "This password contains invalid characters: "+firstInvalidCharacter;	
-			}
-		} else {
-			return null;
-		}
+	    if (text == null || text.length() < 6) {
+	        return "This password is too short";
+	    } else if (text.length() > 255) {
+	        return "This password is too long";
+	    } else if (hasSQLInjection(text)) {
+	        return "This password contains invalid expressions";
+	    } else if (!text.matches(".*\\d.*")) {
+	        return "The password must contain at least one digit";
+	    } else if (!text.matches(".*[!-/:-@\\[-`{-~].*")) {
+	        return "The password must contain at least one symbol";
+	    } else if (!text.matches(".*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ].*")) {
+	        return "The password must contain at least one letter";
+	    } else if (!isTextWithUnderline(text)) {
+	        Character firstInvalidCharacter = getFirstInvalidCharacter(text);
+	        if (firstInvalidCharacter == null) {
+	            return "The password contains invalid characters";
+	        } else {
+	            return "The password contains invalid character: " + firstInvalidCharacter;
+	        }
+	    } else {
+	        return null;
+	    }
 	}
 	
 	public String isValidName(String text) {

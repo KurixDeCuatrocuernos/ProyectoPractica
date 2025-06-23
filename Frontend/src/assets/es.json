@@ -130,6 +130,7 @@
         "passLabel1": "Contraseña",
         "passLabel2": "Repite la Contraseña",
         "roleLabel": "Rol",
+        "roleDefaultOption": "Selecciona un Rol",
         "namePlaceholder": "Juan Juanes",
         "emailPlaceholder": "micorreo@escudero.juridico.es",
         "passwordPlaceholder": "12345abcd",
@@ -197,9 +198,13 @@
         "label5": "Nuevo Archivo: ",
         "inputButtonText": "Seleccionar archivo",
         "noneFile": "Ningún archivo seleccionado",
-
         "cancelButton": "Cancelar",
         "saveButton": "Guardar" 
+    },
+    "appValidationComponent": {
+        "title": " Hemos detectado que has iniciado sesión con los datos generados por el administrador, te recomendamos cambiar la contraseña, ¿Quieres cambiar la contraseña ahora?",
+        "confirmButton1": "Sí",
+        "cancelButton1": "Ahora no"
     }
 
 }
